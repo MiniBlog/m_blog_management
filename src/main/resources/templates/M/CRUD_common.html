@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title th:text="${$keyWord}"></title>
+	<script th:replace="common :: head"></script>
+	<style>
+		body {
+			overflow: hidden;
+			padding: 0 !important;
+		}
+
+		#app {
+			padding: 0 10px 10px;
+			display: flex;
+			flex-direction: column;
+			width: calc(100% - 20px);
+		}
+
+		#app .el-row {
+			margin-bottom: 10px;
+		}
+
+		#tableRow {
+			overflow: hidden;
+		}
+	</style>
+</head>
+<body>
+<div th:replace="common :: page_loading"></div>
+<div id="app" ref="app">
+	<div id="topRow">
+
+	</div>
+	<el-row id="tableRow">
+		<el-table :data="tableData" border height="100%" highlight-current-row stripe>
+			<el-table-column
+					type="selection"
+					width="40">
+			</el-table-column>
+			<el-table-column
+					:index="indexMethod"
+					type="index">
+			</el-table-column>
+			<th:block th:each="tableColumn : ${tableColumns}" th:if="${tableColumns}" th:object="${tableColumn}">
+				<el-table-column
+						th:label="*{COLUMN_COMMENT}"
+						th:prop="*{COLUMN_NAME}"
+						show-overflow-tooltip
+						sortable
+						th:width="*{column_display_width}">
+				</el-table-column>
+			</th:block>
+		</el-table>
+	</el-row>
+	<el-row justify="end" type="flex">
+		<el-pagination
+				:current-page="pageIndex"
+				:page-size="pageSize"
+				:total="tableTotal"
+				@current-change="pageChange"
+				@size-change="pageSizeChange"
+				layout="total, prev, pager, next, sizes, jumper">
+		</el-pagination>
+	</el-row>
+</div>
+<script th:inline="javascript">
+	let $filterForm = [[${filterForm}]];
+	let $queryUrl = webRootAjax + "/M/" + [[${keyWord}]] + ".do";
+	new Vue({
+		el: '#app',
+		data: function () {
+			let that = this;
+			return {
+				queryUrl: $queryUrl,
+				tableData: [],
+				tableLoading: true,
+				tableTotal: 0,
+				pageIndex: 1,
+				pageSize: 10,
+				//filter
+				filterForm: $filterForm
+			}
+		},
+		methods: {
+			//整理高度
+			initStyle() {
+				let that = this;
+				$("#tableRow").height(document.documentElement.clientHeight - $("#topRow").height() - 52);
+				console.log(that.tableHeight);
+				window.onresize = () => {
+					$("#tableRow").height(document.documentElement.clientHeight - $("#topRow").height() - 52);
+				};
+			},
+			//查询列表
+			query(pageNum, pageSize) {
+				let that = this;
+				that.tableLoading = true;
+				if (pageNum) {
+					//如果指定页码，更新页码
+					that.pageIndex = pageNum;
+				} else {
+					//如果没有指定页码，取当前页码
+					pageNum = that.pageIndex;
+				}
+				if (pageSize) {
+					that.pageSize = pageSize
+				} else {
+					pageSize = that.pageSize;
+				}
+				let paramMap = that.filterForm;
+				paramMap['pageSize'] = pageSize;
+				paramMap['pageNum'] = pageNum;
+				//查询
+				easymGetAjax(that, that.queryUrl, paramMap, (json) => {
+					that.tableTotal = json.map.count;
+					that.tableData = json.map.list;
+					if (!that.tableData && pageNum > 1) {
+						that.query(1, pageSize);
+					}
+				});
+			},
+			clearQuery() {
+				let that = this;
+				that.$refs['filterForm'].resetFields();
+				that.query(1, this.pageSize);
+			},
+			pageChange(pageNum) {
+				this.query(pageNum, this.pageSize);
+			},
+			pageSizeChange(pageSize) {
+				this.query(this.pageIndex, pageSize);
+			},
+			indexMethod(index) {
+				return index + this.pageSize * (this.pageIndex - 1) + 1;
+			}
+		},
+		mounted: function () {
+			this.initStyle();
+			$('#loading').fadeOut();
+			$('#app').fadeIn();
+			this.query();
+		}
+	});
+
+</script>
+</body>
+</html>

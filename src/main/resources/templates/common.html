@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<th:block th:fragment="head">
+		<!--<script th:replace="statisticsTools :: ga"></script>-->
+		<script th:inline="javascript">
+			var webRoot = [[${webRoot}]];
+			var webRootAjax = [[${webRootAjax}]];
+			var webRootCdnStatic = [[${webRootCdnStatic}]];
+		</script>
+		<!--所有静态资源的路径-->
+		<base th:href="${webRootCdnStatic}"/>
+		<!--css文件-->
+		<link rel="stylesheet" th:href="@{/css/common.css}"/>
+		<link rel="stylesheet" th:href="@{/css/page/pagecss_loading.css}"/>
+
+		<!--字库文件-->
+		<link rel="stylesheet" th:href="@{/font/iconfont.css}"/>
+
+		<!--图标文件-->
+		<link rel="shortcut icon" th:href="@{/images/favicon.png}"/>
+		<link rel="bookmark" th:href="@{/images/favicon.png}"/>
+		<link rel="icon" th:href="@{/images/favicon.png}"/>
+
+		<!--js文件-->
+		<script th:src="@{/js/minimal.js}"></script>
+		<script th:src="@{/js/util.js}"></script>
+		<script th:src="@{/font/iconfont.js}"></script>
+
+		<!-- 引入Vue -->
+		<script th:src="@{/js/vue.min.js}"></script>
+
+		<!-- Element-UI -->
+		<link rel="stylesheet" th:href="@{/lib/element-ui/index.css}"/>
+		<script th:src="@{/lib/element-ui/index.js}"></script>
+
+	</th:block>
+
+	<th:block th:fragment="page_loading">
+		<div id="loading">
+			<div id="loading-center">
+				<div id="loading-center-absolute">
+					<div class="object" id="object_one"></div>
+					<div class="object" id="object_two"></div>
+					<div class="object" id="object_three"></div>
+					<div class="object" id="object_four"></div>
+					<div class="object" id="object_five"></div>
+					<div class="object" id="object_six"></div>
+					<div class="object" id="object_seven"></div>
+					<div class="object" id="object_eight"></div>
+				</div>
+			</div>
+		</div>
+	</th:block>
+</html>

@@ -1,0 +1,50 @@
+#配置server
+server:
+  port: 6969
+  servlet:
+    context-path: /easym
+    session:
+      tracking-modes: cookie
+#配置spring
+spring:
+  #不同工程发布到同一tomcat下，必须要jmx区分开
+  jmx:
+    default-domain: easym
+  #thymeleaf不进行页面缓存，方便页面热修改
+  thymeleaf:
+    cache: false
+# 配置mybatis
+mybatis:
+  type-aliases-package: com.luzhoumin.mblog.management
+  mapper-locations: classpath:com.luzhoumin.mblog.management.mapper.**.xml
+#配置日志
+debug: true
+#配置数据库
+druid:
+  type: com.alibaba.druid.pool.DruidDataSource
+  master:
+    url: jdbc:mysql://localhost:8889/easym?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: easy_write
+    password: cjZwOky8r6hMMvP1
+    initial-size: 5
+    min-idle: 1
+    max-active: 100
+    max-wait: 60000
+    validation-query: SELECT 1
+    test-while-idle: true
+    time-between-eviction-runs-millis: 60000
+    min-evictable-idle-time-millis: 300000
+  slave:
+    url: jdbc:mysql://localhost:8889/easym?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: easym_read
+    password: 8IGcwvUZvtlsbh4c
+    initial-size: 5
+    min-idle: 1
+    max-active: 100
+    max-wait: 60000
+    validation-query: SELECT 1
+    test-while-idle: true
+    time-between-eviction-runs-millis: 60000
+    min-evictable-idle-time-millis: 300000

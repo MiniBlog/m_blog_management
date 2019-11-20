@@ -1,0 +1,19 @@
+body {
+    overflow: hidden;
+    padding: 0 !important;
+}
+
+#app {
+    padding: 0 10px 10px;
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 20px);
+}
+
+#app .el-row {
+    margin-bottom: 10px;
+}
+
+#tableRow {
+    overflow: hidden;
+}

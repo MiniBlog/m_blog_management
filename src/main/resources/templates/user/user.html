@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>User</title>
+	<script th:replace="common :: head"></script>
+	<link rel="stylesheet" th:href="@{/css/page/page_css_common_table.css}"/>
+</head>
+<body>
+<div th:replace="common :: page_loading"></div>
+<div id="app" ref="app">
+	<div id="topRow">
+		<el-row>
+			<el-form :inline="true" :model="filterForm" ref="filterForm">
+				<el-form-item label="用户名" prop="name">
+					<el-input type="text" v-model="filterForm.name"></el-input>
+				</el-form-item>
+				<el-form-item label="邮箱" prop="email">
+					<el-input type="text" v-model="filterForm.email"></el-input>
+				</el-form-item>
+				<el-form-item label="创建时间" prop="create_date">
+					<el-date-picker
+							align="right"
+							format="yyyy年MM月dd日"
+							type="date"
+							v-model="filterForm.create_date"
+							value-format="yyyy-MM-dd">
+					</el-date-picker>
+				</el-form-item>
+				<el-form-item>
+					<el-button @click="query(1)" icon="el-icon-search" type="primary">搜索</el-button>
+					<el-button @click="clearQuery" icon="el-icon-refresh-left">重置</el-button>
+				</el-form-item>
+			</el-form>
+		</el-row>
+		<el-row>
+			<el-button @click="userFormDialog = true" icon="el-icon-plus" type="primary">添加</el-button>
+		</el-row>
+	</div>
+	<el-row id="tableRow">
+		<el-table :data="tableData" border height="100%" highlight-current-row stripe>
+			<el-table-column
+					type="selection"
+					width="40">
+			</el-table-column>
+			<el-table-column
+					:index="indexMethod"
+					type="index">
+			</el-table-column>
+			<el-table-column
+					label="用户名"
+					prop="_name"
+					show-overflow-tooltip
+					sortable
+					width="180">
+			</el-table-column>
+			<el-table-column
+					label="邮箱"
+					prop="_email"
+					show-overflow-tooltip
+					sortable>
+			</el-table-column>
+			<el-table-column
+					label="注册时间"
+					prop="create_date"
+					show-overflow-tooltip
+					sortable
+					width="300">
+			</el-table-column>
+			<el-table-column
+					fixed="right"
+					label="操作"
+					width="180">
+				<template slot-scope="scope">
+					<el-button
+							@click="handleEdit(scope.$index, scope.row)"
+							size="mini"
+							type="text">
+						编辑
+					</el-button>
+					<el-button
+							@click="handleModifyPass(scope.$index, scope.row)"
+							size="mini"
+							type="text">
+						修改密码
+					</el-button>
+					<el-button
+							@click="handleDelete(scope.$index, scope.row)"
+							size="mini"
+							type="text">
+						删除
+					</el-button>
+				</template>
+			</el-table-column>
+		</el-table>
+	</el-row>
+	<el-row justify="end" type="flex">
+		<el-pagination
+				:current-page="pageIndex"
+				:page-size="pageSize"
+				:total="tableTotal"
+				@current-change="pageChange"
+				@size-change="pageSizeChange"
+				layout="total, prev, pager, next, sizes, jumper">
+		</el-pagination>
+	</el-row>
+	<!--添加用户弹出框-->
+	<el-dialog :close-on-click-modal="false"
+			   :close-on-press-escape="false"
+			   :show-close="false"
+			   :title="userForm._isEdit?'编辑用户':'添加用户'"
+			   :visible.sync="userFormDialog">
+		<el-form :model="userForm" :rules="userRules" label-position="right" label-width="100px" ref="userForm"
+				 status-icon>
+			<el-form-item label="用户名" prop="name">
+				<el-input autocomplete="off" v-model="userForm.name"></el-input>
+			</el-form-item>
+			<el-form-item label="邮箱" prop="email">
+				<el-input autocomplete="off" v-model="userForm.email"></el-input>
+			</el-form-item>
+			<el-form-item label="密码" prop="pass">
+				<el-input :disabled="userForm._isEdit"
+						  autocomplete="off"
+						  show-password
+						  type="password"
+						  v-model="userForm.pass"></el-input>
+			</el-form-item>
+			<el-form-item label="确认密码" prop="pass_confirm">
+				<el-input :disabled="userForm._isEdit"
+						  autocomplete="off"
+						  show-password
+						  type="password"
+						  v-model="userForm.pass_confirm"></el-input>
+			</el-form-item>
+		</el-form>
+		<div class="dialog-footer" slot="footer">
+			<el-button @click="userDialogClose">取消</el-button>
+			<el-button @click="userDialogSubmit" type="primary">{{userForm._isEdit?'保存':'添加'}}</el-button>
+		</div>
+	</el-dialog>
+	<!--修改密码弹出框-->
+	<el-dialog :close-on-click-modal="false"
+			   :close-on-press-escape="false"
+			   :show-close="false"
+			   :visible.sync="modifyPassFormDialog"
+			   title="修改密码">
+		<el-form :model="modifyPassForm" :rules="modifyPassRules" label-position="right" label-width="100px"
+				 ref="modifyPassForm"
+				 status-icon>
+			<el-form-item label="用户名">
+				<el-input autocomplete="off" disabled="disabled" v-model="modifyPassForm.name"></el-input>
+			</el-form-item>
+			<el-form-item label="邮箱">
+				<el-input autocomplete="off" disabled="disabled" v-model="modifyPassForm.email"></el-input>
+			</el-form-item>
+			<el-form-item label="原密码" prop="org_pass">
+				<el-input autocomplete="off" v-model="modifyPassForm.org_pass"></el-input>
+			</el-form-item>
+			<el-form-item label="密码" prop="pass">
+				<el-input autocomplete="off" show-password type="password" v-model="modifyPassForm.pass"></el-input>
+			</el-form-item>
+			<el-form-item label="确认密码" prop="pass_confirm">
+				<el-input autocomplete="off" show-password type="password"
+						  v-model="modifyPassForm.pass_confirm"></el-input>
+			</el-form-item>
+		</el-form>
+		<div class="dialog-footer" slot="footer">
+			<el-button @click="modifyPassClose">取消</el-button>
+			<el-button @click="modifyPassSubmit" type="primary">确认</el-button>
+		</div>
+	</el-dialog>
+</div>
+<script th:inline="javascript" th:src="@{/js/page/pagejs_user.js}"></script>
+</body>
+</html>

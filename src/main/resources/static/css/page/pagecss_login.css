@@ -1,0 +1,242 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial;
+    background: #f2f3f9;
+    color: #333333;
+    font-size: 14px;
+}
+
+a {
+    text-decoration: none;
+}
+a:focus {
+    outline: none;
+    -moz-outline: none;
+}
+.p_t_0 {
+    padding-top: 0!important;
+}
+.m_t_15 {
+    margin-top: 15px!important;
+}
+
+.m_t_35 {
+    margin-top: 35px !important;
+}
+.m_t_60 {
+    margin-top: 60px!important;
+}
+
+.m_t_65 {
+    margin-top: 65px !important;
+}
+
+.m_t_115 {
+    margin-top: 115px !important;
+}
+.grey {
+    color: #999999;
+}
+li {
+    list-style: none;
+}
+.clearfix:after {
+    content: '';
+    clear: both;
+    display: block;
+}
+.icon {
+    width: 1em; height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+}
+.min_1200 {
+    min-width: 1200px;
+    margin: 0 auto;
+}
+.f_l {
+    float: left!important;
+}
+.f_r {
+    float: right!important;
+}
+.special_font {
+    font-family: Arial;/* 后期会改 */
+}
+.btn {
+    height: 45px;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 45px;
+    text-align: center;
+    cursor: pointer;
+}
+.green_btn {
+    background: #45d0a6;
+}
+.green_btn:hover {
+    background: #40c69e;
+}
+.error_msg {
+    color: #d4181c;
+    font-size: 13px;
+    margin-top: 5px;
+    height: 15px;
+}
+.error_msg i {
+    margin-right: 5px;
+    font-size: 13px;
+}
+
+body {
+    padding: 0 80px;
+}
+.login_div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 1030px;
+    height: 510px;
+    border-top-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    overflow: hidden;
+    background: #ffffff;
+    box-shadow: 0 0 10px 1px rgba(0,0,0,.1);
+}
+.left_part {
+    width: 600px;
+    float: left;
+    height: 510px;
+    padding: 100px 0 0 30px;
+    background: skyblue;
+}
+.left_part .line {
+    width: 150px;
+    height: 2px;
+    background: #ffffff;
+}
+.left_part p {
+    font-size: 30px;
+    color: #ffffff;
+    margin-top: 17px;
+}
+.right_part {
+    float: right;
+    width: 430px;
+    height: 510px;
+    position: relative;
+}
+.top_cont {
+    text-align: center;
+    padding-top: 25px;
+}
+.top_cont i {
+    font-size: 50px;
+    color: #45d0a6;
+}
+.top_cont p {
+    font-size: 20px;
+    font-weight: bold;
+    color: #121737;
+    margin-top: 15px;
+}
+.right_part form {
+    padding: 0 45px;
+}
+.right_part form .item {
+    margin-top: 30px;
+    position: relative;
+}
+.right_part form input {
+    width: 100%;
+    height: 45px;
+    border: 1px solid #dee2e5;
+    border-radius: 5px;
+    padding-left: 10px;
+    outline: none;
+    font-size: 16px;
+    position: relative;
+    z-index: 9;
+    background: none;
+}
+.right_part form .item>span {
+    position: absolute;
+    left: 10px;
+    right: auto;
+    line-height: 45px;
+    top: 0;
+    color: #333333;
+    font-size: 16px;
+    transition: all .5s;
+    z-index: 8;
+}
+.right_part form .item>span.move {
+    right: 10px;
+    left: auto;
+    color: #999999;
+}
+.right_part form .item.relative .error_msg {
+    position: absolute;
+    top: 45px;
+    left: 0;
+}
+.right_part form .item .error_msg {
+    color: #d4181c;
+    font-size: 13px;
+    margin-top: 5px;
+}
+.right_part form .item .error_msg i {
+    margin-right: 5px;
+    font-size: 13px;
+}
+.right_part form .operate {
+    font-size: 14px;
+    margin-top: 10px;
+}
+.right_part form .operate a {
+    color: #1f88e4;
+}
+.right_part form .operate span {
+    float: right;
+}
+.right_part form .green_btn {
+    margin-top: 30px;
+}
+.third_login {
+    position: absolute;
+    width: 430px;
+    padding-top: 15px;
+    border-top: 1px solid #dee2e5;
+    position: absolute;
+    bottom: 20px;
+}
+.third_login .depart {
+    text-align: center;
+}
+.third_login .depart .line {
+    width: 50px;
+    height: 1px;
+    background: #333333;
+    display: inline-block;
+    vertical-align: middle;
+}
+.third_login .depart span {
+    display: inline-block;
+    margin: 0 10px;
+}
+.third_login .icon_box {
+    margin-top: 15px;
+    text-align: center;
+}
+.third_login .icon_box svg {
+    margin: 0 10px;
+    font-size: 35px;
+}

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Demo</title>
+	<script th:replace="common :: head"></script>
+	<link rel="stylesheet" th:href="@{/css/page/demo.css}"/>
+	<script th:inline="javascript">
+		//加载后台传过来的参数
+	</script>
+</head>
+<body>
+<div id="app" ref="app" style="display: flex;flex-direction: column;width: 100%">
+
+</div>
+<script th:inline="javascript" th:src="@{/js/page/pagejs_demo.js}"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>登入</title>
+	<script th:replace="common :: head"></script>
+	<link rel="stylesheet" th:href="@{/css/page/pagecss_login.css}"/>
+</head>
+<body>
+<div class="login_div">
+	<div class="left_part">
+		<div class="line"></div>
+		<p class="special_font">多 · 快 · 好 · 省</p>
+	</div>
+	<div class="right_part">
+		<div class="top_cont">
+			<i class="iconfont icon-huanying"></i>
+			<p class="special_font">欢迎使用 EasyM</p>
+		</div>
+		<form>
+			<div class="item relative">
+				<input autocomplete="off" id="userName" onblur="checkLoginItems('userName')" type="text"/>
+				<span>用户名</span>
+				<div class="error_msg" id="userName_error_div" style="visibility: hidden">
+					<i class="iconfont icon-jingshi"></i>
+					<span id="userName_error"></span>
+				</div>
+			</div>
+			<div class="item">
+				<input id="userPass" onblur="checkLoginItems('userPass')" type="password"/>
+				<span>密码</span>
+				<div class="error_msg" id="userPass_error_div" style="visibility: hidden">
+					<i class="iconfont icon-jingshi"></i>
+					<span id="userPass_error"></span>
+				</div>
+			</div>
+			<!--			<div class="operate">-->
+			<!--				<a th:href="@{${webRoot}+'/reset-password.html'}">忘记密码</a>-->
+			<!--				<span>新用户? <a th:href="@{${webRoot}+'/register.html'}">注册</a></span>-->
+			<!--			</div>-->
+			<div class="error_msg" id="login_error_div" style="visibility: hidden">
+				<i class="iconfont icon-jingshi"></i>
+				<span id="login_error"></span>
+			</div>
+			<div class="btn green_btn loginBtn">登入</div>
+		</form>
+	</div>
+</div>
+<script th:src="@{/js/page/pagejs_login.js}"></script>
+</body>
+</html>

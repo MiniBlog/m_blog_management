@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.luzhoumin.mblog.management.mapper.LogMapper">
+
+	<select id="getRequestLogList" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT
+		id,
+		_user_uuid,
+		_user_name,
+		_source,
+		_path,
+		_query,
+		_params,
+		_ip,
+		DATE_FORMAT(create_date,'%Y-%m-%d %H:%i:%s') as create_date
+		FROM m_sys_log_request
+		<where>
+			<if test="user_name != null and user_name !=''">
+				AND _user_name LIKE CONCAT('%', #{user_name}, '%')
+			</if>
+			<if test="path != null and path !=''">
+				AND _path LIKE CONCAT('%', #{path}, '%')
+			</if>
+			<if test="create_date != null and create_date != ''">
+				AND date_format(create_date,'%Y-%m-%d') = #{create_date}
+			</if>
+		</where>
+		order by create_date desc
+	</select>
+
+	<select id="getRequestLogListCount" resultType="java.lang.Integer" parameterType="java.util.Map">
+		SELECT
+		count(id)
+		FROM m_sys_log_request
+		<where>
+			<if test="user_name != null and user_name !=''">
+				AND _user_name LIKE CONCAT('%', #{user_name}, '%')
+			</if>
+			<if test="path != null and path !=''">
+				AND _path LIKE CONCAT('%', #{path}, '%')
+			</if>
+			<if test="create_date != null and create_date != ''">
+				AND date_format(create_date,'%Y-%m-%d') = #{create_date}
+			</if>
+		</where>
+		order by create_date desc
+	</select>
+
+</mapper>

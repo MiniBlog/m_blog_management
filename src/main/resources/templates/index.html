@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>首页</title>
+	<script th:replace="common :: head"></script>
+	<link rel="stylesheet" th:href="@{/css/page/pagecss_index.css}"/>
+	<link rel="stylesheet" th:href="@{/css/page/pasescss_index_loading.css}"/>
+	<script th:inline="javascript">
+		var plainMenuMap = [[${plainMenuMap}]];
+	</script>
+</head>
+<body>
+<div id="loading">
+	<div class="loader">
+		<svg viewBox="0 0 80 80">
+			<circle cx="40" cy="40" id="test" r="32"></circle>
+		</svg>
+	</div>
+
+	<div class="loader triangle">
+		<svg viewBox="0 0 86 80">
+			<polygon points="43 8 79 72 7 72"></polygon>
+		</svg>
+	</div>
+
+	<div class="loader">
+		<svg viewBox="0 0 80 80">
+			<rect height="64" width="64" x="8" y="8"></rect>
+		</svg>
+	</div>
+</div>
+<div id="app" ref="app">
+	<header class="page-header collapse" id="J-page-header">
+		<div class="nav-container">
+			<div class="nav-left">
+				<div class="logo">
+					<a class="router-link-active" href="#/zh"><img
+							class="logo-img"
+							preload=""
+							th:src="@{/images/logo.png}">
+						<span>EasyM</span>
+					</a>
+				</div>
+			</div>
+			<div class="nav-right">
+				<ul class="navbar">
+					<li><a class="router-link-active" href="#">菜单1</a></li>
+					<li><a class="" href="#">菜单2</a></li>
+					<li><a class="" href="#">菜单3</a></li>
+				</ul>
+				<div class="btn-language">EN</div>
+			</div>
+		</div>
+	</header>
+	<el-row>
+		<el-col id="menu_box">
+			<el-menu @select="menuClick" default-active="dashboard" style="border-right: none;">
+				<th:block th:each="rootMenu : ${menuList}" th:object="${rootMenu}">
+					<!--如果有子菜单-->
+					<th:block th:if="${rootMenu['children']}">
+						<el-submenu th:index="${rootMenu['_key']}">
+							<template slot="title">
+								<i th:class="*{_icon}"></i>
+								<span>[[*{_title}]]</span>
+							</template>
+							<th:block th:each="childMenu : ${rootMenu['children']}" th:if="${rootMenu['children']}"
+									  th:object="${childMenu}">
+								<!--如果是分组菜单-->
+								<th:block th:if="*{_group}">
+									<el-menu-item-group>
+										<template slot="title">[[*{_title}]]</template>
+										<!--如果分组菜单有子菜单-->
+										<th:block th:each="groupChildMenu : ${childMenu['children']}"
+												  th:object="${groupChildMenu}">
+											<el-menu-item th:disabled="*{ed_flag}?false:true" th:index="*{_key}">
+												<i th:class="*{_icon}"></i>
+												<span slot="title">[[*{_title}]]</span>
+											</el-menu-item>
+										</th:block>
+									</el-menu-item-group>
+								</th:block>
+								<!--如果不是分组菜单-->
+								<th:block th:if="!*{_group}">
+									<el-menu-item th:disabled="*{ed_flag}?false:true" th:index="*{_key}">
+										<i th:class="*{_icon}"></i>
+										<span slot="title">[[*{_title}]]</span>
+									</el-menu-item>
+								</th:block>
+							</th:block>
+						</el-submenu>
+					</th:block>
+					<!--没有子菜单-->
+					<th:block th:if="!${rootMenu['children']}">
+						<el-menu-item th:disabled="*{ed_flag}?false:true" th:index="*{_key}">
+							<i th:class="*{_icon}"></i>
+							<span slot="title">[[*{_title}]]</span>
+						</el-menu-item>
+					</th:block>
+				</th:block>
+			</el-menu>
+		</el-col>
+		<el-col id="frame_box">
+			<el-tabs @tab-click="tabClick" @tab-remove="removeTab" closable type="card" v-model="currentTabName">
+				<el-tab-pane :key="index" :label="item.label" :name="item.name" v-for="(item, index) in tabList">
+					<iframe :src="item.url" allowtransparency="yes" border="0" class="dashbord_frame" frameborder="no"
+							:id="item.name" :name="item.name" height="100%" marginheight="0" marginwidth="0"
+							scrolling="yes" width="100%"></iframe>
+				</el-tab-pane>
+			</el-tabs>
+		</el-col>
+	</el-row>
+</div>
+<script th:inline="javascript" th:src="@{/js/page/pagejs_index.js}"></script>
+</body>
+</html>

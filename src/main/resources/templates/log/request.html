@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>User</title>
+	<script th:replace="common :: head"></script>
+	<link rel="stylesheet" th:href="@{/css/page/page_css_common_table.css}"/>
+</head>
+<body>
+<div th:replace="common :: page_loading"></div>
+<div id="app" ref="app">
+	<div id="topRow">
+		<el-row>
+			<el-form :inline="true" :model="filterForm" ref="filterForm">
+				<el-form-item label="用户名" prop="user_name">
+					<el-input type="text" v-model="filterForm.user_name"></el-input>
+				</el-form-item>
+				<el-form-item label="请求地址" prop="path">
+					<el-input type="text" v-model="filterForm.path"></el-input>
+				</el-form-item>
+				<el-form-item label="创建时间" prop="create_date">
+					<el-date-picker
+							align="right"
+							format="yyyy年MM月dd日"
+							type="date"
+							v-model="filterForm.create_date"
+							value-format="yyyy-MM-dd">
+					</el-date-picker>
+				</el-form-item>
+				<el-form-item>
+					<el-button @click="query(1)" icon="el-icon-search" type="primary">搜索</el-button>
+					<el-button @click="clearQuery" icon="el-icon-refresh-left">重置</el-button>
+				</el-form-item>
+			</el-form>
+		</el-row>
+	</div>
+	<el-row id="tableRow">
+		<el-table :data="tableData" border height="100%" highlight-current-row stripe>
+			<el-table-column
+					type="selection"
+					width="40">
+			</el-table-column>
+			<el-table-column
+					:index="indexMethod"
+					type="index">
+			</el-table-column>
+			<el-table-column
+					label="用户UUID"
+					prop="_user_uuid"
+					show-overflow-tooltip
+					width="320">
+			</el-table-column>
+			<el-table-column
+					label="用户名"
+					prop="_user_name"
+					show-overflow-tooltip
+					sortable
+					width="180">
+			</el-table-column>
+			<el-table-column
+					label="请求来源"
+					prop="_source"
+					show-overflow-tooltip
+					width="300">
+			</el-table-column>
+			<el-table-column
+					label="请求路径"
+					prop="_path"
+					show-overflow-tooltip
+					width="500">
+			</el-table-column>
+			<el-table-column
+					label="请求路径参数"
+					prop="_query"
+					show-overflow-tooltip
+					width="500">
+			</el-table-column>
+			<el-table-column
+					label="请求体参数"
+					prop="_params"
+					show-overflow-tooltip
+					width="500">
+			</el-table-column>
+			<el-table-column
+					label="请求IP"
+					prop="_ip"
+					show-overflow-tooltip
+					width="300">
+			</el-table-column>
+			<el-table-column
+					label="创建时间"
+					prop="create_date"
+					show-overflow-tooltip
+					sortable
+					width="300">
+			</el-table-column>
+		</el-table>
+	</el-row>
+	<el-row justify="end" type="flex">
+		<el-pagination
+				:current-page="pageIndex"
+				:page-size="pageSize"
+				:total="tableTotal"
+				@current-change="pageChange"
+				@size-change="pageSizeChange"
+				layout="total, prev, pager, next, sizes, jumper">
+		</el-pagination>
+	</el-row>
+</div>
+<script th:inline="javascript" th:src="@{/js/page/pagejs_log_request.js}"></script>
+</body>
+</html>
