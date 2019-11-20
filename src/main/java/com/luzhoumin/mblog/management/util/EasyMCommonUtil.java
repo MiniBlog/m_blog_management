@@ -2,10 +2,7 @@ package com.luzhoumin.mblog.management.util;
 
 import cn.hutool.core.util.StrUtil;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created on September 23, 2019
@@ -21,8 +18,9 @@ public class EasyMCommonUtil {
 	 * _order   => order
 	 */
 	public static <T> Map<String, T> transUnderLineKeyToNormal(Map<String, T> map) {
-		Map<String, T> returnMap = new LinkedHashMap<>();
+		Map<String, T> returnMap = null;
 		if (map != null) {
+			returnMap = new LinkedHashMap<>();
 			for (String s : map.keySet()) {
 				if (StrUtil.isNotEmpty(s)) {
 					if (s.startsWith("_")) {
@@ -32,17 +30,37 @@ public class EasyMCommonUtil {
 					}
 				}
 			}
-		} else return null;
+		}
 		return returnMap;
 	}
 
 	public static <T> List<Map<String, T>> transUnderLineKeyToNormal(List<Map<String, T>> list) {
-		List<Map<String, T>> returnList = new ArrayList<>();
+		List<Map<String, T>> returnList = null;
 		if (list != null) {
+			returnList = new ArrayList<>();
 			for (Map<String, T> map : list) {
 				returnList.add(transUnderLineKeyToNormal(map));
 			}
-		} else return null;
+		}
 		return returnList;
+	}
+
+	/**
+	 * 移除map中value为null的值
+	 */
+	public static Map<String, Object> removeMapNullValue(Map<String, Object> oldMap) {
+		if (oldMap == null) {
+			return null;
+		}
+		Map<String, Object> newMap = new HashMap<>();
+		Set<Map.Entry<String, Object>> entries = oldMap.entrySet();
+		for (Map.Entry<String, Object> entry : entries) {
+			String newKey = entry.getKey();
+			Object newValue = entry.getValue();
+			if (newValue != null) {
+				newMap.put(newKey, newValue);
+			}
+		}
+		return newMap;
 	}
 }

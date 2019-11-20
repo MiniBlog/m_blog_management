@@ -1,7 +1,7 @@
 package com.luzhoumin.mblog.management.controller;
 
 import com.luzhoumin.mblog.management.pojo.AjaxJson;
-import com.luzhoumin.mblog.management.service.LogService;
+import com.luzhoumin.mblog.management.service.SysLogRequestService;
 import com.luzhoumin.mblog.management.util.ConvertUtil;
 import com.luzhoumin.mblog.management.util.HttpServletUtil;
 import com.luzhoumin.mblog.management.util.PageHelperUtil;
@@ -30,7 +30,7 @@ public class SysLogRequestController {
 	private static Logger logger = LoggerFactory.getLogger(SysLogRequestController.class);
 
 	@Resource
-	LogService logService;
+	SysLogRequestService sysLogRequestService;
 
 	@GetMapping("/request.html")
 	public ModelAndView requestList() {
@@ -45,7 +45,7 @@ public class SysLogRequestController {
 		AjaxJson aj = new AjaxJson();
 		try {
 			Map<String, String> paramMap = ConvertUtil.requestToMap(request);
-			Map<String, Object> data = logService.getRequestLogList(paramMap, PageHelperUtil.getPageNum(request), PageHelperUtil.getPageSize(request));
+			Map<String, Object> data = sysLogRequestService.getRequestLogList(paramMap, PageHelperUtil.getPageNum(request), PageHelperUtil.getPageSize(request));
 			aj.setMap(data);
 			aj.setSuccess(true);
 		} catch (Exception e) {

@@ -3,7 +3,7 @@ package com.luzhoumin.mblog.management.controller;
 import cn.hutool.core.util.StrUtil;
 import com.luzhoumin.mblog.management.pojo.AjaxJson;
 import com.luzhoumin.mblog.management.pojo.MSysUser;
-import com.luzhoumin.mblog.management.service.UserService;
+import com.luzhoumin.mblog.management.service.SysUserService;
 import com.luzhoumin.mblog.management.util.ConvertUtil;
 import com.luzhoumin.mblog.management.util.HttpServletUtil;
 import com.luzhoumin.mblog.management.util.PageHelperUtil;
@@ -32,7 +32,7 @@ public class SysUserController {
 	private static Logger logger = LoggerFactory.getLogger(SysUserController.class);
 
 	@Resource
-	UserService userService;
+	SysUserService sysUserService;
 
 	@GetMapping("/user.html")
 	public ModelAndView list() {
@@ -47,7 +47,7 @@ public class SysUserController {
 		AjaxJson aj = new AjaxJson();
 		try {
 			Map<String, String> paramMap = ConvertUtil.requestToMap(request);
-			Map<String, Object> data = userService.getUserList(paramMap, PageHelperUtil.getPageNum(request), PageHelperUtil.getPageSize(request));
+			Map<String, Object> data = sysUserService.getUserList(paramMap, PageHelperUtil.getPageNum(request), PageHelperUtil.getPageSize(request));
 			aj.setMap(data);
 			aj.setSuccess(true);
 		} catch (Exception e) {
@@ -65,7 +65,7 @@ public class SysUserController {
 		logger.info("**************** SysUserController,ajaxAddUser:start ****************");
 		AjaxJson aj = new AjaxJson();
 		try {
-			boolean b = userService.addUser(user);
+			boolean b = sysUserService.addUser(user);
 			aj.setSuccess(b);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -91,7 +91,7 @@ public class SysUserController {
 			String new_pass = user.getPass();
 			String org_pass = request.getParameter("org_pass");
 			if (StrUtil.isNotEmpty(org_pass)) {
-				MSysUser userInfoInDb = userService.getUserInfoByUuid(user.getUuid());
+				MSysUser userInfoInDb = sysUserService.getUserInfoByUuid(user.getUuid());
 				if (userInfoInDb == null) {
 					//用户不存在
 					aj.setMsg("用户不存在");
@@ -104,7 +104,7 @@ public class SysUserController {
 						user = new MSysUser();
 						user.setUuid(dbUserUuid);
 						user.setPass(new_pass);
-						aj.setSuccess(userService.modifyUser(user));
+						aj.setSuccess(sysUserService.modifyUser(user));
 					} else {
 						//密码不对
 						aj.setMsg("原密码错误");
@@ -112,7 +112,7 @@ public class SysUserController {
 					}
 				}
 			} else {
-				aj.setSuccess(userService.modifyUser(user));
+				aj.setSuccess(sysUserService.modifyUser(user));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -132,13 +132,13 @@ public class SysUserController {
 
 			String uuid = request.getParameter("uuid");
 			if (StrUtil.isNotEmpty(uuid)) {
-				MSysUser userInfoInDb = userService.getUserInfoByUuid(uuid);
+				MSysUser userInfoInDb = sysUserService.getUserInfoByUuid(uuid);
 				if (userInfoInDb == null) {
 					//用户不存在
 					aj.setMsg("用户不存在");
 					aj.setSuccess(false);
 				} else {
-					aj.setSuccess(userService.deleteUser(userInfoInDb));
+					aj.setSuccess(sysUserService.deleteUser(userInfoInDb));
 				}
 			} else {
 				//参数不全

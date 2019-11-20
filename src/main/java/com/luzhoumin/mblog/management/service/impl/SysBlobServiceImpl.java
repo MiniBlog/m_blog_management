@@ -8,12 +8,14 @@ import com.luzhoumin.mblog.management.service.SysBlobService;
 import com.luzhoumin.mblog.management.service.SysSequenceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+@Service
 public class SysBlobServiceImpl implements SysBlobService {
 	private static Logger logger = LoggerFactory.getLogger(SysBlobServiceImpl.class);
 	@Resource

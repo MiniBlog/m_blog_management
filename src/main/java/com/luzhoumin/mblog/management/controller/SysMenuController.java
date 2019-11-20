@@ -3,8 +3,8 @@ package com.luzhoumin.mblog.management.controller;
 import cn.hutool.core.util.StrUtil;
 import com.luzhoumin.mblog.management.pojo.AjaxJson;
 import com.luzhoumin.mblog.management.pojo.MSysMenu;
-import com.luzhoumin.mblog.management.service.MenuService;
-import com.luzhoumin.mblog.management.service.TypeDefineService;
+import com.luzhoumin.mblog.management.service.SysMenuService;
+import com.luzhoumin.mblog.management.service.SysTypeDefineService;
 import com.luzhoumin.mblog.management.util.ConvertUtil;
 import com.luzhoumin.mblog.management.util.HttpServletUtil;
 import org.slf4j.Logger;
@@ -33,10 +33,10 @@ public class SysMenuController {
 	private static Logger logger = LoggerFactory.getLogger(SysMenuController.class);
 
 	@Resource
-	MenuService menuService;
+	SysMenuService sysMenuService;
 
 	@Resource
-	TypeDefineService typeDefineService;
+	SysTypeDefineService sysTypeDefineService;
 
 	@GetMapping("/menu.html")
 	public ModelAndView list(HttpServletRequest request) {
@@ -45,7 +45,7 @@ public class SysMenuController {
 		//SYS_UI_ICON
 		Map<String, String> mapParams = new HashMap<>();
 		mapParams.put("typeId", "SYS_UI_ICON");
-		List<Map<String, Object>> iconTypeList = typeDefineService.getTypeDefineList(mapParams);
+		List<Map<String, Object>> iconTypeList = sysTypeDefineService.getTypeDefineList(mapParams);
 		request.setAttribute("iconTypeList", iconTypeList);
 
 		logger.info("**************** SysMenuController,list:end ****************");
@@ -58,7 +58,7 @@ public class SysMenuController {
 		AjaxJson aj = new AjaxJson();
 		try {
 			Map<String, String> paramMap = ConvertUtil.requestToMap(request);
-			List<Map<String, Object>> menuList = menuService.getMenuList();
+			List<Map<String, Object>> menuList = sysMenuService.getMenuList();
 			aj.setList(menuList);
 			aj.setSuccess(true);
 		} catch (Exception e) {
@@ -76,7 +76,7 @@ public class SysMenuController {
 		logger.info("**************** SysMenuController,ajaxGetPlantList:start ****************");
 		AjaxJson aj = new AjaxJson();
 		try {
-			List<Map<String, Object>> menuList = menuService.getMenuList();
+			List<Map<String, Object>> menuList = sysMenuService.getMenuList();
 			List<Map<String, Object>> menuPlantList = new ArrayList<>();
 			findSubMenuAndAddToPlant(menuList, menuPlantList, 0);
 			aj.setList(menuPlantList);
@@ -116,7 +116,7 @@ public class SysMenuController {
 		logger.info("**************** SysMenuController,ajaxAddMenu:start ****************");
 		AjaxJson aj = new AjaxJson();
 		try {
-			aj.setSuccess(menuService.addMenu(menu));
+			aj.setSuccess(sysMenuService.addMenu(menu));
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error("SysMenuController,ajaxAddMenu", e);
@@ -132,7 +132,7 @@ public class SysMenuController {
 		logger.info("**************** SysMenuController,ajaxModifyMenu:start ****************");
 		AjaxJson aj = new AjaxJson();
 		try {
-			aj.setSuccess(menuService.modifyMenu(menu));
+			aj.setSuccess(sysMenuService.modifyMenu(menu));
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error("SysMenuController,ajaxModifyMenu", e);
@@ -151,7 +151,7 @@ public class SysMenuController {
 
 			String uuid = request.getParameter("uuid");
 			if (StrUtil.isNotEmpty(uuid)) {
-				aj.setSuccess(menuService.deleteMenu(uuid));
+				aj.setSuccess(sysMenuService.deleteMenu(uuid));
 			} else {
 				//参数不全
 				aj.setMsg("缺少参数uuid.");

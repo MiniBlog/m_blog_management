@@ -7,6 +7,12 @@ public class EasyMConstant {
 	//UNKNOWN
 	public static final String UNKNOWN = "UNKNOWN";
 
+	/*Http请求*/
+	//文件系统接口 开始
+	public static final String HTTP_FILE_UPLOAD = "httpFileUpload";
+	public static final String HTTP_CHECK_FILE_EXIST = "httpCheckFileExist";
+	//文件系统接口 结束
+
 	//列表页默认一页的条数
 	public static final int LIST_DEFAULT_PAGE_SIZE = 10;
 

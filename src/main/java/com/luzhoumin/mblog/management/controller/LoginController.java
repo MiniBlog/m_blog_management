@@ -3,7 +3,7 @@ package com.luzhoumin.mblog.management.controller;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
 import com.luzhoumin.mblog.management.pojo.AjaxJson;
-import com.luzhoumin.mblog.management.service.UserService;
+import com.luzhoumin.mblog.management.service.SysUserService;
 import com.luzhoumin.mblog.management.util.HttpServletUtil;
 import com.luzhoumin.mblog.management.util.SessionUtil;
 import org.slf4j.Logger;
@@ -28,7 +28,7 @@ public class LoginController {
 
 	private static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	@Resource
-	UserService userService;
+	SysUserService sysUserService;
 
 	@RequestMapping("/login.html")
 	public ModelAndView pageLogin() {
@@ -56,7 +56,7 @@ public class LoginController {
 			returnUrl = HttpServletUtil.getCurrentCompleteDomainName() + "/index.html";
 		}
 		aj.setStr(returnUrl);
-		Map<String, Object> userInfo = userService.getUserInfo(userName);
+		Map<String, Object> userInfo = sysUserService.getUserInfo(userName);
 		if (userInfo == null) {
 			//用户不存在
 			aj.setMsg("用户不存在");
