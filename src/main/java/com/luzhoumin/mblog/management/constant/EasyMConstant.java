@@ -13,7 +13,7 @@ public class EasyMConstant {
 	//Session-忘记密码-验证码
 	public static final String SESSION_M_VERIFICATION_CODE_FOR_RESET_PASSWORD = "verificationCodeForResetPassword";
 	//Session-登陆后-用户名
-	public static final String SESSION_M_USER_NAME = "userName";
+	public static final String SESSION_M_USER_NAME = "sessionMUserName";
 	//Session-登陆后-用户UUID
-	public static final String SESSION_M_USER_UUID = "userUUID";
+	public static final String SESSION_M_USER_UUID = "sessionMUserUuid";
 }

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Welcome</title>
+	<script th:replace="common :: head"></script>
+</head>
+<body>
+<div th:replace="common :: page_loading"></div>
+<div id="app" ref="app">
+	Hello, [[${session.sessionMUserName}]]. Have a nice day!
+</div>
+<script th:inline="javascript" th:src="@{/js/page/pagejs_welcome.js}"></script>
+</body>
+</html>

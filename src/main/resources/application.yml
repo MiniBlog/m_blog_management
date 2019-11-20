@@ -1,18 +1,25 @@
 #配置server
 server:
-  port: 6969
+  port: 16969
   servlet:
-    context-path: /easym
+    context-path: /m_blog_management
     session:
       tracking-modes: cookie
 #配置spring
 spring:
   #不同工程发布到同一tomcat下，必须要jmx区分开
   jmx:
-    default-domain: easym
+    default-domain: m_blog_management
   #thymeleaf不进行页面缓存，方便页面热修改
   thymeleaf:
     cache: false
+  #设置url后缀自定义设置
+  mvc:
+    pathmatch:
+      use-suffix-pattern: false
+      use-registered-suffix-pattern: true
+    contentnegotiation:
+      favor-path-extension: false
 # 配置mybatis
 mybatis:
   type-aliases-package: com.luzhoumin.mblog.management
@@ -23,7 +30,7 @@ debug: true
 druid:
   type: com.alibaba.druid.pool.DruidDataSource
   master:
-    url: jdbc:mysql://localhost:3306/easym?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull
+    url: jdbc:mysql://localhost:3306/mblog?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: rootroot1
@@ -36,7 +43,7 @@ druid:
     time-between-eviction-runs-millis: 60000
     min-evictable-idle-time-millis: 300000
   slave:
-    url: jdbc:mysql://localhost:3306/easym?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull
+    url: jdbc:mysql://localhost:3306/mblog?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: rootroot1

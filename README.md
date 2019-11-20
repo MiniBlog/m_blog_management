@@ -1,2 +1,2 @@
-# easyM
-An easy java framework
+# m_blog_management
+MBlog Management
