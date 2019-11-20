@@ -1,4 +1,4 @@
-package com.echemi.web.service.business;
+package com.luzhoumin.mblog.management.service;
 
 import java.util.Map;
 

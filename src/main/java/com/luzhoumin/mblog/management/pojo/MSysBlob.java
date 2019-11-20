@@ -6,10 +6,13 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class MSysDemo implements Serializable {
+public class MSysBlob implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private String uuid;
+	private Integer id;
+	private String blob;
 	private String name;
+	private String originalName;
+	private String address;
 	private String createBy;
 	private Date createDate;
 	private String updateBy;
