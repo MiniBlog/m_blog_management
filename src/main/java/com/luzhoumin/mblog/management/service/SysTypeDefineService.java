@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * TypeDefineService
  */
-public interface TypeDefineService {
+public interface SysTypeDefineService {
 
 	/**
 	 * 获取类型定义列表

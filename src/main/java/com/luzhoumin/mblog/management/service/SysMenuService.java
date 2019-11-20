@@ -12,7 +12,7 @@ import java.util.Map;
  * @author <a href="mailto:zmlu1996@gmail.com">Jacob Lu</a>
  * @since 1.8
  */
-public interface MenuService {
+public interface SysMenuService {
 	//获取菜单
 	List<Map<String, Object>> getMenuList();
 

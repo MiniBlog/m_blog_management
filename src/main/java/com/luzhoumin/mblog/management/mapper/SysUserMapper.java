@@ -10,7 +10,7 @@ import java.util.Map;
  * @author <a href="mailto:zmlu1996@gmail.com">Jacob Lu</a>
  * @since 1.8
  */
-public interface UserMapper {
+public interface SysUserMapper {
 	Map<String, Object> getUserInfo(String userName);
 
 	List<Map<String, Object>> getUserList(Map<String, String> paramMap);

@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * BlobService
  */
-public interface BlobService {
+public interface SysBlobService {
 
 	/**
 	 * 获取附件信息

@@ -2,10 +2,10 @@ package com.luzhoumin.mblog.management.service.impl;
 
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
-import com.luzhoumin.mblog.management.mapper.MenuMapper;
+import com.luzhoumin.mblog.management.mapper.SysMenuMapper;
 import com.luzhoumin.mblog.management.mapper.generate.MSysMenuMapper;
 import com.luzhoumin.mblog.management.pojo.MSysMenu;
-import com.luzhoumin.mblog.management.service.MenuService;
+import com.luzhoumin.mblog.management.service.SysMenuService;
 import com.luzhoumin.mblog.management.util.SessionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,17 +25,17 @@ import java.util.Map;
  * @since 1.8
  */
 @Service
-public class MenuServiceImpl implements MenuService {
-	private static Logger logger = LoggerFactory.getLogger(MenuServiceImpl.class);
+public class SysMenuServiceImpl implements SysMenuService {
+	private static Logger logger = LoggerFactory.getLogger(SysMenuServiceImpl.class);
 	@Resource
-	MenuMapper menuMapper;
+	SysMenuMapper sysMenuMapper;
 	@Resource
 	MSysMenuMapper mSysMenuMapper;
 
 	@Override
 	public List<Map<String, Object>> getMenuList() {
 		logger.info("**************** MenuServiceImpl,getMenuList:start ****************");
-		List<Map<String, Object>> rootMenuList = menuMapper.getRootMenuList();
+		List<Map<String, Object>> rootMenuList = sysMenuMapper.getRootMenuList();
 		for (Map<String, Object> rootMenu : rootMenuList) {
 			findSubMenuAndAdd(rootMenu);
 		}
@@ -47,7 +47,7 @@ public class MenuServiceImpl implements MenuService {
 	public Map<String, Map<String, Object>> getPlainMenuMap() {
 		logger.info("**************** MenuServiceImpl,getPlainMenuMap:start ****************");
 		Map<String, Map<String, Object>> plainMenuMap = new LinkedHashMap<>();
-		List<Map<String, Object>> plainMenuList = menuMapper.getPlainMenuList();
+		List<Map<String, Object>> plainMenuList = sysMenuMapper.getPlainMenuList();
 		for (Map<String, Object> row : plainMenuList) {
 			plainMenuMap.put(String.valueOf(row.get("_key")), row);
 		}
@@ -135,7 +135,7 @@ public class MenuServiceImpl implements MenuService {
 	 */
 	private void findSubMenuAndAdd(Map<String, Object> menu) {
 		String uuid = String.valueOf(menu.get("uuid"));
-		List<Map<String, Object>> subMenuList = menuMapper.getSubMenuListByParentUuid(uuid);
+		List<Map<String, Object>> subMenuList = sysMenuMapper.getSubMenuListByParentUuid(uuid);
 		if (subMenuList != null && subMenuList.size() > 0) {
 			//有子菜单
 			menu.put("children", subMenuList);

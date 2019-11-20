@@ -9,7 +9,7 @@ import java.util.Map;
  * @author <a href="mailto:zmlu1996@gmail.com">Jacob Lu</a>
  * @since 1.8
  */
-public interface LogService {
+public interface SysLogRequestService {
 	Map<String, Object> getRequestLogList(Map<String, String> paramMap, int pageNum, int pageSize);
 
 }

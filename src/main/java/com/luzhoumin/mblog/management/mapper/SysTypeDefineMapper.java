@@ -3,7 +3,7 @@ package com.luzhoumin.mblog.management.mapper;
 import java.util.List;
 import java.util.Map;
 
-public interface TypeDefineMapper {
+public interface SysTypeDefineMapper {
 
 	/**
 	 * 获取区分定义列表

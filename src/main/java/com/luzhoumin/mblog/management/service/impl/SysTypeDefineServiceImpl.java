@@ -1,8 +1,8 @@
 package com.luzhoumin.mblog.management.service.impl;
 
 import cn.hutool.core.util.StrUtil;
-import com.luzhoumin.mblog.management.mapper.TypeDefineMapper;
-import com.luzhoumin.mblog.management.service.TypeDefineService;
+import com.luzhoumin.mblog.management.mapper.SysTypeDefineMapper;
+import com.luzhoumin.mblog.management.service.SysTypeDefineService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -14,18 +14,19 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class TypeDefineServiceImpl implements TypeDefineService {
+public class SysTypeDefineServiceImpl implements SysTypeDefineService {
 
-	private static Logger logger = LoggerFactory.getLogger(TypeDefineServiceImpl.class);
+	private static Logger logger = LoggerFactory.getLogger(SysTypeDefineServiceImpl.class);
 	
 	@Resource
-	private TypeDefineMapper typeDefineMapper;
+	private SysTypeDefineMapper sysTypeDefineMapper;
 
 	/**
 	 * 获取类型定义列表
 	 * @param mapParams
 	 * @return
 	 */
+	@Override
 	public List<Map<String, Object>> getTypeDefineList(Map<String, String> mapParams){
 		logger.info("********** TypeDefineServiceImpl,getTypeDefineList:start **********");
 		List<Map<String, Object>> typeDefineList = new ArrayList<Map<String, Object>>();
@@ -61,7 +62,7 @@ public class TypeDefineServiceImpl implements TypeDefineService {
 			sqlParams.put("typeValueExcludeArray", typeValueExcludeArray);
 		}
 
-		typeDefineList = typeDefineMapper.getTypeDefineList(sqlParams);
+		typeDefineList = sysTypeDefineMapper.getTypeDefineList(sqlParams);
 
 		logger.info("********** TypeDefineServiceImpl,getTypeDefineList:end **********");
 		return typeDefineList;

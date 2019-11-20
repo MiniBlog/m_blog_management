@@ -2,10 +2,10 @@ package com.luzhoumin.mblog.management.service.impl;
 
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
-import com.luzhoumin.mblog.management.mapper.UserMapper;
+import com.luzhoumin.mblog.management.mapper.SysUserMapper;
 import com.luzhoumin.mblog.management.mapper.generate.MSysUserMapper;
 import com.luzhoumin.mblog.management.pojo.MSysUser;
-import com.luzhoumin.mblog.management.service.UserService;
+import com.luzhoumin.mblog.management.service.SysUserService;
 import com.luzhoumin.mblog.management.util.PageHelperUtil;
 import com.luzhoumin.mblog.management.util.SessionUtil;
 import org.slf4j.Logger;
@@ -23,10 +23,10 @@ import java.util.*;
  * @since 1.8
  */
 @Service
-public class UserServiceImpl implements UserService {
-	private static Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+public class SysUserServiceImpl implements SysUserService {
+	private static Logger logger = LoggerFactory.getLogger(SysUserServiceImpl.class);
 	@Resource
-	UserMapper userMapper;
+	SysUserMapper sysUserMapper;
 	@Resource
 	MSysUserMapper mSysUserMapper;
 
@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
 		if (StrUtil.isEmpty(userName)) {
 			return null;
 		}
-		Map<String, Object> userInfo = userMapper.getUserInfo(userName);
+		Map<String, Object> userInfo = sysUserMapper.getUserInfo(userName);
 		logger.info("**************** UserServiceImpl,getUserInfo:end ****************");
 		return userInfo;
 	}
@@ -56,11 +56,11 @@ public class UserServiceImpl implements UserService {
 	public Map<String, Object> getUserList(Map<String, String> paramMap, int pageNum, int pageSize) {
 		logger.info("**************** UserServiceImpl,getUserList:start ****************");
 		Map<String, Object> data = new HashMap<>();
-		int userListCount = userMapper.getUserListCount(paramMap);
+		int userListCount = sysUserMapper.getUserListCount(paramMap);
 		List<Map<String, Object>> userList = new ArrayList<>();
 		if (userListCount > 0) {
 			PageHelperUtil.addPaging(pageNum, pageSize);
-			userList = userMapper.getUserList(paramMap);
+			userList = sysUserMapper.getUserList(paramMap);
 		}
 		data.put("list", userList);
 		data.put("count", userListCount);

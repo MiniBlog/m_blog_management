@@ -1,7 +1,7 @@
 package com.luzhoumin.mblog.management.service.impl;
 
-import com.luzhoumin.mblog.management.mapper.LogMapper;
-import com.luzhoumin.mblog.management.service.LogService;
+import com.luzhoumin.mblog.management.mapper.SysLogRequestMapper;
+import com.luzhoumin.mblog.management.service.SysLogRequestService;
 import com.luzhoumin.mblog.management.util.PageHelperUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,21 +21,21 @@ import java.util.Map;
  * @since 1.8
  */
 @Service
-public class LogServiceImpl implements LogService {
+public class SysLogRequestServiceImpl implements SysLogRequestService {
 
-	private static Logger logger = LoggerFactory.getLogger(LogServiceImpl.class);
+	private static Logger logger = LoggerFactory.getLogger(SysLogRequestServiceImpl.class);
 	@Resource
-	LogMapper logMapper;
+	SysLogRequestMapper sysLogRequestMapper;
 
 	@Override
 	public Map<String, Object> getRequestLogList(Map<String, String> paramMap, int pageNum, int pageSize) {
 		logger.info("**************** LogServiceImpl,getRequestLogList:start ****************");
 		Map<String, Object> data = new HashMap<>();
-		int userListCount = logMapper.getRequestLogListCount(paramMap);
+		int userListCount = sysLogRequestMapper.getLogRequestListCount(paramMap);
 		List<Map<String, Object>> userList = new ArrayList<>();
 		if (userListCount > 0) {
 			PageHelperUtil.addPaging(pageNum, pageSize);
-			userList = logMapper.getRequestLogList(paramMap);
+			userList = sysLogRequestMapper.getLogRequestList(paramMap);
 		}
 		data.put("list", userList);
 		data.put("count", userListCount);

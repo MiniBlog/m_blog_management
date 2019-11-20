@@ -10,7 +10,7 @@ import java.util.Map;
  * @author <a href="mailto:zmlu1996@gmail.com">Jacob Lu</a>
  * @since 1.8
  */
-public interface MenuMapper {
+public interface SysMenuMapper {
 	//获取主菜单
 	List<Map<String, Object>> getRootMenuList();
 

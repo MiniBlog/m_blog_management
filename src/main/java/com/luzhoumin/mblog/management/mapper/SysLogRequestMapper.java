@@ -11,7 +11,7 @@ import java.util.Map;
  * @since 1.8
  */
 public interface SysLogRequestMapper {
-	List<Map<String, Object>> getRequestLogList(Map<String, String> paramMap);
+	List<Map<String, Object>> getLogRequestList(Map<String, String> paramMap);
 
-	int getRequestLogListCount(Map<String, String> paramMap);
+	int getLogRequestListCount(Map<String, String> paramMap);
 }
