@@ -10,7 +10,7 @@ import java.util.Map;
  * @author <a href="mailto:zmlu1996@gmail.com">Jacob Lu</a>
  * @since 1.8
  */
-public interface LogMapper {
+public interface SysLogRequestMapper {
 	List<Map<String, Object>> getRequestLogList(Map<String, String> paramMap);
 
 	int getRequestLogListCount(Map<String, String> paramMap);
