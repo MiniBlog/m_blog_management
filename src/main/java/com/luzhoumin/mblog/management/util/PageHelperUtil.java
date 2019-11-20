@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static com.luzhoumin.mblog.management.constant.EasyMConstant.LIST_DEFAULT_PAGE_SIZE;
+import static com.luzhoumin.mblog.management.constant.MBlogConstant.LIST_DEFAULT_PAGE_SIZE;
 
 /**
  * 分页工具类

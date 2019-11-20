@@ -11,7 +11,7 @@ import java.util.*;
  * @author <a href="mailto:zmlu1996@gmail.com">Jacob Lu</a>
  * @since 1.8
  */
-public class EasyMCommonUtil {
+public class MBlogCommonUtil {
 	/**
 	 * 去除map中key的首部下划线。eg:
 	 * _key     => key

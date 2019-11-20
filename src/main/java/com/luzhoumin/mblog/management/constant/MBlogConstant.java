@@ -3,7 +3,7 @@ package com.luzhoumin.mblog.management.constant;
 /**
  * 常量类
  */
-public class EasyMConstant {
+public class MBlogConstant {
 	//UNKNOWN
 	public static final String UNKNOWN = "UNKNOWN";
 

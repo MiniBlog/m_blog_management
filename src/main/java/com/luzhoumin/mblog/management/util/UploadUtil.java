@@ -5,7 +5,7 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONObject;
 import com.github.pagehelper.util.StringUtil;
-import com.luzhoumin.mblog.management.constant.EasyMConstant;
+import com.luzhoumin.mblog.management.constant.MBlogConstant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -59,7 +59,7 @@ public class UploadUtil {
 		mapParams.put("fileBytesBase64", Base64.encode(bytes));
 		mapParams.put("filePath", filePath);
 		mapParams.put("fileName", fileName);
-		JSONObject httpObj = MHttpUtil.post(EasyMConstant.HTTP_FILE_UPLOAD, mapParams);
+		JSONObject httpObj = MHttpUtil.post(MBlogConstant.HTTP_FILE_UPLOAD, mapParams);
 		if (MHttpUtil.httpRequestSuccess(httpObj)) {
 			JSONObject fileInfo = new JSONObject();
 			fileInfo.put("fileActualName", httpObj.get("fileActualName"));
@@ -82,7 +82,7 @@ public class UploadUtil {
 			mapParams.put("filePath", filePath);
 			mapParams.put("fileName", fileName);
 			//http请求
-			JSONObject httpObj = MHttpUtil.post(EasyMConstant.HTTP_CHECK_FILE_EXIST, mapParams);
+			JSONObject httpObj = MHttpUtil.post(MBlogConstant.HTTP_CHECK_FILE_EXIST, mapParams);
 			//请求正常
 			if (MHttpUtil.httpRequestSuccess(httpObj)) {
 				String existFlag = StrUtil.toString(httpObj.get("existFlag"));

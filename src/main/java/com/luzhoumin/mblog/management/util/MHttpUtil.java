@@ -10,7 +10,7 @@ public class MHttpUtil {
 
 	public static JSONObject get(String requestKey, Map<String, Object> mapParams) {
 		//移除值为null的参数
-		Map<String, Object> newMap = EasyMCommonUtil.removeMapNullValue(mapParams);
+		Map<String, Object> newMap = MBlogCommonUtil.removeMapNullValue(mapParams);
 
 		//获取请求地址
 		String uri = PropertiesUtil.getHttpRequestPath(requestKey);
@@ -24,7 +24,7 @@ public class MHttpUtil {
 
 	public static JSONObject post(String requestKey, Map<String, Object> mapParams) {
 		//移除值为null的参数
-		Map<String, Object> newMap = EasyMCommonUtil.removeMapNullValue(mapParams);
+		Map<String, Object> newMap = MBlogCommonUtil.removeMapNullValue(mapParams);
 
 		//获取请求地址
 		String uri = PropertiesUtil.getHttpRequestPath(requestKey);

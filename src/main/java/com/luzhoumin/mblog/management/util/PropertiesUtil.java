@@ -1,6 +1,6 @@
 package com.luzhoumin.mblog.management.util;
 
-import com.github.pagehelper.util.StringUtil;
+import cn.hutool.core.util.StrUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -92,9 +92,9 @@ public class PropertiesUtil {
 			is = PropertiesUtil.class.getClassLoader().getResourceAsStream(configFileName);
 			Properties p = new Properties();
 			p.load(new InputStreamReader(is,"UTF-8"));
-			if (p.containsKey(configKey)){
+			if (p.containsKey(configKey)) {
 				configValue = p.getProperty(configKey);
-				if (StringUtil.isNotEmpty(configValue)) {
+				if (StrUtil.isNotEmpty(configValue)) {
 					//去除人为因素的空格
 					configValue = configValue.trim();
 				}

@@ -1,7 +1,7 @@
 package com.luzhoumin.mblog.management.util;
 
 import cn.hutool.core.util.StrUtil;
-import com.luzhoumin.mblog.management.constant.EasyMConstant;
+import com.luzhoumin.mblog.management.constant.MBlogConstant;
 
 import javax.servlet.http.HttpSession;
 import java.util.*;
@@ -33,7 +33,7 @@ public class SessionUtil {
 		if (session == null) {
 			return null;
 		}
-		return session.getAttribute(EasyMConstant.SESSION_M_USER_UUID);
+		return session.getAttribute(MBlogConstant.SESSION_M_USER_UUID);
 	}
 
 	/**
@@ -45,9 +45,9 @@ public class SessionUtil {
 		HttpSession session = getSession();
 		if (session != null) {
 			if (StrUtil.isNotEmpty(uuid)) {
-				session.setAttribute(EasyMConstant.SESSION_M_USER_UUID, uuid);
+				session.setAttribute(MBlogConstant.SESSION_M_USER_UUID, uuid);
 			} else {
-				session.removeAttribute(EasyMConstant.SESSION_M_USER_UUID);
+				session.removeAttribute(MBlogConstant.SESSION_M_USER_UUID);
 			}
 		}
 	}
@@ -62,7 +62,7 @@ public class SessionUtil {
 		if (session == null) {
 			return null;
 		}
-		return session.getAttribute(EasyMConstant.SESSION_M_USER_NAME);
+		return session.getAttribute(MBlogConstant.SESSION_M_USER_NAME);
 	}
 
 	/**
@@ -74,9 +74,9 @@ public class SessionUtil {
 		HttpSession session = getSession();
 		if (session != null) {
 			if (StrUtil.isNotEmpty(name)) {
-				session.setAttribute(EasyMConstant.SESSION_M_USER_NAME, name);
+				session.setAttribute(MBlogConstant.SESSION_M_USER_NAME, name);
 			} else {
-				session.removeAttribute(EasyMConstant.SESSION_M_USER_NAME);
+				session.removeAttribute(MBlogConstant.SESSION_M_USER_NAME);
 			}
 		}
 	}
