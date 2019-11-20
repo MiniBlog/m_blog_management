@@ -4,10 +4,10 @@ import cn.hutool.core.util.StrUtil;
 import com.luzhoumin.mblog.management.pojo.AjaxJson;
 import com.luzhoumin.mblog.management.pojo.MSysUser;
 import com.luzhoumin.mblog.management.service.UserService;
-import com.luzhoumin.mblog.management.util.HttpServletUtil;
-import com.luzhoumin.mblog.management.util.SessionUtil;
 import com.luzhoumin.mblog.management.util.ConvertUtil;
+import com.luzhoumin.mblog.management.util.HttpServletUtil;
 import com.luzhoumin.mblog.management.util.PageHelperUtil;
+import com.luzhoumin.mblog.management.util.SessionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
@@ -27,22 +27,23 @@ import java.util.Map;
  * @since 1.8
  */
 @RestController
-public class UserController {
-	private static Logger logger = LoggerFactory.getLogger(UserController.class);
+@RequestMapping("/sys")
+public class SysUserController {
+	private static Logger logger = LoggerFactory.getLogger(SysUserController.class);
 
 	@Resource
 	UserService userService;
 
 	@GetMapping("/user.html")
 	public ModelAndView list() {
-		logger.info("**************** UserController,list:start ****************");
-		logger.info("**************** UserController,list:end ****************");
+		logger.info("**************** SysUserController,list:start ****************");
+		logger.info("**************** SysUserController,list:end ****************");
 		return new ModelAndView("user/user");
 	}
 
 	@GetMapping("/user.do")
 	public void ajaxGetList(HttpServletRequest request, HttpServletResponse response) {
-		logger.info("**************** UserController,ajaxGetList:start ****************");
+		logger.info("**************** SysUserController,ajaxGetList:start ****************");
 		AjaxJson aj = new AjaxJson();
 		try {
 			Map<String, String> paramMap = ConvertUtil.requestToMap(request);
@@ -51,34 +52,34 @@ public class UserController {
 			aj.setSuccess(true);
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("UserController,ajaxGetList", e);
+			logger.error("SysUserController,ajaxGetList", e);
 			aj.setSuccess(false);
 			aj.setMsg(e.getMessage());
 		}
 		HttpServletUtil.ajaxResponse(response, aj);
-		logger.info("**************** UserController,ajaxGetList:end ****************");
+		logger.info("**************** SysUserController,ajaxGetList:end ****************");
 	}
 
 	@PostMapping("/user.do")
 	public void ajaxAddUser(MSysUser user, HttpServletResponse response) {
-		logger.info("**************** UserController,ajaxAddUser:start ****************");
+		logger.info("**************** SysUserController,ajaxAddUser:start ****************");
 		AjaxJson aj = new AjaxJson();
 		try {
 			boolean b = userService.addUser(user);
 			aj.setSuccess(b);
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("UserController,ajaxAddUser", e);
+			logger.error("SysUserController,ajaxAddUser", e);
 			aj.setSuccess(false);
 			aj.setMsg(e.getMessage());
 		}
 		HttpServletUtil.ajaxResponse(response, aj);
-		logger.info("**************** UserController,ajaxAddUser:end ****************");
+		logger.info("**************** SysUserController,ajaxAddUser:end ****************");
 	}
 
 	@PutMapping("/user.do")
 	public void ajaxModifyUser(MSysUser user, HttpServletRequest request, HttpServletResponse response) {
-		logger.info("**************** UserController,ajaxModifyUser:start ****************");
+		logger.info("**************** SysUserController,ajaxModifyUser:start ****************");
 		AjaxJson aj = new AjaxJson();
 		try {
 			String loginUser = StrUtil.toString(SessionUtil.getSessionLoginUserName());
@@ -115,17 +116,17 @@ public class UserController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("UserController,ajaxModifyUser", e);
+			logger.error("SysUserController,ajaxModifyUser", e);
 			aj.setSuccess(false);
 			aj.setMsg(e.getMessage());
 		}
 		HttpServletUtil.ajaxResponse(response, aj);
-		logger.info("**************** UserController,ajaxModifyUser:end ****************");
+		logger.info("**************** SysUserController,ajaxModifyUser:end ****************");
 	}
 
 	@DeleteMapping("/user.do")
 	public void ajaxDeleteUser(HttpServletRequest request, HttpServletResponse response) {
-		logger.info("**************** UserController,ajaxDeleteUser:start ****************");
+		logger.info("**************** SysUserController,ajaxDeleteUser:start ****************");
 		AjaxJson aj = new AjaxJson();
 		try {
 
@@ -146,11 +147,11 @@ public class UserController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("UserController,ajaxDeleteUser", e);
+			logger.error("SysUserController,ajaxDeleteUser", e);
 			aj.setSuccess(false);
 			aj.setMsg(e.getMessage());
 		}
 		HttpServletUtil.ajaxResponse(response, aj);
-		logger.info("**************** UserController,ajaxDeleteUser:end ****************");
+		logger.info("**************** SysUserController,ajaxDeleteUser:end ****************");
 	}
 }

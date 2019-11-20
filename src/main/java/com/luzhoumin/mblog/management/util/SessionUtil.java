@@ -4,7 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import com.luzhoumin.mblog.management.constant.EasyMConstant;
 
 import javax.servlet.http.HttpSession;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Session工具类
@@ -77,6 +77,24 @@ public class SessionUtil {
 				session.setAttribute(EasyMConstant.SESSION_M_USER_NAME, name);
 			} else {
 				session.removeAttribute(EasyMConstant.SESSION_M_USER_NAME);
+			}
+		}
+	}
+
+	/**
+	 * 清空session中的参数
+	 */
+	public static void clearSessionAttrs(String... except) {
+		HttpSession session = getSession();
+		List<String> exceptList = Arrays.asList(except);
+		if (session != null) {
+			Enumeration<String> attributeNames = session.getAttributeNames();
+			Iterator<String> attributeName = attributeNames.asIterator();
+			while (attributeName.hasNext()) {
+				String attrs = attributeName.next();
+				if (!exceptList.contains(attrs)) {
+					session.removeAttribute(attributeName.next());
+				}
 			}
 		}
 	}

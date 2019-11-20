@@ -5,7 +5,7 @@ new Vue({
 	data: function () {
 		let that = this;
 		return {
-			queryUrl: webRootAjax + "/user.do",
+			queryUrl: webRootAjax + "/sys/user.do",
 			tableData: [],
 			tableLoading: true,
 			tableTotal: 0,
@@ -189,7 +189,7 @@ new Vue({
 				if (valid) {
 					if (that.userForm._isEdit) {
 						let param = that.userForm;
-						easymPutAjax(that, webRootAjax + "/user.do", param, (data) => {
+						easymPutAjax(that, webRootAjax + "/sys/user.do", param, (data) => {
 							that.$message({
 								message: '修改用户成功',
 								type: 'success'
@@ -202,7 +202,7 @@ new Vue({
 						param['name'] = that.userForm.name;
 						param['email'] = that.userForm.email;
 						param['pass'] = hex_md5(that.userForm.pass);
-						easymPostAjax(that, webRootAjax + "/user.do", param, (data) => {
+						easymPostAjax(that, webRootAjax + "/sys/user.do", param, (data) => {
 							that.$message({
 								message: '添加用户成功',
 								type: 'success'
@@ -224,7 +224,7 @@ new Vue({
 					param['uuid'] = that.modifyPassForm.uuid;
 					param['pass'] = hex_md5(that.modifyPassForm.pass);
 					param['org_pass'] = hex_md5(that.modifyPassForm.org_pass);
-					easymPutAjax(that, webRootAjax + "/user.do", param, (data) => {
+					easymPutAjax(that, webRootAjax + "/sys/user.do", param, (data) => {
 						that.$message({
 							message: '修改密码成功',
 							type: 'success'
@@ -271,7 +271,7 @@ new Vue({
 			}).then(() => {
 				let param = {};
 				param['uuid'] = row['uuid'];
-				easymDeleteAjax(that, webRootAjax + "/user.do", param, (data) => {
+				easymDeleteAjax(that, webRootAjax + "/sys/user.do", param, (data) => {
 					that.$message({
 						type: 'success',
 						message: '删除成功!'

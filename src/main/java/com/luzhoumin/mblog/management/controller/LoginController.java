@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -37,12 +38,11 @@ public class LoginController {
 	}
 
 	@RequestMapping("/logout.html")
-	public ModelAndView pageLogout() {
+	public void pageLogout(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		logger.info("**************** LoginController,pageLogout:start ****************");
-		SessionUtil.setSessionLoginUserUuid(null);
-		SessionUtil.setSessionLoginUserName(null);
+		SessionUtil.clearSessionAttrs();
 		logger.info("**************** LoginController,pageLogout:end ****************");
-		return new ModelAndView("login/logout");
+		response.sendRedirect(HttpServletUtil.getCurrentCompleteDomainName() + "/login.html");
 	}
 
 	@RequestMapping("/login.do")

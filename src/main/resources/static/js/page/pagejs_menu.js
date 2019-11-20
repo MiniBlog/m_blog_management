@@ -3,14 +3,14 @@ new Vue({
 	data: function () {
 		let that = this;
 		return {
-			queryUrl: webRootAjax + "/menu.do",
+			queryUrl: webRootAjax + "/sys/menu.do",
 			queryPlantUrl: webRootAjax + "/menuPlant.do",
 			tableData: [],
 			tablePlantData: {},
 			tableLoading: true,
 			menuFormDialog: false,
 			menuForm: {
-				uuid:'',
+				uuid: '',
 				parent: '',
 				group: false,
 				title: '',
@@ -73,8 +73,8 @@ new Vue({
 			that.$refs['menuForm'].validate((valid) => {
 				if (valid) {
 					let param = that.menuForm;
-					if (that.menuForm._isEdit){
-						easymPutAjax(that, webRootAjax + "/menu.do", param, (data) => {
+					if (that.menuForm._isEdit) {
+						easymPutAjax(that, webRootAjax + "/sys/menu.do", param, (data) => {
 							that.$message({
 								message: '修改菜单成功',
 								type: 'success'
@@ -82,15 +82,15 @@ new Vue({
 							that.menuDialogClose();
 							that.query();
 						});
-					}else{
-						easymPostAjax(that, webRootAjax + "/menu.do", param, (data) => {
+					}else {
+						easymPostAjax(that, webRootAjax + "/sys/menu.do", param, (data) => {
 							that.$message({
 								message: '添加菜单成功',
 								type: 'success'
 							});
 							that.menuDialogClose();
 							that.query();
-						});	
+						});
 					}
 				} else {
 					return false;
@@ -128,7 +128,7 @@ new Vue({
 			}).then(() => {
 				let param = {};
 				param['uuid'] = row['uuid'];
-				easymDeleteAjax(that, webRootAjax + "/menu.do", param, (data) => {
+				easymDeleteAjax(that, webRootAjax + "/sys/menu.do", param, (data) => {
 					that.$message({
 						type: 'success',
 						message: '删除成功!'
