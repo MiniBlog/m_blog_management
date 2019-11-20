@@ -16,6 +16,38 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `m_sys_blob`
+--
+
+DROP TABLE IF EXISTS `m_sys_blob`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `m_sys_blob` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `_blob` varchar(50) NOT NULL COMMENT '附件ID(seq_id=BLOB_ID)',
+  `_name` varchar(100) NOT NULL COMMENT '附件名称',
+  `_original_name` varchar(200) NOT NULL COMMENT '附件原始名称',
+  `_address` varchar(200) NOT NULL COMMENT '附件地址',
+  `create_by` varchar(50) NOT NULL COMMENT '创建人',
+  `create_date` datetime NOT NULL COMMENT '创建时间',
+  `update_by` varchar(50) NOT NULL COMMENT '修改人',
+  `update_date` datetime NOT NULL COMMENT '修改时间',
+  `delete_flag` int(10) DEFAULT '0' COMMENT '删除标记(0：未删除 1：已删除)',
+  `delete_date` datetime DEFAULT NULL COMMENT '删除时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `m_sys_blob`
+--
+
+LOCK TABLES `m_sys_blob` WRITE;
+/*!40000 ALTER TABLE `m_sys_blob` DISABLE KEYS */;
+/*!40000 ALTER TABLE `m_sys_blob` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `m_sys_demo`
 --
 
@@ -112,6 +144,36 @@ INSERT INTO `m_sys_menu` VALUES ('1fbaad60-1def-4cdd-9960-2d47314f9a37','系统�
 UNLOCK TABLES;
 
 --
+-- Table structure for table `m_sys_sequence`
+--
+
+DROP TABLE IF EXISTS `m_sys_sequence`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `m_sys_sequence` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `seq_id` varchar(50) NOT NULL COMMENT '序列ID',
+  `prefix_value` varchar(10) DEFAULT NULL COMMENT '前缀值',
+  `date_value` varchar(10) DEFAULT NULL COMMENT '日期值',
+  `current_value` int(10) NOT NULL COMMENT '当前值',
+  `current_value_init` int(10) NOT NULL COMMENT '当前值初始值',
+  `current_value_length` int(10) NOT NULL COMMENT '当前值长度',
+  `increment_value` int(10) NOT NULL COMMENT '增量值',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `m_sys_sequence`
+--
+
+LOCK TABLES `m_sys_sequence` WRITE;
+/*!40000 ALTER TABLE `m_sys_sequence` DISABLE KEYS */;
+INSERT INTO `m_sys_sequence` VALUES (1,'BLOB_ID','blob','191120',1,1,4,1);
+/*!40000 ALTER TABLE `m_sys_sequence` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `m_sys_type_define`
 --
 
@@ -119,7 +181,7 @@ DROP TABLE IF EXISTS `m_sys_type_define`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `m_sys_type_define` (
-  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `_type` varchar(60) NOT NULL COMMENT '类型ID',
   `_order` int(10) DEFAULT NULL COMMENT '表示顺序',
   `_value` varchar(30) NOT NULL COMMENT '类型值',
@@ -187,4 +249,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-20 11:39:38
+-- Dump completed on 2019-11-20 15:09:08
