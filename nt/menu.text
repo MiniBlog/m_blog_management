@@ -4,7 +4,7 @@
 内容管理 (100-content)
 --分类设置 (110-category)(/category.html)
 --标签设置 (120-tag)(/tag.html)
-tag.html
+
 模块管理 (200-model)
 --文章模块 (210-article-model)(/article-model.html)
 --页面模块 (220-page-model)(/page-model.html)
