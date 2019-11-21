@@ -2,47 +2,50 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.luzhoumin.mblog.management.mapper.generate.MSysUserMapper">
   <resultMap id="BaseResultMap" type="com.luzhoumin.mblog.management.pojo.MSysUser">
-	  <id column="uuid" jdbcType="VARCHAR" property="uuid"/>
-	  <result column="_name" jdbcType="VARCHAR" property="name"/>
-	  <result column="_pass" jdbcType="VARCHAR" property="pass"/>
-	  <result column="_email" jdbcType="VARCHAR" property="email"/>
-	  <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
-	  <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
-	  <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
-	  <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
-	  <result column="delete_flag" jdbcType="INTEGER" property="deleteFlag"/>
-	  <result column="delete_date" jdbcType="TIMESTAMP" property="deleteDate"/>
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="_uid" jdbcType="VARCHAR" property="uid" />
+    <result column="_name" jdbcType="VARCHAR" property="name" />
+    <result column="_pass" jdbcType="VARCHAR" property="pass" />
+    <result column="_email" jdbcType="VARCHAR" property="email" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="delete_flag" jdbcType="INTEGER" property="deleteFlag" />
+    <result column="delete_date" jdbcType="TIMESTAMP" property="deleteDate" />
   </resultMap>
-	<sql id="Base_Column_List">
-		uuid, _name, _pass, _email, create_date, create_by, update_date, update_by, delete_flag,
+  <sql id="Base_Column_List">
+    id, _uid, _name, _pass, _email, create_date, create_by, update_date, update_by, delete_flag, 
     delete_date
-	</sql>
-	<select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-		select
-		<include refid="Base_Column_List"/>
-		from m_sys_user
-		where uuid = #{uuid,jdbcType=VARCHAR}
-	</select>
-	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-		delete
-		from m_sys_user
-		where uuid = #{uuid,jdbcType=VARCHAR}
-	</delete>
-	<insert id="insert" parameterType="com.luzhoumin.mblog.management.pojo.MSysUser">
-		insert into m_sys_user (uuid, _name, _pass,
-								_email, create_date, create_by,
-								update_date, update_by, delete_flag,
-								delete_date)
-		values (#{uuid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{pass,jdbcType=VARCHAR},
-				#{email,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR},
-				#{updateDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=INTEGER},
-				#{deleteDate,jdbcType=TIMESTAMP})
-	</insert>
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from m_sys_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from m_sys_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.luzhoumin.mblog.management.pojo.MSysUser">
+    insert into m_sys_user (id, _uid, _name, 
+      _pass, _email, create_date, 
+      create_by, update_date, update_by, 
+      delete_flag, delete_date)
+    values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{pass,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{createBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, 
+      #{deleteFlag,jdbcType=INTEGER}, #{deleteDate,jdbcType=TIMESTAMP})
+  </insert>
   <insert id="insertSelective" parameterType="com.luzhoumin.mblog.management.pojo.MSysUser">
     insert into m_sys_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="uuid != null">
-        uuid,
+      <if test="id != null">
+        id,
+      </if>
+      <if test="uid != null">
+        _uid,
       </if>
       <if test="name != null">
         _name,
@@ -73,8 +76,11 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="uuid != null">
-        #{uuid,jdbcType=VARCHAR},
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=VARCHAR},
       </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
@@ -108,6 +114,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.luzhoumin.mblog.management.pojo.MSysUser">
     update m_sys_user
     <set>
+      <if test="uid != null">
+        _uid = #{uid,jdbcType=VARCHAR},
+      </if>
       <if test="name != null">
         _name = #{name,jdbcType=VARCHAR},
       </if>
@@ -136,19 +145,20 @@
         delete_date = #{deleteDate,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where uuid = #{uuid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.luzhoumin.mblog.management.pojo.MSysUser">
-	  update m_sys_user
-	  set _name       = #{name,jdbcType=VARCHAR},
-		  _pass       = #{pass,jdbcType=VARCHAR},
-		  _email      = #{email,jdbcType=VARCHAR},
-		  create_date = #{createDate,jdbcType=TIMESTAMP},
-		  create_by   = #{createBy,jdbcType=VARCHAR},
-		  update_date = #{updateDate,jdbcType=TIMESTAMP},
-		  update_by   = #{updateBy,jdbcType=VARCHAR},
-		  delete_flag = #{deleteFlag,jdbcType=INTEGER},
-		  delete_date = #{deleteDate,jdbcType=TIMESTAMP}
-	  where uuid = #{uuid,jdbcType=VARCHAR}
+    update m_sys_user
+    set _uid = #{uid,jdbcType=VARCHAR},
+      _name = #{name,jdbcType=VARCHAR},
+      _pass = #{pass,jdbcType=VARCHAR},
+      _email = #{email,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      delete_date = #{deleteDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
