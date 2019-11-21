@@ -28,26 +28,26 @@ public class SessionUtil {
 	 *
 	 * @return 登录用户uuid
 	 */
-	public static Object getSessionLoginUserUuid() {
+	public static Object getSessionLoginUserUid() {
 		HttpSession session = getSession();
 		if (session == null) {
 			return null;
 		}
-		return session.getAttribute(MBlogConstant.SESSION_M_USER_UUID);
+		return session.getAttribute(MBlogConstant.SESSION_M_USER_UID);
 	}
 
 	/**
 	 * 往session中设定登录用户uuid
 	 *
-	 * @param uuid 登录用户uuid
+	 * @param uid 登录用户id
 	 */
-	public static void setSessionLoginUserUuid(String uuid) {
+	public static void setSessionLoginUserUid(String uid) {
 		HttpSession session = getSession();
 		if (session != null) {
-			if (StrUtil.isNotEmpty(uuid)) {
-				session.setAttribute(MBlogConstant.SESSION_M_USER_UUID, uuid);
+			if (StrUtil.isNotEmpty(uid)) {
+				session.setAttribute(MBlogConstant.SESSION_M_USER_UID, uid);
 			} else {
-				session.removeAttribute(MBlogConstant.SESSION_M_USER_UUID);
+				session.removeAttribute(MBlogConstant.SESSION_M_USER_UID);
 			}
 		}
 	}

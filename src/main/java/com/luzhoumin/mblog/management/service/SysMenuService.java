@@ -23,7 +23,5 @@ public interface SysMenuService {
 
 	boolean modifyMenu(MSysMenu menu);
 
-	MSysMenu getMenuInfoByUuid(String uuid);
-
-	boolean deleteMenu(String uuid);
+	boolean deleteMenu(String id);
 }

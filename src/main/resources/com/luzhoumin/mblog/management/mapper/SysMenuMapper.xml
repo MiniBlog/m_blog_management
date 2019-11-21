@@ -4,7 +4,7 @@
 <mapper namespace="com.luzhoumin.mblog.management.mapper.SysMenuMapper">
 
 	<select id="getRootMenuList" resultType="java.util.Map">
-		SELECT uuid,
+		SELECT id,
 			   _title,
 			   _key,
 			   _icon,
@@ -20,7 +20,7 @@
 	</select>
 
 	<select id="getPlainMenuList" resultType="java.util.Map">
-		SELECT uuid,
+		SELECT id,
 			   _title,
 			   _key,
 			   _icon,
@@ -34,8 +34,8 @@
 		ORDER BY _order
 	</select>
 
-	<select id="getSubMenuListByParentUuid" resultType="java.util.Map">
-		SELECT uuid,
+	<select id="getSubMenuListByParentId" resultType="java.util.Map">
+		SELECT id,
 			   _title,
 			   _key,
 			   _icon,
@@ -46,7 +46,7 @@
 			   ed_flag
 		FROM m_sys_menu
 		WHERE delete_flag &lt;&gt; 1
-		  and _parent = #{parentUuid,jdbcType=VARCHAR}
+		  and _parent = #{parentId,jdbcType=VARCHAR}
 		ORDER BY _order
 	</select>
 

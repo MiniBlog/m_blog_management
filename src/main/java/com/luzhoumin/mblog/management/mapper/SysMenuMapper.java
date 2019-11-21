@@ -18,5 +18,5 @@ public interface SysMenuMapper {
 	List<Map<String, Object>> getPlainMenuList();
 
 	//根据uuid获取子菜单
-	List<Map<String, Object>> getSubMenuListByParentUuid(String parentUuid);
+	List<Map<String, Object>> getSubMenuListByParentId(String parentId);
 }

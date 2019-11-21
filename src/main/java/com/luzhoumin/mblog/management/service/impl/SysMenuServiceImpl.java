@@ -1,6 +1,7 @@
 package com.luzhoumin.mblog.management.service.impl;
 
 import cn.hutool.core.util.IdUtil;
+import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.StrUtil;
 import com.luzhoumin.mblog.management.mapper.SysMenuMapper;
 import com.luzhoumin.mblog.management.mapper.generate.MSysMenuMapper;
@@ -61,9 +62,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 		try {
 			String loginUser = StrUtil.toString(SessionUtil.getSessionLoginUserName());
 			Date now = new Date();
-			String uuid = IdUtil.randomUUID();
 
-			menu.setUuid(uuid);
 			menu.setCreateBy(loginUser);
 			menu.setCreateDate(now);
 			menu.setUpdateBy(loginUser);
@@ -100,19 +99,14 @@ public class SysMenuServiceImpl implements SysMenuService {
 	}
 
 	@Override
-	public MSysMenu getMenuInfoByUuid(String uuid) {
-		return null;
-	}
-
-	@Override
-	public boolean deleteMenu(String uuid) {
+	public boolean deleteMenu(String id) {
 		logger.info("**************** MenuServiceImpl,addMenu:start ****************");
 		try {
 			String loginUser = StrUtil.toString(SessionUtil.getSessionLoginUserName());
 			Date now = new Date();
 
 			MSysMenu menu = new MSysMenu();
-			menu.setUuid(uuid);
+			menu.setId(NumberUtil.parseInt(id));
 			menu.setUpdateBy(loginUser);
 			menu.setUpdateDate(now);
 			menu.setDeleteFlag(1);
@@ -134,8 +128,8 @@ public class SysMenuServiceImpl implements SysMenuService {
 	 * @param menu
 	 */
 	private void findSubMenuAndAdd(Map<String, Object> menu) {
-		String uuid = String.valueOf(menu.get("uuid"));
-		List<Map<String, Object>> subMenuList = sysMenuMapper.getSubMenuListByParentUuid(uuid);
+		String id = String.valueOf(menu.get("id"));
+		List<Map<String, Object>> subMenuList = sysMenuMapper.getSubMenuListByParentId(id);
 		if (subMenuList != null && subMenuList.size() > 0) {
 			//有子菜单
 			menu.put("children", subMenuList);

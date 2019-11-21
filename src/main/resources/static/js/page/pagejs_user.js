@@ -22,7 +22,7 @@ new Vue({
 			modifyPassFormDialog: false,
 			//form
 			userForm: {
-				uuid: '',
+				id: '',
 				name: '',
 				email: '',
 				pass: '',
@@ -30,7 +30,7 @@ new Vue({
 				_isEdit: false
 			},
 			modifyPassForm: {
-				uuid: '',
+				id: '',
 				name: '',
 				email: '',
 				org_pass: '',
@@ -221,7 +221,7 @@ new Vue({
 			that.$refs['modifyPassForm'].validate((valid) => {
 				if (valid) {
 					let param = {};
-					param['uuid'] = that.modifyPassForm.uuid;
+					param['id'] = that.modifyPassForm.id;
 					param['pass'] = hex_md5(that.modifyPassForm.pass);
 					param['org_pass'] = hex_md5(that.modifyPassForm.org_pass);
 					easymPutAjax(that, webRootAjax + "/sys/user.do", param, (data) => {
@@ -251,13 +251,13 @@ new Vue({
 			let that = this;
 			that.userForm.email = row['_email'];
 			that.userForm.name = row['_name'];
-			that.userForm.uuid = row['uuid'];
+			that.userForm.id = row['id'];
 			that.userForm._isEdit = true;
 			that.userFormDialog = true;
 		},
 		handleModifyPass(index, row) {
 			let that = this;
-			that.modifyPassForm.uuid = row['uuid'];
+			that.modifyPassForm.id = row['id'];
 			that.modifyPassForm.name = row['_name'];
 			that.modifyPassForm.email = row['_email'];
 			that.modifyPassFormDialog = true;
@@ -270,7 +270,7 @@ new Vue({
 				type: 'warning'
 			}).then(() => {
 				let param = {};
-				param['uuid'] = row['uuid'];
+				param['id'] = row['id'];
 				easymDeleteAjax(that, webRootAjax + "/sys/user.do", param, (data) => {
 					that.$message({
 						type: 'success',

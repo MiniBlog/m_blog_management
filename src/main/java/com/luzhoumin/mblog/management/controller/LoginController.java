@@ -65,12 +65,12 @@ public class LoginController {
 		} else {
 			String dbUserName = StrUtil.toString(userInfo.get("_name"));
 			String dbUserPass = StrUtil.toString(userInfo.get("_pass"));
-			String dbUserUuid = StrUtil.toString(userInfo.get("uuid"));
+			String dbUserUid = StrUtil.toString(userInfo.get("_uid"));
 			String data1 = SecureUtil.md5(dbUserName);
 			String data2 = SecureUtil.md5(data1 + dbUserPass);
 			if (data2.equals(userPass)) {
 				//登陆成功
-				SessionUtil.setSessionLoginUserUuid(dbUserUuid);
+				SessionUtil.setSessionLoginUserUid(dbUserUid);
 				SessionUtil.setSessionLoginUserName(dbUserName);
 				aj.setSuccess(true);
 			} else {

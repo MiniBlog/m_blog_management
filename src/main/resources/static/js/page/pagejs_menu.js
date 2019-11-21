@@ -10,7 +10,7 @@ new Vue({
 			tableLoading: true,
 			menuFormDialog: false,
 			menuForm: {
-				uuid: '',
+				id: '',
 				parent: '',
 				group: false,
 				title: '',
@@ -106,7 +106,7 @@ new Vue({
 		//编辑
 		handleEdit(index, row) {
 			let that = this;
-			that.menuForm.uuid = row['uuid'];
+			that.menuForm.id = row['id'];
 			that.menuForm.group = row['_group'];
 			that.menuForm.title = row['_title'];
 			that.menuForm.icon = row['_icon'];
@@ -127,7 +127,7 @@ new Vue({
 				type: 'warning'
 			}).then(() => {
 				let param = {};
-				param['uuid'] = row['uuid'];
+				param['id'] = row['id'];
 				easymDeleteAjax(that, webRootAjax + "/sys/menu.do", param, (data) => {
 					that.$message({
 						type: 'success',

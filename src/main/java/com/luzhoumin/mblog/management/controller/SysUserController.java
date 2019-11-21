@@ -1,8 +1,10 @@
 package com.luzhoumin.mblog.management.controller;
 
+import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.StrUtil;
 import com.luzhoumin.mblog.management.pojo.AjaxJson;
 import com.luzhoumin.mblog.management.pojo.MSysUser;
+import com.luzhoumin.mblog.management.service.SysSequenceService;
 import com.luzhoumin.mblog.management.service.SysUserService;
 import com.luzhoumin.mblog.management.util.ConvertUtil;
 import com.luzhoumin.mblog.management.util.HttpServletUtil;
@@ -33,6 +35,8 @@ public class SysUserController {
 
 	@Resource
 	SysUserService sysUserService;
+	@Resource
+	SysSequenceService sysSequenceService;
 
 	@GetMapping("/user.html")
 	public ModelAndView list() {
@@ -65,6 +69,8 @@ public class SysUserController {
 		logger.info("**************** SysUserController,ajaxAddUser:start ****************");
 		AjaxJson aj = new AjaxJson();
 		try {
+			String uid = sysSequenceService.getSequence("USER_ID");
+			user.setUid(uid);
 			boolean b = sysUserService.addUser(user);
 			aj.setSuccess(b);
 		} catch (Exception e) {
@@ -91,18 +97,18 @@ public class SysUserController {
 			String new_pass = user.getPass();
 			String org_pass = request.getParameter("org_pass");
 			if (StrUtil.isNotEmpty(org_pass)) {
-				MSysUser userInfoInDb = sysUserService.getUserInfoByUuid(user.getUuid());
+				MSysUser userInfoInDb = sysUserService.getUserInfoById(user.getId());
 				if (userInfoInDb == null) {
 					//用户不存在
 					aj.setMsg("用户不存在");
 					aj.setSuccess(false);
 				} else {
-					String dbUserUuid = StrUtil.toString(userInfoInDb.getUuid());
+					int dbUserId = userInfoInDb.getId();
 					String dbUserPass = StrUtil.toString(userInfoInDb.getPass());
 					if (dbUserPass.equals(org_pass)) {
 						//密码正确
 						user = new MSysUser();
-						user.setUuid(dbUserUuid);
+						user.setId(dbUserId);
 						user.setPass(new_pass);
 						aj.setSuccess(sysUserService.modifyUser(user));
 					} else {
@@ -130,9 +136,9 @@ public class SysUserController {
 		AjaxJson aj = new AjaxJson();
 		try {
 
-			String uuid = request.getParameter("uuid");
-			if (StrUtil.isNotEmpty(uuid)) {
-				MSysUser userInfoInDb = sysUserService.getUserInfoByUuid(uuid);
+			String id = request.getParameter("id");
+			if (StrUtil.isNotEmpty(id)) {
+				MSysUser userInfoInDb = sysUserService.getUserInfoById(NumberUtil.parseInt(id));
 				if (userInfoInDb == null) {
 					//用户不存在
 					aj.setMsg("用户不存在");

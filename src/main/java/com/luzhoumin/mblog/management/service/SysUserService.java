@@ -14,7 +14,7 @@ import java.util.Map;
 public interface SysUserService {
 	Map<String, Object> getUserInfo(String userName);
 
-	MSysUser getUserInfoByUuid(String uuid);
+	MSysUser getUserInfoById(int id);
 
 	Map<String, Object> getUserList(Map<String, String> paramMap, int pageNum, int pageSize);
 

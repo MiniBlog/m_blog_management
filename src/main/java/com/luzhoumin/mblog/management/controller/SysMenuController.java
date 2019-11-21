@@ -57,7 +57,6 @@ public class SysMenuController {
 		logger.info("**************** SysMenuController,ajaxGetList:start ****************");
 		AjaxJson aj = new AjaxJson();
 		try {
-			Map<String, String> paramMap = ConvertUtil.requestToMap(request);
 			List<Map<String, Object>> menuList = sysMenuService.getMenuList();
 			aj.setList(menuList);
 			aj.setSuccess(true);
@@ -149,9 +148,9 @@ public class SysMenuController {
 		AjaxJson aj = new AjaxJson();
 		try {
 
-			String uuid = request.getParameter("uuid");
-			if (StrUtil.isNotEmpty(uuid)) {
-				aj.setSuccess(sysMenuService.deleteMenu(uuid));
+			String id = request.getParameter("id");
+			if (StrUtil.isNotEmpty(id)) {
+				aj.setSuccess(sysMenuService.deleteMenu(id));
 			} else {
 				//参数不全
 				aj.setMsg("缺少参数uuid.");

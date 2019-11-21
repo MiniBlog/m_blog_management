@@ -8,19 +8,14 @@ import org.apache.ibatis.annotations.Mapper;
 public interface MSysLogRequestMapper {
     @DBWriteConnection
     int deleteByPrimaryKey(Integer id);
-
     @DBWriteConnection
     int insert(MSysLogRequest record);
-
     @DBWriteConnection
     int insertSelective(MSysLogRequest record);
-
     @DBWriteConnection
     MSysLogRequest selectByPrimaryKey(Integer id);
-
     @DBWriteConnection
     int updateByPrimaryKeySelective(MSysLogRequest record);
-
     @DBWriteConnection
     int updateByPrimaryKey(MSysLogRequest record);
 }

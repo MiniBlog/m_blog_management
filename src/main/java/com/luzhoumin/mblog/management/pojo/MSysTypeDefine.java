@@ -5,10 +5,20 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public class MSysDemo implements Serializable {
+public class MSysTypeDefine implements Serializable {
     private Integer id;
 
-    private String name;
+    private String type;
+
+    private Integer order;
+
+    private String value;
+
+    private String valueOther;
+
+    private String desc;
+
+    private String remark;
 
     private String createBy;
 

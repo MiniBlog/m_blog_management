@@ -7,20 +7,15 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface MSysMenuMapper {
     @DBWriteConnection
-    int deleteByPrimaryKey(String uuid);
-
+    int deleteByPrimaryKey(Integer id);
     @DBWriteConnection
     int insert(MSysMenu record);
-
     @DBWriteConnection
     int insertSelective(MSysMenu record);
-
     @DBWriteConnection
-    MSysMenu selectByPrimaryKey(String uuid);
-
+    MSysMenu selectByPrimaryKey(Integer id);
     @DBWriteConnection
     int updateByPrimaryKeySelective(MSysMenu record);
-
     @DBWriteConnection
     int updateByPrimaryKey(MSysMenu record);
 }

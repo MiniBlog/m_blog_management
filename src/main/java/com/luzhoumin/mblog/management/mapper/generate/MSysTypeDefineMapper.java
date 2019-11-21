@@ -1,21 +1,21 @@
 package com.luzhoumin.mblog.management.mapper.generate;
 
 import com.luzhoumin.mblog.management.config.DBWriteConnection;
-import com.luzhoumin.mblog.management.pojo.MSysUser;
+import com.luzhoumin.mblog.management.pojo.MSysTypeDefine;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface MSysUserMapper {
+public interface MSysTypeDefineMapper {
     @DBWriteConnection
     int deleteByPrimaryKey(Integer id);
     @DBWriteConnection
-    int insert(MSysUser record);
+    int insert(MSysTypeDefine record);
     @DBWriteConnection
-    int insertSelective(MSysUser record);
+    int insertSelective(MSysTypeDefine record);
     @DBWriteConnection
-    MSysUser selectByPrimaryKey(Integer id);
+    MSysTypeDefine selectByPrimaryKey(Integer id);
     @DBWriteConnection
-    int updateByPrimaryKeySelective(MSysUser record);
+    int updateByPrimaryKeySelective(MSysTypeDefine record);
     @DBWriteConnection
-    int updateByPrimaryKey(MSysUser record);
+    int updateByPrimaryKey(MSysTypeDefine record);
 }

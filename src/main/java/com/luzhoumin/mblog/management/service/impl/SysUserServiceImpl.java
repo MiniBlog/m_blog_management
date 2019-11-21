@@ -1,6 +1,7 @@
 package com.luzhoumin.mblog.management.service.impl;
 
 import cn.hutool.core.util.IdUtil;
+import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.StrUtil;
 import com.luzhoumin.mblog.management.mapper.SysUserMapper;
 import com.luzhoumin.mblog.management.mapper.generate.MSysUserMapper;
@@ -42,12 +43,9 @@ public class SysUserServiceImpl implements SysUserService {
 	}
 
 	@Override
-	public MSysUser getUserInfoByUuid(String uuid) {
+	public MSysUser getUserInfoById(int id) {
 		logger.info("**************** UserServiceImpl,getUserInfoByUuid:start ****************");
-		if (StrUtil.isEmpty(uuid)) {
-			return null;
-		}
-		MSysUser mSysUser = mSysUserMapper.selectByPrimaryKey(uuid);
+		MSysUser mSysUser = mSysUserMapper.selectByPrimaryKey(id);
 		logger.info("**************** UserServiceImpl,getUserInfoByUuid:end ****************");
 		return mSysUser;
 	}
@@ -74,9 +72,7 @@ public class SysUserServiceImpl implements SysUserService {
 		try {
 			String loginUser = StrUtil.toString(SessionUtil.getSessionLoginUserName());
 			Date now = new Date();
-			String uuid = IdUtil.randomUUID();
 
-			user.setUuid(uuid);
 			user.setCreateBy(loginUser);
 			user.setCreateDate(now);
 			user.setUpdateBy(loginUser);

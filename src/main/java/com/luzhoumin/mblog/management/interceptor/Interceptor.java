@@ -51,7 +51,7 @@ public class Interceptor implements HandlerInterceptor {
 	private void logRequest(HttpServletRequest request) {
 		MSysLogRequest mSysLogRequest = new MSysLogRequest();
 		String userName = StrUtil.toString(SessionUtil.getSessionLoginUserName());
-		String userUuid = StrUtil.toString(SessionUtil.getSessionLoginUserUuid());
+		String userUuid = StrUtil.toString(SessionUtil.getSessionLoginUserUid());
 		mSysLogRequest.setUserName(userName);
 		mSysLogRequest.setUserUuid(userUuid);
 		mSysLogRequest.setSource("b");
@@ -92,7 +92,7 @@ public class Interceptor implements HandlerInterceptor {
 	 */
 	private boolean loginIntercept(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String requestPath = HttpServletUtil.getRequestPath(request);
-		if (SessionUtil.getSessionLoginUserUuid() == null) {
+		if (SessionUtil.getSessionLoginUserUid() == null) {
 			logger.info("====登录状态 未登录[拦截成功" + requestPath + "]====");
 			PrintWriter out = response.getWriter();
 			out.println("<html>");

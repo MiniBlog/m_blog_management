@@ -55,7 +55,7 @@ DROP TABLE IF EXISTS `m_sys_demo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `m_sys_demo` (
-  `uuid` varchar(40) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `_name` varchar(50) DEFAULT NULL COMMENT '名称',
   `create_by` varchar(20) NOT NULL COMMENT '创建人',
   `create_date` datetime NOT NULL COMMENT '创建日期',
@@ -63,7 +63,7 @@ CREATE TABLE `m_sys_demo` (
   `update_date` datetime NOT NULL COMMENT '更新日期',
   `delete_flag` int(1) NOT NULL DEFAULT '0' COMMENT '删除标记',
   `delete_date` datetime DEFAULT NULL COMMENT '删除日期',
-  PRIMARY KEY (`uuid`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -114,7 +114,7 @@ DROP TABLE IF EXISTS `m_sys_menu`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `m_sys_menu` (
-  `uuid` varchar(40) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `_title` varchar(50) NOT NULL COMMENT '菜单名',
   `_key` varchar(50) DEFAULT NULL COMMENT 'key',
   `_icon` varchar(50) DEFAULT NULL COMMENT '图标',
@@ -129,8 +129,8 @@ CREATE TABLE `m_sys_menu` (
   `update_date` datetime NOT NULL,
   `delete_flag` int(1) NOT NULL DEFAULT '0',
   `delete_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`uuid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -139,7 +139,7 @@ CREATE TABLE `m_sys_menu` (
 
 LOCK TABLES `m_sys_menu` WRITE;
 /*!40000 ALTER TABLE `m_sys_menu` DISABLE KEYS */;
-INSERT INTO `m_sys_menu` VALUES ('037f9c5a-9d3d-5897-8303-c4b345e2d1bc','内容管理','100-content','el-icon-notebook-2',NULL,100,0,NULL,1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),('197a5df9-df42-53dd-9192-bf93c2734f77','分类设置','110-category','el-icon-coin','/category.html',110,0,'037f9c5a-9d3d-5897-8303-c4b345e2d1bc',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),('29c0e6e8-db70-59fa-85b0-ce8a549404aa','菜单设置','811-sys-set-menu','el-icon-s-operation','/sys/menu.html',811,0,'5b2b5ab3-04b5-5109-953a-b7ea31a9c48d',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),('30a30249-5188-578c-ad1d-b75c5051cd99','创建文章','310-add-article','el-icon-document-add','/add-article.html',310,0,'885e78ae-f9c0-5bf2-8c7c-5640837bd22c',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),('3eb24d3d-4de0-5cc3-ac4b-fd4a6e1f1684','系统管理','800-sys','el-icon-s-operation',NULL,800,0,NULL,1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),('3fd513e5-c754-5141-8703-96a3a04be410','文章列表','320-article-list','el-icon-tickets','/article-list.html',320,0,'885e78ae-f9c0-5bf2-8c7c-5640837bd22c',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),('401e267f-0ee5-5fc1-8bfb-9913b001f364','系统信息','820-sys-info','el-icon-s-operation',NULL,820,1,'3eb24d3d-4de0-5cc3-ac4b-fd4a6e1f1684',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),('40935225-8324-5342-8a86-bc5df4ea4c5c','demo','901-demo0','el-icon-menu','/demo/demo.html',901,0,'560a6f7c-b19d-5bfb-9fa7-6efbbd79ed29',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),('4ac559a9-8996-5fc8-bfe6-496e233d20d4','TKD设置','610-tkd','el-icon-s-operation','/tkd.html',610,0,'990180ca-4b73-5761-911f-a07712c2631b',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),('51e67451-8b23-5907-bdd4-134502174c80','文件列表','520-file','el-icon-s-order','/file.html',520,0,'5b00c7c2-1541-5f5b-a0f6-eb402fdd61e9',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),('560a6f7c-b19d-5bfb-9fa7-6efbbd79ed29','Demo','900-demo','el-icon-menu',NULL,900,0,NULL,1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),('56fd6f25-2bd6-503e-a81c-3b103fd53d34','请求日志','821-sys-info-log-request','el-icon-s-marketing','/sys/log/request.html',821,0,'401e267f-0ee5-5fc1-8bfb-9913b001f364',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),('5b00c7c2-1541-5f5b-a0f6-eb402fdd61e9','附件管理','500-annex','el-icon-paperclip',NULL,500,0,NULL,1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),('5b2b5ab3-04b5-5109-953a-b7ea31a9c48d','系统设置','810-sys-set','el-icon-s-operation',NULL,810,1,'3eb24d3d-4de0-5cc3-ac4b-fd4a6e1f1684',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),('5c7eff0a-db09-5118-9110-7c22342c4fe8','广告位设置','620-advertisement','el-icon-s-operation','/advertisement.html',620,0,'990180ca-4b73-5761-911f-a07712c2631b',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),('6aa15d42-ed00-53a0-a355-2f8a60321e03','文章模块','210-article-model','el-icon-copy-document','/article-model.html',210,0,'6fa39964-e229-5028-880b-9c0fd1ef5d1f',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),('6fa39964-e229-5028-880b-9c0fd1ef5d1f','模块管理','200-modal','el-icon-copy-document',NULL,200,0,NULL,1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),('723e0734-1560-5fd5-8497-ea8901dba1d9','页面模块','220-page-model','el-icon-copy-document','/page-model.html',220,0,'6fa39964-e229-5028-880b-9c0fd1ef5d1f',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),('885e78ae-f9c0-5bf2-8c7c-5640837bd22c','文章管理','300-article','el-icon-document',NULL,300,0,NULL,1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),('88d57fe1-0db6-5bb3-b85d-c0a26d62085f','用户设置','812-sys-set-user','el-icon-s-operation','/sys/user.html',812,0,'5b2b5ab3-04b5-5109-953a-b7ea31a9c48d',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),('8b09249d-cebd-58cc-87d4-d27de1837fa2','页面列表','420-page-list','el-icon-document-copy','/page-list.html',420,0,'a4c7d1b7-90fd-533c-81aa-4628b17bea9e',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),('93074b68-d53b-529e-9b86-47e464011f92','文章评论列表','330-article-comment-list','el-icon-chat-dot-square','/article-comment-list.html',330,0,'885e78ae-f9c0-5bf2-8c7c-5640837bd22c',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),('990180ca-4b73-5761-911f-a07712c2631b','SEO管理','600-seo','el-icon-s-marketing',NULL,600,0,NULL,1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),('9a410948-2b9e-53f0-87d2-3fbe916ccd15','图片列表','510-pic','el-icon-picture','/pic.html',510,0,'5b00c7c2-1541-5f5b-a0f6-eb402fdd61e9',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),('a4c7d1b7-90fd-533c-81aa-4628b17bea9e','页面管理','400-page','el-icon-document',NULL,400,0,NULL,1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),('c187d14b-fa43-5a97-86da-cb5d9aac29b0','首页','0-welcome','el-icon-s-home','/welcome.html',0,0,NULL,1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),('c6a5000c-f719-562f-8142-61a8b7174c35','创建页面','410-add-page','el-icon-document-add','/add-page.html',410,0,'a4c7d1b7-90fd-533c-81aa-4628b17bea9e',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),('ebea1cc7-9274-5784-8830-e46ed7c0c8b8','页面评论列表','430-page-comment-list','el-icon-chat-dot-square','/page-comment-list.html',430,0,'a4c7d1b7-90fd-533c-81aa-4628b17bea9e',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),('f206197c-e454-5f7f-8ddc-1d1e601d4e69','标签设置','120-tag','el-icon-price-tag','/tag.html',120,0,'037f9c5a-9d3d-5897-8303-c4b345e2d1bc',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),('f5ae8828-94d8-5228-8db5-33a98df1b9be','demo图片上传','902-demo-pic-upload','el-icon-menu','/demo/picUpload.html',902,0,'560a6f7c-b19d-5bfb-9fa7-6efbbd79ed29',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL);
+INSERT INTO `m_sys_menu` VALUES (1,'首页','0-welcome','el-icon-s-home','/welcome.html',0,0,NULL,1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(2,'内容管理','100-content','el-icon-notebook-2',NULL,100,0,NULL,1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(3,'分类设置','110-category','el-icon-coin','/category.html',110,0,'2',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(4,'标签设置','120-tag','el-icon-price-tag','/tag.html',120,0,'2',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(5,'模块管理','200-modal','el-icon-copy-document',NULL,200,0,NULL,1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(6,'文章模块','210-article-model','el-icon-copy-document','/article-model.html',210,0,'5',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(7,'页面模块','220-page-model','el-icon-copy-document','/page-model.html',220,0,'5',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(8,'文章管理','300-article','el-icon-document',NULL,300,0,NULL,1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(9,'创建文章','310-add-article','el-icon-document-add','/add-article.html',310,0,'8',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(10,'文章列表','320-article-list','el-icon-tickets','/article-list.html',320,0,'8',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(11,'文章评论列表','330-article-comment-list','el-icon-chat-dot-square','/article-comment-list.html',330,0,'8',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(12,'页面管理','400-page','el-icon-document',NULL,400,0,NULL,1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(13,'创建页面','410-add-page','el-icon-document-add','/add-page.html',410,0,'12',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(14,'页面列表','420-page-list','el-icon-document-copy','/page-list.html',420,0,'12',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(15,'页面评论列表','430-page-comment-list','el-icon-chat-dot-square','/page-comment-list.html',430,0,'12',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(16,'附件管理','500-annex','el-icon-paperclip',NULL,500,0,NULL,1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(17,'图片列表','510-pic','el-icon-picture','/pic.html',510,0,'16',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(18,'文件列表','520-file','el-icon-s-order','/file.html',520,0,'16',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(19,'SEO管理','600-seo','el-icon-s-marketing',NULL,600,0,NULL,1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(20,'TKD设置','610-tkd','el-icon-s-operation','/tkd.html',610,0,'19',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(21,'广告位设置','620-advertisement','el-icon-s-operation','/advertisement.html',620,0,'19',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(22,'系统管理','800-sys','el-icon-s-operation',NULL,800,0,NULL,1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(23,'系统设置','810-sys-set','el-icon-s-operation',NULL,810,1,'22',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(24,'菜单设置','811-sys-set-menu','el-icon-s-operation','/sys/menu.html',811,0,'23',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(25,'用户设置','812-sys-set-user','el-icon-s-operation','/sys/user.html',812,0,'23',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(26,'系统信息','820-sys-info','el-icon-s-operation',NULL,820,1,'22',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(27,'请求日志','821-sys-info-log-request','el-icon-s-marketing','/sys/log/request.html',821,0,'26',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(28,'Demo','900-demo','el-icon-menu',NULL,900,0,NULL,1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(29,'demo','901-demo0','el-icon-menu','/demo/demo.html',901,0,'28',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(30,'demo图片上传','902-demo-pic-upload','el-icon-menu','/demo/picUpload.html',902,0,'28',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL);
 /*!40000 ALTER TABLE `m_sys_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -160,7 +160,7 @@ CREATE TABLE `m_sys_sequence` (
   `current_value_length` int(10) NOT NULL COMMENT '当前值长度',
   `increment_value` int(10) NOT NULL COMMENT '增量值',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -169,7 +169,7 @@ CREATE TABLE `m_sys_sequence` (
 
 LOCK TABLES `m_sys_sequence` WRITE;
 /*!40000 ALTER TABLE `m_sys_sequence` DISABLE KEYS */;
-INSERT INTO `m_sys_sequence` VALUES (1,'BLOB_ID','blob','191121',1,1,4,1);
+INSERT INTO `m_sys_sequence` VALUES (1,'BLOB_ID','blob','191121',1,1,4,1),(2,'USER_ID','u','191121',2,1,4,1);
 /*!40000 ALTER TABLE `m_sys_sequence` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -216,7 +216,8 @@ DROP TABLE IF EXISTS `m_sys_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `m_sys_user` (
-  `uuid` varchar(40) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `_uid` varchar(20) DEFAULT NULL COMMENT 'uid',
   `_name` varchar(20) NOT NULL COMMENT '用户名',
   `_pass` varchar(200) NOT NULL COMMENT '用户密码',
   `_email` varchar(50) DEFAULT NULL COMMENT '用户邮箱',
@@ -226,8 +227,8 @@ CREATE TABLE `m_sys_user` (
   `update_by` varchar(20) NOT NULL,
   `delete_flag` int(1) NOT NULL DEFAULT '0',
   `delete_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`uuid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -236,7 +237,7 @@ CREATE TABLE `m_sys_user` (
 
 LOCK TABLES `m_sys_user` WRITE;
 /*!40000 ALTER TABLE `m_sys_user` DISABLE KEYS */;
-INSERT INTO `m_sys_user` VALUES ('898f85c4-819c-4043-bf49-0f4edecabd47','jacob','1a100d2c0dab19c4430e7d73762b3423','jacob1996@gmail.com','2019-09-19 17:05:32','jacob','2019-11-21 02:15:21','jacob',0,NULL);
+INSERT INTO `m_sys_user` VALUES (1,'u1911210002','jacob','1a100d2c0dab19c4430e7d73762b3423','jacob1996@gmail.com','2019-09-19 17:05:32','jacob','2019-11-21 02:15:21','jacob',0,NULL);
 /*!40000 ALTER TABLE `m_sys_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -249,4 +250,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-21 11:38:28
+-- Dump completed on 2019-11-21 14:14:59

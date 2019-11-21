@@ -20,6 +20,6 @@ public class MBlogConstant {
 	public static final String SESSION_M_VERIFICATION_CODE_FOR_RESET_PASSWORD = "verificationCodeForResetPassword";
 	//Session-登陆后-用户名
 	public static final String SESSION_M_USER_NAME = "sessionMUserName";
-	//Session-登陆后-用户UUID
-	public static final String SESSION_M_USER_UUID = "sessionMUserUuid";
+	//Session-登陆后-用户Uid
+	public static final String SESSION_M_USER_UID = "sessionMUserUid";
 }
