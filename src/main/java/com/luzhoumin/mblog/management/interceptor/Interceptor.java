@@ -32,8 +32,8 @@ public class Interceptor implements HandlerInterceptor {
 		// 只有返回true才会继续向下执行，返回false取消当前请求
 		logger.info(">>>Interceptor>>>>>>>在请求处理之前进行调用（Controller方法调用之前）");
 		response.addHeader("x-frame-options", "SAMEORIGIN");
-		//1.请求日志
-		logRequest(request);
+//		//1.请求日志
+//		logRequest(request);
 		//2.请求地址拦截
 		String requestPath = HttpServletUtil.getRequestPath(request);
 		if (StrUtil.containsAny(requestPath, noLoginPathPattens)) {
