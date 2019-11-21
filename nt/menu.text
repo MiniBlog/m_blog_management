@@ -1,0 +1,39 @@
+
+首页 (0-welcome)(/welcome.html)
+
+内容管理 (100-content)
+--分类设置 (110-category)()
+--标签设置 (120-tag)()
+
+模块管理 (200-modal)
+--文章模块 (210-artical-modal)()
+--页面模块 (220-page-modal)()
+
+文章管理 (300-artical)
+--创建文章 (310-add-artical)()
+--文章列表 (320-artical-list)()
+--文章评论列表 (330-artical-comment-list)()
+
+页面管理 (400-page)
+--创建页面 (410-add-page)()
+--页面列表 (420-page-list)()
+--页面评论列表 (430-page-comment-list)()
+
+附件管理 (500-annex)
+--图片列表 (510-pic)()
+--文件列表 (520-file)()
+
+SEO管理 (600-seo)
+--TKD设置 (610-tkd)()
+--广告位设置 (620-advertisement)()
+
+系统管理 (800-sys)
+--#系统设置 (810-sys-set)
+----菜单设置 (811-sys-set-menu)(/sys/menu.html)
+----用户设置 (812-sys-set-user)(/sys/user.html)
+--#系统信息 (820-sys-info)
+----请求日志 (821-sys-info-log-request)(/sys/log/request.html)
+
+Demo (900-demo)
+--demo (901-demo0)(/demo/demo.html)
+--demo图片上传 (902-demo-pic-upload)(/demo/picUpload.html)

@@ -55,7 +55,7 @@
 	</header>
 	<el-row>
 		<el-col id="menu_box">
-			<el-menu @select="menuClick" default-active="dashboard" style="border-right: none;">
+			<el-menu @select="menuClick" default-active="dashboard" unique-opened style="border-right: none;">
 				<th:block th:each="rootMenu : ${menuList}" th:object="${rootMenu}">
 					<!--如果有子菜单-->
 					<th:block th:if="${rootMenu['children']}">
