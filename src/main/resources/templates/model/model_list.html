@@ -2,11 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8"/>
-	<title>User</title>
+	<title>Model List</title>
 	<script th:replace="common :: head"></script>
 	<link rel="stylesheet" th:href="@{/css/page/page_css_common_table.css}"/>
 </head>
 <body>
+<div th:replace="common :: page_loading"></div>
 <div id="app" ref="app">
 	<div id="topRow">
 		<el-row>
