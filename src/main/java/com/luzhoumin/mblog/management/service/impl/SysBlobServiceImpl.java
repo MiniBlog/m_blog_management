@@ -6,8 +6,7 @@ import com.luzhoumin.mblog.management.mapper.generate.MSysBlobMapper;
 import com.luzhoumin.mblog.management.pojo.MSysBlob;
 import com.luzhoumin.mblog.management.service.SysBlobService;
 import com.luzhoumin.mblog.management.service.SysSequenceService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -15,9 +14,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Service
 public class SysBlobServiceImpl implements SysBlobService {
-	private static Logger logger = LoggerFactory.getLogger(SysBlobServiceImpl.class);
+
 	@Resource
 	private SysBlobMapper sysBlobMapper;
 	@Resource
@@ -30,11 +30,10 @@ public class SysBlobServiceImpl implements SysBlobService {
 	 */
 	@Override
 	public Map<String, Object> getBlobInfo(String blobId) {
-		logger.info("**********getBlobInfo 开始**********");
+		log.info("SysBlobServiceImpl,getBlobInfo:start");
 
 		if (StringUtil.isEmpty(blobId)) {
-			logger.info("**********INCOMPLETE_PARAMETERS**********");
-			logger.info("**********getBlobInfo 结束**********");
+			log.info("SysBlobServiceImpl,getBlobInfo:end.<INCOMPLETE_PARAMETERS>");
 			return null;
 		}
 
@@ -45,7 +44,7 @@ public class SysBlobServiceImpl implements SysBlobService {
 			blobInfo = blobList.get(0);
 		}
 
-		logger.info("**********getBlobInfo 结束**********");
+		log.info("SysBlobServiceImpl,getBlobInfo:end");
 		return blobInfo;
 	}
 
@@ -55,14 +54,14 @@ public class SysBlobServiceImpl implements SysBlobService {
 	@Override
 	public String saveBlobData(Map<String, String> mapParams) {
 
-		logger.info("**********saveBlobData 开始**********");
+		log.info("saveBlobData 开始");
 		String blobName = mapParams.get("blobName");
 		String blobOriginalName = mapParams.get("blobOriginalName");
 		String blobAddress = mapParams.get("blobAddress");
 
 		if (StringUtil.isEmpty(blobName) || StringUtil.isEmpty(blobOriginalName) || StringUtil.isEmpty(blobAddress)) {
-			logger.info("**********INCOMPLETE_PARAMETERS**********");
-			logger.info("**********saveBlobData 结束**********");
+			log.info("INCOMPLETE_PARAMETERS");
+			log.info("saveBlobData 结束");
 			return "";
 		}
 
@@ -90,7 +89,7 @@ public class SysBlobServiceImpl implements SysBlobService {
 			return "";
 		}
 
-		logger.info("**********saveBlobData 结束**********");
+		log.info("saveBlobData 结束");
 		return blobId;
 	}
 }

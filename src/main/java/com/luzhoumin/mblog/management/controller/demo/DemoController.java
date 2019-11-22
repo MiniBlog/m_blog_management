@@ -1,8 +1,7 @@
 package com.luzhoumin.mblog.management.controller.demo;
 
 import com.luzhoumin.mblog.management.service.DemoService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,18 +17,19 @@ import javax.servlet.http.HttpServletResponse;
  * @author <a href="mailto:zmlu1996@gmail.com">Jacob Lu</a>
  * @since 1.8
  */
+@Slf4j
 @RestController
 @RequestMapping("/demo")
 public class DemoController {
 
-	private static Logger logger = LoggerFactory.getLogger(DemoController.class);
 	@Resource
 	private DemoService demoService;
-	
+
 	@RequestMapping("/demo.html")
-	public ModelAndView demo(HttpServletRequest request, HttpServletResponse response){
-		logger.info("**************** DemoController,demo:start ****************");
-		logger.info("**************** DemoController,demo:start ****************");
-		return new ModelAndView("demo/demo");
+	public ModelAndView demoPage(HttpServletRequest request, HttpServletResponse response) {
+		log.info("DemoController,demoPage:start");
+		ModelAndView modelAndView = new ModelAndView("demo/demo");
+		log.info("DemoController,demoPage:start");
+		return modelAndView;
 	}
 }

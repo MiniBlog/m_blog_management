@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -119,7 +120,7 @@ public class UploadUtil {
 
 			response.setContentType("application/octet-stream");
 			response.setHeader("Content-disposition", "attachment; filename="
-					+ new String(fileName.getBytes("utf-8"), "ISO8859-1"));
+					+ new String(fileName.getBytes(StandardCharsets.UTF_8), "ISO8859-1"));
 
 			bis = new BufferedInputStream(inputStream);
 			bos = new BufferedOutputStream(response.getOutputStream());

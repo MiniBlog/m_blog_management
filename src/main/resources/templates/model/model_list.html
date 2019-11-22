@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>User</title>
+	<script th:replace="common :: head"></script>
+	<link rel="stylesheet" th:href="@{/css/page/page_css_common_table.css}"/>
+</head>
+<body>
+<div id="app" ref="app">
+	<div id="topRow">
+		<el-row>
+			<el-form :inline="true" :model="filterForm" ref="filterForm">
+				<el-form-item label="UID" prop="uid">
+					<el-input type="text" v-model="filterForm.uid"></el-input>
+				</el-form-item>
+				<el-form-item label="模板名" prop="name">
+					<el-input type="text" v-model="filterForm.name"></el-input>
+				</el-form-item>
+				<el-form-item label="创建时间" prop="create_date">
+					<el-date-picker
+							align="right"
+							format="yyyy年MM月dd日"
+							type="date"
+							v-model="filterForm.create_date"
+							value-format="yyyy-MM-dd">
+					</el-date-picker>
+				</el-form-item>
+				<el-form-item>
+					<el-button @click="query(1)" icon="el-icon-search" type="primary">搜索</el-button>
+					<el-button @click="clearQuery" icon="el-icon-refresh-left">重置</el-button>
+				</el-form-item>
+			</el-form>
+		</el-row>
+		<el-row>
+			<el-button icon="el-icon-plus" type="primary">添加</el-button>
+		</el-row>
+	</div>
+	<el-row id="tableRow">
+		<el-table :data="tableData" border height="100%" highlight-current-row stripe>
+			<el-table-column
+					type="selection"
+					width="40">
+			</el-table-column>
+			<el-table-column
+					:index="indexMethod"
+					type="index">
+			</el-table-column>
+			<el-table-column
+					label="UID"
+					prop="_uid"
+					width="180"
+					show-overflow-tooltip
+					sortable>
+			</el-table-column>
+			<el-table-column
+					label="用户名"
+					prop="_name"
+					show-overflow-tooltip
+					sortable>
+			</el-table-column>
+			<el-table-column
+					label="创建时间"
+					prop="create_date"
+					show-overflow-tooltip
+					sortable
+					width="300">
+			</el-table-column>
+			<el-table-column
+					fixed="right"
+					label="操作"
+					width="180">
+				<template slot-scope="scope">
+					<el-button
+							@click="handleEdit(scope.$index, scope.row)"
+							size="mini"
+							type="text">
+						编辑
+					</el-button>
+					<el-button
+							@click="handleDelete(scope.$index, scope.row)"
+							size="mini"
+							type="text">
+						删除
+					</el-button>
+				</template>
+			</el-table-column>
+		</el-table>
+	</el-row>
+	<el-row justify="end" type="flex">
+		<el-pagination
+				:current-page="pageIndex"
+				:page-size="pageSize"
+				:total="tableTotal"
+				@current-change="pageChange"
+				@size-change="pageSizeChange"
+				layout="total, prev, pager, next, sizes, jumper">
+		</el-pagination>
+	</el-row>
+</div>
+<script th:inline="javascript" th:src="@{/js/page/pagejs_model_list.js}"></script>
+</body>
+</html>

@@ -5,12 +5,10 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONObject;
 import com.luzhoumin.mblog.management.service.FileService;
 import com.luzhoumin.mblog.management.service.SysBlobService;
-import com.luzhoumin.mblog.management.util.ConvertUtil;
 import com.luzhoumin.mblog.management.util.PropertiesUtil;
 import com.luzhoumin.mblog.management.util.SessionUtil;
 import com.luzhoumin.mblog.management.util.UploadUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -25,10 +23,9 @@ import java.util.Map;
 /**
  * BlobServiceImpl
  */
+@Slf4j
 @Service
 public class FileServiceImpl implements FileService {
-
-	private static Logger logger = LoggerFactory.getLogger(FileServiceImpl.class);
 
 	@Resource
 	private SysBlobService sysBlobService;
@@ -55,12 +52,12 @@ public class FileServiceImpl implements FileService {
 				MultipartFile mpf = mRequest.getFile(itr.next());
 
 				//check文件类型
-				logger.info("文件类型[" + mpf.getContentType() + "]");
+				log.info("文件类型[" + mpf.getContentType() + "]");
 				String allowFileType = mRequest.getParameter("allowFileType");
-				if (StrUtil.isNotEmpty(allowFileType)){
+				if (StrUtil.isNotEmpty(allowFileType)) {
 					String[] fileTypes = allowFileType.split("-");
 					String[] fileNames = mpf.getOriginalFilename().split("\\.");
-					String uploadFileType = fileNames[fileNames.length-1];
+					String uploadFileType = fileNames[fileNames.length - 1];
 					boolean fileTypeAllowFlag = false;
 					for (int i = 0; i < fileTypes.length; i++) {
 						if (uploadFileType.toLowerCase().equals(fileTypes[i].toLowerCase())) {
@@ -68,7 +65,7 @@ public class FileServiceImpl implements FileService {
 							break;
 						}
 					}
-					if (fileTypeAllowFlag==false) {
+					if (fileTypeAllowFlag == false) {
 						//格式不允许
 						fileInfo.put("success", "false");
 						fileInfo.put("message", "FILE_TYPE_ERROR");
@@ -77,13 +74,13 @@ public class FileServiceImpl implements FileService {
 				}
 
 				//check文件大小
-				logger.info("文件大小[" + mpf.getSize() + "]");
+				log.info("文件大小[" + mpf.getSize() + "]");
 				String allowFileSize = mRequest.getParameter("allowFileSize");
 				Integer fileSize = 3;
-				if (StrUtil.isNotEmpty(allowFileSize)){
+				if (StrUtil.isNotEmpty(allowFileSize)) {
 					fileSize = Integer.parseInt(allowFileSize);
 				}
-				if(mpf.getSize() > fileSize*1024*1024){
+				if (mpf.getSize() > fileSize * 1024 * 1024) {
 					//文件大于指定大小(默认3M)
 					fileInfo.put("success", "false");
 					fileInfo.put("message", "FILE_SIZE_ERROR");

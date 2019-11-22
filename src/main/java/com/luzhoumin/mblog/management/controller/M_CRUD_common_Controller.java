@@ -4,11 +4,10 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONObject;
 import com.luzhoumin.mblog.management.pojo.AjaxJson;
 import com.luzhoumin.mblog.management.service.MService;
-import com.luzhoumin.mblog.management.util.HttpServletUtil;
 import com.luzhoumin.mblog.management.util.ConvertUtil;
+import com.luzhoumin.mblog.management.util.HttpServletUtil;
 import com.luzhoumin.mblog.management.util.PageHelperUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,19 +28,17 @@ import java.util.Map;
  * @author <a href="mailto:zmlu1996@gmail.com">Jacob Lu</a>
  * @since 1.8
  */
+@Slf4j
 @RestController
 @RequestMapping("/M")
 public class M_CRUD_common_Controller {
-
-	private static Logger logger = LoggerFactory.getLogger(M_CRUD_common_Controller.class);
-
 
 	@Resource
 	MService mService;
 
 	@GetMapping("/{$keyWord}.html")
 	public ModelAndView crudCommonList(HttpServletRequest request, @PathVariable String $keyWord) {
-		logger.info("**************** M_CRUD_common_Controller,crudCommonList," + $keyWord + ":start ****************");
+		log.info("M_CRUD_common_Controller,crudCommonList," + $keyWord + ":start");
 		JSONObject $filterForm = new JSONObject();
 
 		// 1.获取表的列
@@ -77,13 +74,13 @@ public class M_CRUD_common_Controller {
 		request.setAttribute("filterForm", $filterForm);
 		request.setAttribute("keyWord", $keyWord);
 
-		logger.info("**************** M_CRUD_common_Controller,crudCommonList," + $keyWord + ":end ****************");
+		log.info("M_CRUD_common_Controller,crudCommonList," + $keyWord + ":end");
 		return new ModelAndView("M/CRUD_common");
 	}
 
 	@GetMapping("/{$keyWord}.do")
 	public void ajaxGetCrudCommonList(HttpServletRequest request, HttpServletResponse response, @PathVariable String $keyWord) {
-		logger.info("**************** M_CRUD_common_Controller,ajaxGetCrudCommonList," + $keyWord + ":start ****************");
+		log.info("M_CRUD_common_Controller,ajaxGetCrudCommonList," + $keyWord + ":start");
 		AjaxJson aj = new AjaxJson();
 		try {
 
@@ -116,11 +113,11 @@ public class M_CRUD_common_Controller {
 			aj.setSuccess(true);
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("M_CRUD_common_Controller,ajaxGetCrudCommonList", e);
+			log.error("M_CRUD_common_Controller,ajaxGetCrudCommonList", e);
 			aj.setSuccess(false);
 			aj.setMsg(e.getMessage());
 		}
 		HttpServletUtil.ajaxResponse(response, aj);
-		logger.info("**************** M_CRUD_common_Controller,ajaxGetCrudCommonList," + $keyWord + ":start ****************");
+		log.info("M_CRUD_common_Controller,ajaxGetCrudCommonList," + $keyWord + ":end");
 	}
 }

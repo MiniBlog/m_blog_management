@@ -5,10 +5,8 @@ import com.luzhoumin.mblog.management.pojo.AjaxJson;
 import com.luzhoumin.mblog.management.pojo.MSysMenu;
 import com.luzhoumin.mblog.management.service.SysMenuService;
 import com.luzhoumin.mblog.management.service.SysTypeDefineService;
-import com.luzhoumin.mblog.management.util.ConvertUtil;
 import com.luzhoumin.mblog.management.util.HttpServletUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -27,10 +25,10 @@ import java.util.Map;
  * @author <a href="mailto:zmlu1996@gmail.com">Jacob Lu</a>
  * @since 1.8
  */
+@Slf4j
 @RestController
 @RequestMapping("/sys")
 public class SysMenuController {
-	private static Logger logger = LoggerFactory.getLogger(SysMenuController.class);
 
 	@Resource
 	SysMenuService sysMenuService;
@@ -39,8 +37,8 @@ public class SysMenuController {
 	SysTypeDefineService sysTypeDefineService;
 
 	@GetMapping("/menu.html")
-	public ModelAndView list(HttpServletRequest request) {
-		logger.info("**************** SysMenuController,list:start ****************");
+	public ModelAndView menuListPage(HttpServletRequest request) {
+		log.info("SysMenuController,menuListPage:start");
 
 		//SYS_UI_ICON
 		Map<String, String> mapParams = new HashMap<>();
@@ -48,13 +46,14 @@ public class SysMenuController {
 		List<Map<String, Object>> iconTypeList = sysTypeDefineService.getTypeDefineList(mapParams);
 		request.setAttribute("iconTypeList", iconTypeList);
 
-		logger.info("**************** SysMenuController,list:end ****************");
-		return new ModelAndView("menu/menu");
+		ModelAndView modelAndView = new ModelAndView("menu/menu");
+		log.info("SysMenuController,menuListPage:end");
+		return modelAndView;
 	}
 
 	@GetMapping("/menu.do")
-	public void ajaxGetList(HttpServletRequest request, HttpServletResponse response) {
-		logger.info("**************** SysMenuController,ajaxGetList:start ****************");
+	public void ajaxGetMenuList(HttpServletRequest request, HttpServletResponse response) {
+		log.info("SysMenuController,ajaxGetMenuList:start");
 		AjaxJson aj = new AjaxJson();
 		try {
 			List<Map<String, Object>> menuList = sysMenuService.getMenuList();
@@ -62,17 +61,17 @@ public class SysMenuController {
 			aj.setSuccess(true);
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("SysMenuController,ajaxGetList", e);
+			log.error("SysMenuController,ajaxGetList", e);
 			aj.setSuccess(false);
 			aj.setMsg(e.getMessage());
 		}
 		HttpServletUtil.ajaxResponse(response, aj);
-		logger.info("**************** SysMenuController,ajaxGetList:end ****************");
+		log.info("SysMenuController,ajaxGetMenuList:end");
 	}
 
 	@GetMapping("/menuPlant.do")
-	public void ajaxGetPlantList(HttpServletRequest request, HttpServletResponse response) {
-		logger.info("**************** SysMenuController,ajaxGetPlantList:start ****************");
+	public void ajaxGetMenuPlantList(HttpServletRequest request, HttpServletResponse response) {
+		log.info("SysMenuController,ajaxGetMenuPlantList:start");
 		AjaxJson aj = new AjaxJson();
 		try {
 			List<Map<String, Object>> menuList = sysMenuService.getMenuList();
@@ -82,12 +81,12 @@ public class SysMenuController {
 			aj.setSuccess(true);
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("SysMenuController,ajaxGetList", e);
+			log.error("SysMenuController,ajaxGetMenuPlantList", e);
 			aj.setSuccess(false);
 			aj.setMsg(e.getMessage());
 		}
 		HttpServletUtil.ajaxResponse(response, aj);
-		logger.info("**************** SysMenuController,ajaxGetPlantList:end ****************");
+		log.info("SysMenuController,ajaxGetMenuPlantList:end");
 	}
 
 	/**
@@ -112,39 +111,39 @@ public class SysMenuController {
 
 	@PostMapping("/menu.do")
 	public void ajaxAddMenu(MSysMenu menu, HttpServletResponse response) {
-		logger.info("**************** SysMenuController,ajaxAddMenu:start ****************");
+		log.info("SysMenuController,ajaxAddMenu:start");
 		AjaxJson aj = new AjaxJson();
 		try {
 			aj.setSuccess(sysMenuService.addMenu(menu));
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("SysMenuController,ajaxAddMenu", e);
+			log.error("SysMenuController,ajaxAddMenu", e);
 			aj.setSuccess(false);
 			aj.setMsg(e.getMessage());
 		}
 		HttpServletUtil.ajaxResponse(response, aj);
-		logger.info("**************** SysMenuController,ajaxAddMenu:end ****************");
+		log.info("SysMenuController,ajaxAddMenu:end");
 	}
 
 	@PutMapping("/menu.do")
 	public void ajaxModifyMenu(MSysMenu menu, HttpServletRequest request, HttpServletResponse response) {
-		logger.info("**************** SysMenuController,ajaxModifyMenu:start ****************");
+		log.info("SysMenuController,ajaxModifyMenu:start");
 		AjaxJson aj = new AjaxJson();
 		try {
 			aj.setSuccess(sysMenuService.modifyMenu(menu));
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("SysMenuController,ajaxModifyMenu", e);
+			log.error("SysMenuController,ajaxModifyMenu", e);
 			aj.setSuccess(false);
 			aj.setMsg(e.getMessage());
 		}
 		HttpServletUtil.ajaxResponse(response, aj);
-		logger.info("**************** SysMenuController,ajaxModifyMenu:end ****************");
+		log.info("SysMenuController,ajaxModifyMenu:end");
 	}
 
 	@DeleteMapping("/menu.do")
 	public void ajaxDeleteMenu(HttpServletRequest request, HttpServletResponse response) {
-		logger.info("**************** SysMenuController,ajaxDeleteMenu:start ****************");
+		log.info("SysMenuController,ajaxDeleteMenu:start");
 		AjaxJson aj = new AjaxJson();
 		try {
 
@@ -153,16 +152,16 @@ public class SysMenuController {
 				aj.setSuccess(sysMenuService.deleteMenu(id));
 			} else {
 				//参数不全
-				aj.setMsg("缺少参数uuid.");
+				aj.setMsg("缺少参数id.");
 				aj.setSuccess(false);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("SysMenuController,ajaxDeleteMenu", e);
+			log.error("SysMenuController,ajaxDeleteMenu", e);
 			aj.setSuccess(false);
 			aj.setMsg(e.getMessage());
 		}
 		HttpServletUtil.ajaxResponse(response, aj);
-		logger.info("**************** SysMenuController,ajaxDeleteMenu:end ****************");
+		log.info("SysMenuController,ajaxDeleteMenu:end");
 	}
 }

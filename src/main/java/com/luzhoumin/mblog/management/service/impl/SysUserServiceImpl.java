@@ -1,7 +1,5 @@
 package com.luzhoumin.mblog.management.service.impl;
 
-import cn.hutool.core.util.IdUtil;
-import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.StrUtil;
 import com.luzhoumin.mblog.management.mapper.SysUserMapper;
 import com.luzhoumin.mblog.management.mapper.generate.MSysUserMapper;
@@ -9,8 +7,7 @@ import com.luzhoumin.mblog.management.pojo.MSysUser;
 import com.luzhoumin.mblog.management.service.SysUserService;
 import com.luzhoumin.mblog.management.util.PageHelperUtil;
 import com.luzhoumin.mblog.management.util.SessionUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -23,9 +20,9 @@ import java.util.*;
  * @author <a href="mailto:zmlu1996@gmail.com">Jacob Lu</a>
  * @since 1.8
  */
+@Slf4j
 @Service
 public class SysUserServiceImpl implements SysUserService {
-	private static Logger logger = LoggerFactory.getLogger(SysUserServiceImpl.class);
 	@Resource
 	SysUserMapper sysUserMapper;
 	@Resource
@@ -33,26 +30,26 @@ public class SysUserServiceImpl implements SysUserService {
 
 	@Override
 	public Map<String, Object> getUserInfo(String userName) {
-		logger.info("**************** UserServiceImpl,getUserInfo:start ****************");
+		log.info("UserServiceImpl,getUserInfo:start");
 		if (StrUtil.isEmpty(userName)) {
 			return null;
 		}
 		Map<String, Object> userInfo = sysUserMapper.getUserInfo(userName);
-		logger.info("**************** UserServiceImpl,getUserInfo:end ****************");
+		log.info("UserServiceImpl,getUserInfo:end");
 		return userInfo;
 	}
 
 	@Override
 	public MSysUser getUserInfoById(int id) {
-		logger.info("**************** UserServiceImpl,getUserInfoByUuid:start ****************");
+		log.info("UserServiceImpl,getUserInfoByUuid:start");
 		MSysUser mSysUser = mSysUserMapper.selectByPrimaryKey(id);
-		logger.info("**************** UserServiceImpl,getUserInfoByUuid:end ****************");
+		log.info("UserServiceImpl,getUserInfoByUuid:end");
 		return mSysUser;
 	}
 
 	@Override
 	public Map<String, Object> getUserList(Map<String, String> paramMap, int pageNum, int pageSize) {
-		logger.info("**************** UserServiceImpl,getUserList:start ****************");
+		log.info("UserServiceImpl,getUserList:start");
 		Map<String, Object> data = new HashMap<>();
 		int userListCount = sysUserMapper.getUserListCount(paramMap);
 		List<Map<String, Object>> userList = new ArrayList<>();
@@ -62,13 +59,13 @@ public class SysUserServiceImpl implements SysUserService {
 		}
 		data.put("list", userList);
 		data.put("count", userListCount);
-		logger.info("**************** UserServiceImpl,getUserList:end ****************");
+		log.info("UserServiceImpl,getUserList:end");
 		return data;
 	}
 
 	@Override
 	public boolean addUser(MSysUser user) {
-		logger.info("**************** UserServiceImpl,addUser:start ****************");
+		log.info("UserServiceImpl,addUser:start");
 		try {
 			String loginUser = StrUtil.toString(SessionUtil.getSessionLoginUserName());
 			Date now = new Date();
@@ -81,30 +78,30 @@ public class SysUserServiceImpl implements SysUserService {
 			mSysUserMapper.insertSelective(user);
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("UserServiceImpl,addUser", e);
+			log.error("UserServiceImpl,addUser", e);
 			return false;
 		}
-		logger.info("**************** UserServiceImpl,addUser:end ****************");
+		log.info("UserServiceImpl,addUser:end");
 		return true;
 	}
 
 	@Override
 	public boolean modifyUser(MSysUser user) {
-		logger.info("**************** UserServiceImpl,modifyUser:start ****************");
+		log.info("UserServiceImpl,modifyUser:start");
 		try {
 			mSysUserMapper.updateByPrimaryKeySelective(user);
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("UserServiceImpl,modifyUser", e);
+			log.error("UserServiceImpl,modifyUser", e);
 			return false;
 		}
-		logger.info("**************** UserServiceImpl,modifyUser:end ****************");
+		log.info("UserServiceImpl,modifyUser:end");
 		return true;
 	}
 
 	@Override
 	public boolean deleteUser(MSysUser user) {
-		logger.info("**************** UserServiceImpl,deleteUser:start ****************");
+		log.info("UserServiceImpl,deleteUser:start");
 		try {
 			String loginUser = StrUtil.toString(SessionUtil.getSessionLoginUserName());
 			Date now = new Date();
@@ -115,10 +112,10 @@ public class SysUserServiceImpl implements SysUserService {
 			mSysUserMapper.updateByPrimaryKeySelective(user);
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("UserServiceImpl,deleteUser", e);
+			log.error("UserServiceImpl,deleteUser", e);
 			return false;
 		}
-		logger.info("**************** UserServiceImpl,deleteUser:end ****************");
+		log.info("UserServiceImpl,deleteUser:end");
 		return true;
 	}
 }

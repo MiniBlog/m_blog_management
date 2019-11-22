@@ -6,8 +6,7 @@ import com.luzhoumin.mblog.management.pojo.AjaxJson;
 import com.luzhoumin.mblog.management.service.SysUserService;
 import com.luzhoumin.mblog.management.util.HttpServletUtil;
 import com.luzhoumin.mblog.management.util.SessionUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,31 +22,32 @@ import java.util.Map;
  *
  * @auther Jacob
  */
+@Slf4j
 @RestController
 public class LoginController {
 
-	private static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	@Resource
 	SysUserService sysUserService;
 
 	@RequestMapping("/login.html")
-	public ModelAndView pageLogin() {
-		logger.info("**************** LoginController,pageLogin:start ****************");
-		logger.info("**************** LoginController,pageLogin:end ****************");
-		return new ModelAndView("login/login");
+	public ModelAndView loginPage() {
+		log.info("LoginController,loginPage:start");
+		ModelAndView modelAndView = new ModelAndView("login/login");
+		log.info("LoginController,loginPage:end");
+		return modelAndView;
 	}
 
 	@RequestMapping("/logout.html")
-	public void pageLogout(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		logger.info("**************** LoginController,pageLogout:start ****************");
+	public void logoutPage(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		log.info("LoginController,logoutPage:start");
 		SessionUtil.clearSessionAttrs();
-		logger.info("**************** LoginController,pageLogout:end ****************");
 		response.sendRedirect(HttpServletUtil.getCurrentCompleteDomainName() + "/login.html");
+		log.info("LoginController,logoutPage:end");
 	}
 
 	@RequestMapping("/login.do")
 	public void ajaxLogin(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		logger.info("**************** LoginController,ajaxLogin:start ****************");
+		log.info("LoginController,ajaxLogin:start");
 		AjaxJson aj = new AjaxJson();
 		String userName = request.getParameter("userName");
 		String userPass = request.getParameter("userPass");
@@ -80,7 +80,7 @@ public class LoginController {
 				aj.setSuccess(false);
 			}
 		}
-		logger.info("**************** LoginController,ajaxLogin:start ****************");
 		HttpServletUtil.ajaxResponse(response, aj);
+		log.info("LoginController,ajaxLogin:end");
 	}
 }

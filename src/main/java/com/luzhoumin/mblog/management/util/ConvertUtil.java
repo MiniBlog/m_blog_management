@@ -1,12 +1,8 @@
 package com.luzhoumin.mblog.management.util;
 
 import cn.hutool.core.util.StrUtil;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;

@@ -3,8 +3,7 @@ package com.luzhoumin.mblog.management.service.impl;
 import cn.hutool.core.util.StrUtil;
 import com.luzhoumin.mblog.management.mapper.SysTypeDefineMapper;
 import com.luzhoumin.mblog.management.service.SysTypeDefineService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -13,11 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Service
 public class SysTypeDefineServiceImpl implements SysTypeDefineService {
-
-	private static Logger logger = LoggerFactory.getLogger(SysTypeDefineServiceImpl.class);
-	
 	@Resource
 	private SysTypeDefineMapper sysTypeDefineMapper;
 
@@ -27,14 +24,14 @@ public class SysTypeDefineServiceImpl implements SysTypeDefineService {
 	 * @return
 	 */
 	@Override
-	public List<Map<String, Object>> getTypeDefineList(Map<String, String> mapParams){
-		logger.info("********** TypeDefineServiceImpl,getTypeDefineList:start **********");
+	public List<Map<String, Object>> getTypeDefineList(Map<String, String> mapParams) {
+		log.info("TypeDefineServiceImpl,getTypeDefineList:start");
 		List<Map<String, Object>> typeDefineList = new ArrayList<Map<String, Object>>();
 
 		String typeId = mapParams.get("typeId");
 		if (StrUtil.isEmpty(typeId)) {
-			logger.info("********** TypeDefineServiceImpl,getTypeDefineList:INCOMPLETE_PARAMETERS **********");
-			logger.info("********** TypeDefineServiceImpl,getTypeDefineList:end **********");
+			log.info("TypeDefineServiceImpl,getTypeDefineList:INCOMPLETE_PARAMETERS");
+			log.info("TypeDefineServiceImpl,getTypeDefineList:end");
 			return typeDefineList;
 		}
 
@@ -64,7 +61,7 @@ public class SysTypeDefineServiceImpl implements SysTypeDefineService {
 
 		typeDefineList = sysTypeDefineMapper.getTypeDefineList(sqlParams);
 
-		logger.info("********** TypeDefineServiceImpl,getTypeDefineList:end **********");
+		log.info("TypeDefineServiceImpl,getTypeDefineList:end");
 		return typeDefineList;
 	}
 
@@ -75,7 +72,7 @@ public class SysTypeDefineServiceImpl implements SysTypeDefineService {
 
 	@Override
 	public Map<String, String> getTypeDescMap(String typeId, String lang) {
-		logger.info("********** TypeDefineServiceImpl,getTypeDescMap:start **********");
+		log.info("TypeDefineServiceImpl,getTypeDescMap:start");
 		Map<String, String> paramMap = new HashMap<>();
 		paramMap.put("lang", lang);
 		paramMap.put("typeId", typeId);
@@ -84,13 +81,13 @@ public class SysTypeDefineServiceImpl implements SysTypeDefineService {
 		for (Map<String, Object> row : typeDefineList) {
 			returnMap.put(String.valueOf(row.get("type_value")), String.valueOf(row.get("type_desc_m")));
 		}
-		logger.info("********** TypeDefineServiceImpl,getTypeDescMap:end **********");
+		log.info("TypeDefineServiceImpl,getTypeDescMap:end");
 		return returnMap;
 	}
 
 	@Override
 	public Map<String, String> getTypeOtherDescMap(String typeId, String lang) {
-		logger.info("********** TypeDefineServiceImpl,getTypeOtherDescMap:start **********");
+		log.info("TypeDefineServiceImpl,getTypeOtherDescMap:start");
 		Map<String, String> paramMap = new HashMap<>();
 		paramMap.put("lang", lang);
 		paramMap.put("typeId", typeId);
@@ -99,7 +96,7 @@ public class SysTypeDefineServiceImpl implements SysTypeDefineService {
 		for (Map<String, Object> row : typeDefineList) {
 			returnMap.put(String.valueOf(row.get("type_value")), String.valueOf(row.get("type_value_other")));
 		}
-		logger.info("********** TypeDefineServiceImpl,getTypeOtherDescMap:end **********");
+		log.info("TypeDefineServiceImpl,getTypeOtherDescMap:end");
 		return returnMap;
 	}
 }

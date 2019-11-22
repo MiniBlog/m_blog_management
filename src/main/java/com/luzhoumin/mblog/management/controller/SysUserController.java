@@ -10,8 +10,7 @@ import com.luzhoumin.mblog.management.util.ConvertUtil;
 import com.luzhoumin.mblog.management.util.HttpServletUtil;
 import com.luzhoumin.mblog.management.util.PageHelperUtil;
 import com.luzhoumin.mblog.management.util.SessionUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,26 +27,27 @@ import java.util.Map;
  * @author <a href="mailto:zmlu1996@gmail.com">Jacob Lu</a>
  * @since 1.8
  */
+@Slf4j
 @RestController
 @RequestMapping("/sys")
 public class SysUserController {
-	private static Logger logger = LoggerFactory.getLogger(SysUserController.class);
 
 	@Resource
 	SysUserService sysUserService;
 	@Resource
 	SysSequenceService sysSequenceService;
 
-	@GetMapping("/user.html")
-	public ModelAndView list() {
-		logger.info("**************** SysUserController,list:start ****************");
-		logger.info("**************** SysUserController,list:end ****************");
-		return new ModelAndView("user/user");
+	@RequestMapping("/user.html")
+	public ModelAndView userListPage() {
+		log.info("SysUserController,userListPage:start");
+		ModelAndView modelAndView = new ModelAndView("user/user");
+		log.info("SysUserController,userListPage:end");
+		return modelAndView;
 	}
 
 	@GetMapping("/user.do")
-	public void ajaxGetList(HttpServletRequest request, HttpServletResponse response) {
-		logger.info("**************** SysUserController,ajaxGetList:start ****************");
+	public void ajaxGetUserList(HttpServletRequest request, HttpServletResponse response) {
+		log.info("SysUserController,ajaxGetUserList:start");
 		AjaxJson aj = new AjaxJson();
 		try {
 			Map<String, String> paramMap = ConvertUtil.requestToMap(request);
@@ -56,17 +56,17 @@ public class SysUserController {
 			aj.setSuccess(true);
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("SysUserController,ajaxGetList", e);
+			log.error("SysUserController,ajaxGetList", e);
 			aj.setSuccess(false);
 			aj.setMsg(e.getMessage());
 		}
 		HttpServletUtil.ajaxResponse(response, aj);
-		logger.info("**************** SysUserController,ajaxGetList:end ****************");
+		log.info("SysUserController,ajaxGetUserList:end");
 	}
 
 	@PostMapping("/user.do")
 	public void ajaxAddUser(MSysUser user, HttpServletResponse response) {
-		logger.info("**************** SysUserController,ajaxAddUser:start ****************");
+		log.info("SysUserController,ajaxAddUser:start");
 		AjaxJson aj = new AjaxJson();
 		try {
 			String uid = sysSequenceService.getSequence("USER_ID");
@@ -75,17 +75,17 @@ public class SysUserController {
 			aj.setSuccess(b);
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("SysUserController,ajaxAddUser", e);
+			log.error("SysUserController,ajaxAddUser", e);
 			aj.setSuccess(false);
 			aj.setMsg(e.getMessage());
 		}
 		HttpServletUtil.ajaxResponse(response, aj);
-		logger.info("**************** SysUserController,ajaxAddUser:end ****************");
+		log.info("SysUserController,ajaxAddUser:end");
 	}
 
 	@PutMapping("/user.do")
 	public void ajaxModifyUser(MSysUser user, HttpServletRequest request, HttpServletResponse response) {
-		logger.info("**************** SysUserController,ajaxModifyUser:start ****************");
+		log.info("SysUserController,ajaxModifyUser:start");
 		AjaxJson aj = new AjaxJson();
 		try {
 			String loginUser = StrUtil.toString(SessionUtil.getSessionLoginUserName());
@@ -122,17 +122,17 @@ public class SysUserController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("SysUserController,ajaxModifyUser", e);
+			log.error("SysUserController,ajaxModifyUser", e);
 			aj.setSuccess(false);
 			aj.setMsg(e.getMessage());
 		}
 		HttpServletUtil.ajaxResponse(response, aj);
-		logger.info("**************** SysUserController,ajaxModifyUser:end ****************");
+		log.info("SysUserController,ajaxModifyUser:end");
 	}
 
 	@DeleteMapping("/user.do")
 	public void ajaxDeleteUser(HttpServletRequest request, HttpServletResponse response) {
-		logger.info("**************** SysUserController,ajaxDeleteUser:start ****************");
+		log.info("SysUserController,ajaxDeleteUser:start");
 		AjaxJson aj = new AjaxJson();
 		try {
 
@@ -148,16 +148,16 @@ public class SysUserController {
 				}
 			} else {
 				//参数不全
-				aj.setMsg("缺少参数uuid.");
+				aj.setMsg("缺少参数id.");
 				aj.setSuccess(false);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("SysUserController,ajaxDeleteUser", e);
+			log.error("SysUserController,ajaxDeleteUser", e);
 			aj.setSuccess(false);
 			aj.setMsg(e.getMessage());
 		}
 		HttpServletUtil.ajaxResponse(response, aj);
-		logger.info("**************** SysUserController,ajaxDeleteUser:end ****************");
+		log.info("SysUserController,ajaxDeleteUser:end");
 	}
 }
