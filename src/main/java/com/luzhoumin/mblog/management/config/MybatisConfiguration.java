@@ -1,5 +1,6 @@
 package com.luzhoumin.mblog.management.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.mapping.DatabaseIdProvider;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.scripting.LanguageDriver;
@@ -8,8 +9,6 @@ import org.apache.ibatis.type.TypeHandler;
 import org.mybatis.spring.boot.autoconfigure.ConfigurationCustomizer;
 import org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration;
 import org.mybatis.spring.boot.autoconfigure.MybatisProperties;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.Bean;
@@ -22,11 +21,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Configuration
 @AutoConfigureAfter({DataSourceConfiguration.class})
 public class MybatisConfiguration extends MybatisAutoConfiguration {
-
-	private static Logger logger = LoggerFactory.getLogger(MybatisConfiguration.class);
 
 	@Resource(name = "masterDataSource")
 	private DataSource masterDataSource;
@@ -39,7 +37,7 @@ public class MybatisConfiguration extends MybatisAutoConfiguration {
 
 	@Bean
 	public SqlSessionFactory sqlSessionFactoryTest(ReadWriteSplitRoutingDataSource dataSource) throws Exception {
-		logger.info("-------------------- 重载父类 sqlSessionFactory init---------------------");
+		log.info("-------------------- 重载父类 sqlSessionFactory init---------------------");
 		return super.sqlSessionFactory(dataSource);
 	}
 

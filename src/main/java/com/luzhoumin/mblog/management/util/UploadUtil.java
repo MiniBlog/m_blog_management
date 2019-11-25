@@ -6,8 +6,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONObject;
 import com.github.pagehelper.util.StringUtil;
 import com.luzhoumin.mblog.management.constant.MBlogConstant;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedInputStream;
@@ -22,11 +21,9 @@ import java.util.Map;
 
 /**
  * 文件上传工具类
- * Created by Andy on 2018/1/3.
  */
+@Slf4j
 public class UploadUtil {
-
-	private static Logger logger = LoggerFactory.getLogger(UploadUtil.class);
 
 	/**
 	 * 文件上传
@@ -66,7 +63,7 @@ public class UploadUtil {
 			fileInfo.put("fileActualName", httpObj.get("fileActualName"));
 			fileInfo.put("fileOriginalName", httpObj.get("fileOriginalName"));
 			fileInfo.put("filePath", httpObj.get("filePath"));
-			logger.debug("------------上传成功：" + fileInfo.toString());
+			log.debug("------------上传成功：" + fileInfo.toString());
 			return fileInfo;
 		}
 		return null;

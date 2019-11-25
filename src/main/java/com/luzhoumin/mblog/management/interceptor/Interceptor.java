@@ -4,8 +4,7 @@ package com.luzhoumin.mblog.management.interceptor;
 import cn.hutool.core.util.StrUtil;
 import com.luzhoumin.mblog.management.pojo.MSysLogRequest;
 import com.luzhoumin.mblog.management.util.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,9 +17,8 @@ import java.util.Date;
 /**
  * 拦截器
  */
+@Slf4j
 public class Interceptor implements HandlerInterceptor {
-
-	private static Logger logger = LoggerFactory.getLogger(Interceptor.class);
 
 	String[] noLoginPathPattens = new String[]{"/error", "/login", ".do"};
 
@@ -30,7 +28,7 @@ public class Interceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		// 只有返回true才会继续向下执行，返回false取消当前请求
-		logger.info(">>>Interceptor>>>>>>>在请求处理之前进行调用（Controller方法调用之前）");
+		log.info(">>>Interceptor>>>>>>>在请求处理之前进行调用（Controller方法调用之前）");
 		response.addHeader("x-frame-options", "SAMEORIGIN");
 //		//1.请求日志
 //		logRequest(request);
@@ -80,7 +78,7 @@ public class Interceptor implements HandlerInterceptor {
 	 */
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-//		logger.info(">>>Interceptor>>>>>>>在整个请求结束之后被调用，也就是在DispatcherServlet 渲染了对应的视图之后执行（主要是用于进行资源清理工作）");
+//		log.info(">>>Interceptor>>>>>>>在整个请求结束之后被调用，也就是在DispatcherServlet 渲染了对应的视图之后执行（主要是用于进行资源清理工作）");
 	}
 
 	/**
@@ -93,7 +91,7 @@ public class Interceptor implements HandlerInterceptor {
 	private boolean loginIntercept(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String requestPath = HttpServletUtil.getRequestPath(request);
 		if (SessionUtil.getSessionLoginUserUid() == null) {
-			logger.info("====登录状态 未登录[拦截成功" + requestPath + "]====");
+			log.info("====登录状态 未登录[拦截成功" + requestPath + "]====");
 			PrintWriter out = response.getWriter();
 			out.println("<html>");
 			out.println("<script>");

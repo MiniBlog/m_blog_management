@@ -3,8 +3,7 @@ package com.luzhoumin.mblog.management.util;
 import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.StrUtil;
 import com.github.pagehelper.PageHelper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,9 +12,8 @@ import static com.luzhoumin.mblog.management.constant.MBlogConstant.LIST_DEFAULT
 /**
  * 分页工具类
  */
+@Slf4j
 public class PageHelperUtil {
-
-	private static Logger logger = LoggerFactory.getLogger(PageHelperUtil.class);
 
 	/**
 	 * 添加分页
@@ -25,7 +23,7 @@ public class PageHelperUtil {
 	 */
 	public static void addPaging(int pageNum, int pageSize) {
 		if (pageSize != -1) {
-			logger.info("有分页：pageNum[" + pageNum + "] pageSize[" + pageSize + "] ");
+			log.info("有分页：pageNum[" + pageNum + "] pageSize[" + pageSize + "] ");
 			//验证pageSize是否正整数
 			if (pageSize <= 0) {
 				pageSize = 1;

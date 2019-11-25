@@ -2,8 +2,7 @@ package com.luzhoumin.mblog.management.util;
 
 import cn.hutool.core.util.StrUtil;
 import com.luzhoumin.mblog.management.constant.MBlogConstant;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
@@ -19,9 +18,8 @@ import java.util.Enumeration;
  * @author <a href="mailto:zmlu1996@gmail.com">Jacob Lu</a>
  * @since 1.8
  */
+@Slf4j
 public class IPUtil {
-
-	private static Logger logger = LoggerFactory.getLogger(IPUtil.class);
 
 	/**
 	 * 获取用户实际IP地址
@@ -31,7 +29,7 @@ public class IPUtil {
 	 */
 	public static String getRemoteIp(HttpServletRequest request) {
 		String ip = request.getHeader("X-Forwarded-For");
-		logger.trace("当前IP来源[X-Forwarded-For], 值[{}]", ip);
+		log.trace("当前IP来源[X-Forwarded-For], 值[{}]", ip);
 		if (!StrUtil.isEmpty(ip) && !MBlogConstant.UNKNOWN.equalsIgnoreCase(ip)) {
 			//多次反向代理后会有多个ip值，第一个ip才是真实ip
 			int index = ip.indexOf(',');
@@ -42,29 +40,29 @@ public class IPUtil {
 			}
 		}
 		ip = request.getHeader("X-Real-IP");
-		logger.trace("当前IP来源[X-Real-IP], 值[{}]", ip);
+		log.trace("当前IP来源[X-Real-IP], 值[{}]", ip);
 		if (!StrUtil.isEmpty(ip) && !MBlogConstant.UNKNOWN.equalsIgnoreCase(ip)) {
 			return ip;
 		}
 		if (StrUtil.isEmpty(ip) || MBlogConstant.UNKNOWN.equalsIgnoreCase(ip)) {
 			ip = request.getHeader("Proxy-Client-IP");
-			logger.trace("当前IP来源[Proxy-Client-IP], 值[{}]", ip);
+			log.trace("当前IP来源[Proxy-Client-IP], 值[{}]", ip);
 		}
 		if (StrUtil.isEmpty(ip) || MBlogConstant.UNKNOWN.equalsIgnoreCase(ip)) {
 			ip = request.getHeader("WL-Proxy-Client-IP");
-			logger.trace("当前IP来源[WL-Proxy-Client-IP], 值[{}]", ip);
+			log.trace("当前IP来源[WL-Proxy-Client-IP], 值[{}]", ip);
 		}
 		if (StrUtil.isEmpty(ip) || MBlogConstant.UNKNOWN.equalsIgnoreCase(ip)) {
 			ip = request.getHeader("HTTP_CLIENT_IP");
-			logger.trace("当前IP来源[HTTP_CLIENT_IP], 值[{}]", ip);
+			log.trace("当前IP来源[HTTP_CLIENT_IP], 值[{}]", ip);
 		}
 		if (StrUtil.isEmpty(ip) || MBlogConstant.UNKNOWN.equalsIgnoreCase(ip)) {
 			ip = request.getHeader("HTTP_X_FORWARDED_FOR");
-			logger.trace("当前IP来源[HTTP_X_FORWARDED_FOR], 值[{}]", ip);
+			log.trace("当前IP来源[HTTP_X_FORWARDED_FOR], 值[{}]", ip);
 		}
 		if (StrUtil.isEmpty(ip) || MBlogConstant.UNKNOWN.equalsIgnoreCase(ip)) {
 			ip = request.getRemoteAddr();
-			logger.trace("当前IP来源[getRemoteAddr], 值[{}]", ip);
+			log.trace("当前IP来源[getRemoteAddr], 值[{}]", ip);
 		}
 		if ("0:0:0:0:0:0:0:1".equals(ip)) {
 			String ipv4FromLocal = getSystemLocalIP();
