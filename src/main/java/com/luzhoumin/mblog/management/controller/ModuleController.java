@@ -3,9 +3,9 @@ package com.luzhoumin.mblog.management.controller;
 import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.StrUtil;
 import com.luzhoumin.mblog.management.pojo.AjaxJson;
-import com.luzhoumin.mblog.management.pojo.MSysModule;
+import com.luzhoumin.mblog.management.pojo.TMbModule;
 import com.luzhoumin.mblog.management.service.ModuleService;
-import com.luzhoumin.mblog.management.service.SysSequenceService;
+import com.luzhoumin.mblog.management.service.SequenceService;
 import com.luzhoumin.mblog.management.util.ConvertUtil;
 import com.luzhoumin.mblog.management.util.HttpServletUtil;
 import com.luzhoumin.mblog.management.util.PageHelperUtil;
@@ -25,7 +25,7 @@ public class ModuleController {
 	@Resource
 	ModuleService moduleService;
 	@Resource
-	SysSequenceService sysSequenceService;
+	SequenceService sequenceService;
 
 	@RequestMapping("/add-module.html")
 	public ModelAndView addModulePage(HttpServletRequest request) {
@@ -67,7 +67,7 @@ public class ModuleController {
 		try {
 			String id = request.getParameter("id");
 			if (StrUtil.isNotEmpty(id)) {
-				MSysModule moduleInfo = moduleService.getModuleInfoById(NumberUtil.parseInt(id));
+				TMbModule moduleInfo = moduleService.getModuleInfoById(NumberUtil.parseInt(id));
 				if (moduleInfo == null) {
 					//用户不存在
 					aj.setMsg("模块不存在");
@@ -91,11 +91,11 @@ public class ModuleController {
 	}
 
 	@PostMapping("/module.do")
-	public void ajaxAddModule(MSysModule module, HttpServletResponse response) {
+	public void ajaxAddModule(TMbModule module, HttpServletResponse response) {
 		log.info("ModuleController,ajaxAddModule:start");
 		AjaxJson aj = new AjaxJson();
 		try {
-			String uid = sysSequenceService.getSequence("MODULE_ID");
+			String uid = sequenceService.getSequence("MODULE_ID");
 			module.setUid(uid);
 			boolean b = moduleService.addModule(module);
 			aj.setSuccess(b);
@@ -110,7 +110,7 @@ public class ModuleController {
 	}
 
 	@PutMapping("/module.do")
-	public void ajaxModifyModule(MSysModule module, HttpServletRequest request, HttpServletResponse response) {
+	public void ajaxModifyModule(TMbModule module, HttpServletRequest request, HttpServletResponse response) {
 		log.info("ModuleController,ajaxModifyModule:start");
 		AjaxJson aj = new AjaxJson();
 		try {

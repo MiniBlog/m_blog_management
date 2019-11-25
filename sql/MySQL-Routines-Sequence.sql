@@ -3,7 +3,7 @@ BEGIN
     DECLARE r_next_value VARCHAR(20);
 
     UPDATE
-        m_sys_sequence
+        t_mb_sequence
     SET
         current_value = CASE
                             WHEN IFNULL(date_value, '') <> '' AND DATE_FORMAT(SYSDATE(), '%y%m%d') = date_value THEN current_value + increment_value
@@ -20,7 +20,7 @@ BEGIN
     INTO
         r_next_value
     FROM
-        m_sys_sequence
+        t_mb_sequence
     WHERE
             seq_id = p_seq_id;
 

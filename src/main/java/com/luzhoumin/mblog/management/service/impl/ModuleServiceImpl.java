@@ -2,8 +2,8 @@ package com.luzhoumin.mblog.management.service.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.luzhoumin.mblog.management.mapper.ModuleMapper;
-import com.luzhoumin.mblog.management.mapper.generate.MSysModuleMapper;
-import com.luzhoumin.mblog.management.pojo.MSysModule;
+import com.luzhoumin.mblog.management.mapper.generate.TMbModuleMapper;
+import com.luzhoumin.mblog.management.pojo.TMbModule;
 import com.luzhoumin.mblog.management.service.ModuleService;
 import com.luzhoumin.mblog.management.util.PageHelperUtil;
 import com.luzhoumin.mblog.management.util.SessionUtil;
@@ -20,7 +20,7 @@ public class ModuleServiceImpl implements ModuleService {
 	@Resource
 	ModuleMapper moduleMapper;
 	@Resource
-	MSysModuleMapper mSysModuleMapper;
+	TMbModuleMapper tMbModuleMapper;
 
 	@Override
 	public Map<String, Object> getModuleList(Map<String, String> paramMap, int pageNum, int pageSize) {
@@ -40,15 +40,15 @@ public class ModuleServiceImpl implements ModuleService {
 
 
 	@Override
-	public MSysModule getModuleInfoById(int id) {
+	public TMbModule getModuleInfoById(int id) {
 		log.info("ModelServiceImpl,getModelInfoById:start");
-		MSysModule MSysModule = mSysModuleMapper.selectByPrimaryKey(id);
+		TMbModule TMbModule = tMbModuleMapper.selectByPrimaryKey(id);
 		log.info("ModelServiceImpl,getModelInfoById:end");
-		return MSysModule;
+		return TMbModule;
 	}
 
 	@Override
-	public boolean deleteModule(MSysModule model) {
+	public boolean deleteModule(TMbModule model) {
 		log.info("ModelServiceImpl,deleteModel:start");
 		try {
 			String loginUser = StrUtil.toString(SessionUtil.getSessionLoginUserName());
@@ -57,7 +57,7 @@ public class ModuleServiceImpl implements ModuleService {
 			model.setUpdateDate(now);
 			model.setDeleteFlag(1);
 			model.setDeleteDate(now);
-			mSysModuleMapper.updateByPrimaryKeySelective(model);
+			tMbModuleMapper.updateByPrimaryKeySelective(model);
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.error("ModelServiceImpl,deleteModel", e);
@@ -68,7 +68,7 @@ public class ModuleServiceImpl implements ModuleService {
 	}
 
 	@Override
-	public boolean addModule(MSysModule module) {
+	public boolean addModule(TMbModule module) {
 		log.info("ModelServiceImpl,addMenu:start");
 		try {
 			String loginUser = StrUtil.toString(SessionUtil.getSessionLoginUserName());
@@ -79,7 +79,7 @@ public class ModuleServiceImpl implements ModuleService {
 			module.setUpdateBy(loginUser);
 			module.setUpdateDate(now);
 
-			mSysModuleMapper.insertSelective(module);
+			tMbModuleMapper.insertSelective(module);
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.error("ModelServiceImpl,addModule", e);
@@ -90,7 +90,7 @@ public class ModuleServiceImpl implements ModuleService {
 	}
 
 	@Override
-	public boolean modifyModule(MSysModule module) {
+	public boolean modifyModule(TMbModule module) {
 		log.info("ModelServiceImpl,modifyModule:start");
 		try {
 			String loginUser = StrUtil.toString(SessionUtil.getSessionLoginUserName());
@@ -99,7 +99,7 @@ public class ModuleServiceImpl implements ModuleService {
 			module.setUpdateBy(loginUser);
 			module.setUpdateDate(now);
 
-			mSysModuleMapper.updateByPrimaryKeySelective(module);
+			tMbModuleMapper.updateByPrimaryKeySelective(module);
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.error("ModelServiceImpl,modifyModule", e);

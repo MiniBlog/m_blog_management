@@ -1,7 +1,7 @@
 package com.luzhoumin.mblog.management.util;
 
-import com.luzhoumin.mblog.management.mapper.generate.MSysLogRequestMapper;
-import com.luzhoumin.mblog.management.pojo.MSysLogRequest;
+import com.luzhoumin.mblog.management.mapper.generate.TMbLogRequestMapper;
+import com.luzhoumin.mblog.management.pojo.TMbLogRequest;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -19,13 +19,13 @@ public class LogUtil {
 
 	private static LogUtil logUtil;
 	@Resource
-	MSysLogRequestMapper mSysLogRequestMapper;
+	TMbLogRequestMapper tMbLogRequestMapper;
 
 	/**
 	 * 记录请求日志
 	 */
-	public static void logRequest(MSysLogRequest mSysLogRequest) {
-		logUtil.mSysLogRequestMapper.insertSelective(mSysLogRequest);
+	public static void logRequest(TMbLogRequest tMbLogRequest) {
+		logUtil.tMbLogRequestMapper.insertSelective(tMbLogRequest);
 	}
 
 	@PostConstruct

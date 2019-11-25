@@ -2,7 +2,7 @@ package com.luzhoumin.mblog.management.interceptor;
 
 
 import cn.hutool.core.util.StrUtil;
-import com.luzhoumin.mblog.management.pojo.MSysLogRequest;
+import com.luzhoumin.mblog.management.pojo.TMbLogRequest;
 import com.luzhoumin.mblog.management.util.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -47,18 +47,18 @@ public class Interceptor implements HandlerInterceptor {
 	 * @param request
 	 */
 	private void logRequest(HttpServletRequest request) {
-		MSysLogRequest mSysLogRequest = new MSysLogRequest();
+		TMbLogRequest tMbLogRequest = new TMbLogRequest();
 		String userName = StrUtil.toString(SessionUtil.getSessionLoginUserName());
 		String userUuid = StrUtil.toString(SessionUtil.getSessionLoginUserUid());
-		mSysLogRequest.setUserName(userName);
-		mSysLogRequest.setUserUuid(userUuid);
-		mSysLogRequest.setSource("b");
-		mSysLogRequest.setPath(request.getRequestURL().toString());
-		mSysLogRequest.setQuery(request.getQueryString());
-		mSysLogRequest.setParams(ConvertUtil.requestToString(request));
-		mSysLogRequest.setIp(IPUtil.getRemoteIp(request));
-		mSysLogRequest.setCreateDate(new Date());
-		LogUtil.logRequest(mSysLogRequest);
+		tMbLogRequest.setUserName(userName);
+		tMbLogRequest.setUserUuid(userUuid);
+		tMbLogRequest.setSource("b");
+		tMbLogRequest.setPath(request.getRequestURL().toString());
+		tMbLogRequest.setQuery(request.getQueryString());
+		tMbLogRequest.setParams(ConvertUtil.requestToString(request));
+		tMbLogRequest.setIp(IPUtil.getRemoteIp(request));
+		tMbLogRequest.setCreateDate(new Date());
+		LogUtil.logRequest(tMbLogRequest);
 	}
 
 	/**

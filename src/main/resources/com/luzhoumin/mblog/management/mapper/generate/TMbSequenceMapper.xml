@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.luzhoumin.mblog.management.mapper.generate.TMbSequenceMapper">
+  <resultMap id="BaseResultMap" type="com.luzhoumin.mblog.management.pojo.TMbSequence">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="seq_id" jdbcType="VARCHAR" property="seqId" />
+    <result column="prefix_value" jdbcType="VARCHAR" property="prefixValue" />
+    <result column="date_value" jdbcType="VARCHAR" property="dateValue" />
+    <result column="current_value" jdbcType="INTEGER" property="currentValue" />
+    <result column="current_value_init" jdbcType="INTEGER" property="currentValueInit" />
+    <result column="current_value_length" jdbcType="INTEGER" property="currentValueLength" />
+    <result column="increment_value" jdbcType="INTEGER" property="incrementValue" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, seq_id, prefix_value, date_value, current_value, current_value_init, current_value_length, 
+    increment_value
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_mb_sequence
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_mb_sequence
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.luzhoumin.mblog.management.pojo.TMbSequence">
+    insert into t_mb_sequence (id, seq_id, prefix_value, 
+      date_value, current_value, current_value_init, 
+      current_value_length, increment_value)
+    values (#{id,jdbcType=INTEGER}, #{seqId,jdbcType=VARCHAR}, #{prefixValue,jdbcType=VARCHAR}, 
+      #{dateValue,jdbcType=VARCHAR}, #{currentValue,jdbcType=INTEGER}, #{currentValueInit,jdbcType=INTEGER}, 
+      #{currentValueLength,jdbcType=INTEGER}, #{incrementValue,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.luzhoumin.mblog.management.pojo.TMbSequence">
+    insert into t_mb_sequence
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="seqId != null">
+        seq_id,
+      </if>
+      <if test="prefixValue != null">
+        prefix_value,
+      </if>
+      <if test="dateValue != null">
+        date_value,
+      </if>
+      <if test="currentValue != null">
+        current_value,
+      </if>
+      <if test="currentValueInit != null">
+        current_value_init,
+      </if>
+      <if test="currentValueLength != null">
+        current_value_length,
+      </if>
+      <if test="incrementValue != null">
+        increment_value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="seqId != null">
+        #{seqId,jdbcType=VARCHAR},
+      </if>
+      <if test="prefixValue != null">
+        #{prefixValue,jdbcType=VARCHAR},
+      </if>
+      <if test="dateValue != null">
+        #{dateValue,jdbcType=VARCHAR},
+      </if>
+      <if test="currentValue != null">
+        #{currentValue,jdbcType=INTEGER},
+      </if>
+      <if test="currentValueInit != null">
+        #{currentValueInit,jdbcType=INTEGER},
+      </if>
+      <if test="currentValueLength != null">
+        #{currentValueLength,jdbcType=INTEGER},
+      </if>
+      <if test="incrementValue != null">
+        #{incrementValue,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.luzhoumin.mblog.management.pojo.TMbSequence">
+    update t_mb_sequence
+    <set>
+      <if test="seqId != null">
+        seq_id = #{seqId,jdbcType=VARCHAR},
+      </if>
+      <if test="prefixValue != null">
+        prefix_value = #{prefixValue,jdbcType=VARCHAR},
+      </if>
+      <if test="dateValue != null">
+        date_value = #{dateValue,jdbcType=VARCHAR},
+      </if>
+      <if test="currentValue != null">
+        current_value = #{currentValue,jdbcType=INTEGER},
+      </if>
+      <if test="currentValueInit != null">
+        current_value_init = #{currentValueInit,jdbcType=INTEGER},
+      </if>
+      <if test="currentValueLength != null">
+        current_value_length = #{currentValueLength,jdbcType=INTEGER},
+      </if>
+      <if test="incrementValue != null">
+        increment_value = #{incrementValue,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.luzhoumin.mblog.management.pojo.TMbSequence">
+    update t_mb_sequence
+    set seq_id = #{seqId,jdbcType=VARCHAR},
+      prefix_value = #{prefixValue,jdbcType=VARCHAR},
+      date_value = #{dateValue,jdbcType=VARCHAR},
+      current_value = #{currentValue,jdbcType=INTEGER},
+      current_value_init = #{currentValueInit,jdbcType=INTEGER},
+      current_value_length = #{currentValueLength,jdbcType=INTEGER},
+      increment_value = #{incrementValue,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

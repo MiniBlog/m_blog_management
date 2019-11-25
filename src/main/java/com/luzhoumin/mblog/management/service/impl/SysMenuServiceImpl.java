@@ -2,9 +2,9 @@ package com.luzhoumin.mblog.management.service.impl;
 
 import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.StrUtil;
-import com.luzhoumin.mblog.management.mapper.SysMenuMapper;
-import com.luzhoumin.mblog.management.mapper.generate.MSysMenuMapper;
-import com.luzhoumin.mblog.management.pojo.MSysMenu;
+import com.luzhoumin.mblog.management.mapper.MenuMapper;
+import com.luzhoumin.mblog.management.mapper.generate.TMbMenuMapper;
+import com.luzhoumin.mblog.management.pojo.TMbMenu;
 import com.luzhoumin.mblog.management.service.SysMenuService;
 import com.luzhoumin.mblog.management.util.SessionUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -28,14 +28,14 @@ import java.util.Map;
 public class SysMenuServiceImpl implements SysMenuService {
 
 	@Resource
-	SysMenuMapper sysMenuMapper;
+	MenuMapper menuMapper;
 	@Resource
-	MSysMenuMapper mSysMenuMapper;
+	TMbMenuMapper tMbMenuMapper;
 
 	@Override
 	public List<Map<String, Object>> getMenuList() {
 		log.info("MenuServiceImpl,getMenuList:start");
-		List<Map<String, Object>> rootMenuList = sysMenuMapper.getRootMenuList();
+		List<Map<String, Object>> rootMenuList = menuMapper.getRootMenuList();
 		for (Map<String, Object> rootMenu : rootMenuList) {
 			findSubMenuAndAdd(rootMenu);
 		}
@@ -47,7 +47,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 	public Map<String, Map<String, Object>> getPlainMenuMap() {
 		log.info("MenuServiceImpl,getPlainMenuMap:start");
 		Map<String, Map<String, Object>> plainMenuMap = new LinkedHashMap<>();
-		List<Map<String, Object>> plainMenuList = sysMenuMapper.getPlainMenuList();
+		List<Map<String, Object>> plainMenuList = menuMapper.getPlainMenuList();
 		for (Map<String, Object> row : plainMenuList) {
 			plainMenuMap.put(String.valueOf(row.get("_key")), row);
 		}
@@ -56,7 +56,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 	}
 
 	@Override
-	public boolean addMenu(MSysMenu menu) {
+	public boolean addMenu(TMbMenu menu) {
 		log.info("MenuServiceImpl,addMenu:start");
 		try {
 			String loginUser = StrUtil.toString(SessionUtil.getSessionLoginUserName());
@@ -67,7 +67,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 			menu.setUpdateBy(loginUser);
 			menu.setUpdateDate(now);
 
-			mSysMenuMapper.insertSelective(menu);
+			tMbMenuMapper.insertSelective(menu);
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.error("MenuServiceImpl,addMenu", e);
@@ -78,7 +78,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 	}
 
 	@Override
-	public boolean modifyMenu(MSysMenu menu) {
+	public boolean modifyMenu(TMbMenu menu) {
 		log.info("MenuServiceImpl,modifyMenu:start");
 		try {
 			String loginUser = StrUtil.toString(SessionUtil.getSessionLoginUserName());
@@ -87,7 +87,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 			menu.setUpdateBy(loginUser);
 			menu.setUpdateDate(now);
 
-			mSysMenuMapper.updateByPrimaryKeySelective(menu);
+			tMbMenuMapper.updateByPrimaryKeySelective(menu);
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.error("MenuServiceImpl,modifyMenu", e);
@@ -104,14 +104,14 @@ public class SysMenuServiceImpl implements SysMenuService {
 			String loginUser = StrUtil.toString(SessionUtil.getSessionLoginUserName());
 			Date now = new Date();
 
-			MSysMenu menu = new MSysMenu();
+			TMbMenu menu = new TMbMenu();
 			menu.setId(NumberUtil.parseInt(id));
 			menu.setUpdateBy(loginUser);
 			menu.setUpdateDate(now);
 			menu.setDeleteFlag(1);
 			menu.setDeleteDate(now);
 
-			mSysMenuMapper.updateByPrimaryKeySelective(menu);
+			tMbMenuMapper.updateByPrimaryKeySelective(menu);
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.error("MenuServiceImpl,deleteMenu", e);
@@ -128,7 +128,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 	 */
 	private void findSubMenuAndAdd(Map<String, Object> menu) {
 		String id = String.valueOf(menu.get("id"));
-		List<Map<String, Object>> subMenuList = sysMenuMapper.getSubMenuListByParentId(id);
+		List<Map<String, Object>> subMenuList = menuMapper.getSubMenuListByParentId(id);
 		if (subMenuList != null && subMenuList.size() > 0) {
 			//有子菜单
 			menu.put("children", subMenuList);

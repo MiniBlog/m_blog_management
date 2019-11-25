@@ -4,10 +4,9 @@
 <mapper namespace="com.luzhoumin.mblog.management.mapper.DemoMapper">
 
 	<select id="getList" resultType="java.util.Map" parameterType="java.util.Map">
-		SELECT id,
-			   _name
-		FROM m_sys_demo
-		ORDER BY update_date DESC
+		SELECT '1'    as id,
+			   'name' as _name
+		FROM dual
 	</select>
 
 </mapper>

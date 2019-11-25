@@ -1,6 +1,6 @@
 package com.luzhoumin.mblog.management.service;
 
-import com.luzhoumin.mblog.management.pojo.MSysMenu;
+import com.luzhoumin.mblog.management.pojo.TMbMenu;
 
 import java.util.List;
 import java.util.Map;
@@ -19,9 +19,9 @@ public interface SysMenuService {
 	//获取菜单不分级Map， key：_key，value：map
 	Map<String, Map<String, Object>> getPlainMenuMap();
 
-	boolean addMenu(MSysMenu menu);
+	boolean addMenu(TMbMenu menu);
 
-	boolean modifyMenu(MSysMenu menu);
+	boolean modifyMenu(TMbMenu menu);
 
 	boolean deleteMenu(String id);
 }

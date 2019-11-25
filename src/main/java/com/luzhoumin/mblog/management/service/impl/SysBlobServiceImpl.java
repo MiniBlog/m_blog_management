@@ -1,11 +1,11 @@
 package com.luzhoumin.mblog.management.service.impl;
 
 import com.github.pagehelper.util.StringUtil;
-import com.luzhoumin.mblog.management.mapper.SysBlobMapper;
-import com.luzhoumin.mblog.management.mapper.generate.MSysBlobMapper;
-import com.luzhoumin.mblog.management.pojo.MSysBlob;
+import com.luzhoumin.mblog.management.mapper.BlobMapper;
+import com.luzhoumin.mblog.management.mapper.generate.TMbBlobMapper;
+import com.luzhoumin.mblog.management.pojo.TMbBlob;
 import com.luzhoumin.mblog.management.service.SysBlobService;
-import com.luzhoumin.mblog.management.service.SysSequenceService;
+import com.luzhoumin.mblog.management.service.SequenceService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -19,11 +19,11 @@ import java.util.Map;
 public class SysBlobServiceImpl implements SysBlobService {
 
 	@Resource
-	private SysBlobMapper sysBlobMapper;
+	private BlobMapper blobMapper;
 	@Resource
-	private MSysBlobMapper mSysBlobMapper;
+	private TMbBlobMapper tMbBlobMapper;
 	@Resource
-	private SysSequenceService sysSequenceService;
+	private SequenceService sequenceService;
 
 	/**
 	 * 获取附件信息
@@ -39,7 +39,7 @@ public class SysBlobServiceImpl implements SysBlobService {
 
 		//获取附件信息
 		Map<String, Object> blobInfo = null;
-		List<Map<String, Object>> blobList = sysBlobMapper.getBlobInfo(blobId);
+		List<Map<String, Object>> blobList = blobMapper.getBlobInfo(blobId);
 		if (blobList != null && blobList.size() > 0) {
 			blobInfo = blobList.get(0);
 		}
@@ -67,10 +67,10 @@ public class SysBlobServiceImpl implements SysBlobService {
 
 		Date nowDate = new Date();
 		//生成附件ID
-		String blobId = sysSequenceService.getSequence("BLOB_ID");
+		String blobId = sequenceService.getSequence("BLOB_ID");
 		String userId = mapParams.get("userId");
 
-		MSysBlob tEuBlob = new MSysBlob();
+		TMbBlob tEuBlob = new TMbBlob();
 		//附件id
 		tEuBlob.setBlob(blobId);
 		//附件名称
@@ -84,7 +84,7 @@ public class SysBlobServiceImpl implements SysBlobService {
 		tEuBlob.setUpdateBy(userId);
 		tEuBlob.setUpdateDate(nowDate);
 
-		int ret = mSysBlobMapper.insertSelective(tEuBlob);
+		int ret = tMbBlobMapper.insertSelective(tEuBlob);
 		if (ret <= 0) {
 			return "";
 		}
