@@ -5,9 +5,9 @@
 --分类设置 (110-category)(/category.html)
 --标签设置 (120-tag)(/tag.html)
 
-模块管理 (200-model)
---添加模块 (210-article-model)(/add-model.html)
---模块列表 (220-model-list)(/model-list.html)
+模块管理 (200-module)
+--添加模块 (210-article-module)(/add-module.html)
+--模块列表 (220-module-list)(/module-list.html)
 
 文章管理 (300-article)
 --创建文章 (310-add-article)(/add-article.html)
@@ -44,9 +44,9 @@ INSERT INTO mblog.m_sys_menu (id, _title, _key, _icon, _href, _order, _group, _p
 INSERT INTO mblog.m_sys_menu (id, _title, _key, _icon, _href, _order, _group, _parent, ed_flag, create_by, create_date, update_by, update_date, delete_flag, delete_date) VALUES (2, '内容管理', '100-content', 'el-icon-notebook-2', null, 100, 0, null, 1, 'jacob', '2019-11-21 11:03:52', 'jacob', '2019-11-21 11:03:58', 0, null);
 INSERT INTO mblog.m_sys_menu (id, _title, _key, _icon, _href, _order, _group, _parent, ed_flag, create_by, create_date, update_by, update_date, delete_flag, delete_date) VALUES (3, '分类设置', '110-category', 'el-icon-coin', '/category.html', 110, 0, '2', 1, 'jacob', '2019-11-21 11:03:52', 'jacob', '2019-11-21 11:03:58', 0, null);
 INSERT INTO mblog.m_sys_menu (id, _title, _key, _icon, _href, _order, _group, _parent, ed_flag, create_by, create_date, update_by, update_date, delete_flag, delete_date) VALUES (4, '标签设置', '120-tag', 'el-icon-price-tag', '/tag.html', 120, 0, '2', 1, 'jacob', '2019-11-21 11:03:52', 'jacob', '2019-11-21 11:03:58', 0, null);
-INSERT INTO mblog.m_sys_menu (id, _title, _key, _icon, _href, _order, _group, _parent, ed_flag, create_by, create_date, update_by, update_date, delete_flag, delete_date) VALUES (5, '模块管理', '200-modal', 'el-icon-copy-document', null, 200, 0, null, 1, 'jacob', '2019-11-21 11:03:52', 'jacob', '2019-11-21 11:03:58', 0, null);
-INSERT INTO mblog.m_sys_menu (id, _title, _key, _icon, _href, _order, _group, _parent, ed_flag, create_by, create_date, update_by, update_date, delete_flag, delete_date) VALUES (6, '添加模块', '210-add-model', 'el-icon-copy-document', '/add-model.html', 210, 0, '5', 1, 'jacob', '2019-11-21 11:03:52', 'jacob', '2019-11-21 11:03:58', 0, null);
-INSERT INTO mblog.m_sys_menu (id, _title, _key, _icon, _href, _order, _group, _parent, ed_flag, create_by, create_date, update_by, update_date, delete_flag, delete_date) VALUES (7, '模块列表', '220-model-list', 'el-icon-copy-document', '/model-list.html', 220, 0, '5', 1, 'jacob', '2019-11-21 11:03:52', 'jacob', '2019-11-21 11:03:58', 0, null);
+INSERT INTO mblog.m_sys_menu (id, _title, _key, _icon, _href, _order, _group, _parent, ed_flag, create_by, create_date, update_by, update_date, delete_flag, delete_date) VALUES (5, '模块管理', '200-module', 'el-icon-copy-document', null, 200, 0, null, 1, 'jacob', '2019-11-21 11:03:52', 'jacob', '2019-11-21 11:03:58', 0, null);
+INSERT INTO mblog.m_sys_menu (id, _title, _key, _icon, _href, _order, _group, _parent, ed_flag, create_by, create_date, update_by, update_date, delete_flag, delete_date) VALUES (6, '添加模块', '210-add-module', 'el-icon-copy-document', '/add-module.html', 210, 0, '5', 1, 'jacob', '2019-11-21 11:03:52', 'jacob', '2019-11-21 11:03:58', 0, null);
+INSERT INTO mblog.m_sys_menu (id, _title, _key, _icon, _href, _order, _group, _parent, ed_flag, create_by, create_date, update_by, update_date, delete_flag, delete_date) VALUES (7, '模块列表', '220-module-list', 'el-icon-copy-document', '/module-list.html', 220, 0, '5', 1, 'jacob', '2019-11-21 11:03:52', 'jacob', '2019-11-21 11:03:58', 0, null);
 INSERT INTO mblog.m_sys_menu (id, _title, _key, _icon, _href, _order, _group, _parent, ed_flag, create_by, create_date, update_by, update_date, delete_flag, delete_date) VALUES (8, '文章管理', '300-article', 'el-icon-document', null, 300, 0, null, 1, 'jacob', '2019-11-21 11:03:52', 'jacob', '2019-11-21 11:03:58', 0, null);
 INSERT INTO mblog.m_sys_menu (id, _title, _key, _icon, _href, _order, _group, _parent, ed_flag, create_by, create_date, update_by, update_date, delete_flag, delete_date) VALUES (9, '创建文章', '310-add-article', 'el-icon-document-add', '/add-article.html', 310, 0, '8', 1, 'jacob', '2019-11-21 11:03:52', 'jacob', '2019-11-21 11:03:58', 0, null);
 INSERT INTO mblog.m_sys_menu (id, _title, _key, _icon, _href, _order, _group, _parent, ed_flag, create_by, create_date, update_by, update_date, delete_flag, delete_date) VALUES (10, '文章列表', '320-article-list', 'el-icon-tickets', '/article-list.html', 320, 0, '8', 1, 'jacob', '2019-11-21 11:03:52', 'jacob', '2019-11-21 11:03:58', 0, null);

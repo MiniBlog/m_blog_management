@@ -64,16 +64,16 @@
 <!--		<table tableName="m_sys_log_request" enableCountByExample="false"-->
 <!--			   enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
 <!--			   selectByExampleQueryId="false"/>-->
-<!--		<table tableName="m_sys_menu" enableCountByExample="false"-->
-<!--			   enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
-<!--			   selectByExampleQueryId="false"/>-->
-<!--		<table tableName="m_sys_type_define" enableCountByExample="false"-->
-<!--			   enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
-<!--			   selectByExampleQueryId="false"/>-->
-<!--		<table tableName="m_sys_user" enableCountByExample="false"-->
-<!--			   enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
-<!--			   selectByExampleQueryId="false"/>-->
-		<table tableName="m_sys_model" enableCountByExample="false"
+		<!--		<table tableName="m_sys_menu" enableCountByExample="false"-->
+		<!--			   enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
+		<!--			   selectByExampleQueryId="false"/>-->
+		<!--		<table tableName="m_sys_type_define" enableCountByExample="false"-->
+		<!--			   enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
+		<!--			   selectByExampleQueryId="false"/>-->
+		<!--		<table tableName="m_sys_user" enableCountByExample="false"-->
+		<!--			   enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
+		<!--			   selectByExampleQueryId="false"/>-->
+		<table tableName="m_sys_module" enableCountByExample="false"
 			   enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
 			   selectByExampleQueryId="false"/>
 	</context>

@@ -112,7 +112,7 @@
 				paramMap['pageSize'] = pageSize;
 				paramMap['pageNum'] = pageNum;
 				//查询
-				easymGetAjax(that, that.queryUrl, paramMap, (json) => {
+				vueGetAjax(that, that.queryUrl, paramMap, (json) => {
 					that.tableTotal = json.map.count;
 					that.tableData = json.map.list;
 					if (!that.tableData && pageNum > 1) {

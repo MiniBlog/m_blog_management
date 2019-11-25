@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Model List</title>
+	<script th:replace="common :: head"></script>
+	<link rel="stylesheet" th:href="@{/css/page/page_css_common_table.css}"/>
+
+</head>
+<body>
+<div th:replace="common :: page_loading"></div>
+<div id="app" ref="app">
+	<div id="topRow">
+		<el-form :inline="true">
+			<el-form-item label="模板名">
+				<el-input type="text" v-model="module_name"></el-input>
+			</el-form-item>
+			<el-form-item label="模板备注">
+				<el-input type="text" v-model="module_note"></el-input>
+			</el-form-item>
+		</el-form>
+	</div>
+	<el-row id="tableRow">
+		<el-input autosize id="m_blog_template" type="textarea" v-model="module_template"></el-input>
+	</el-row>
+	<el-row justify="end" type="flex">
+		<el-button @click="addClick" icon="el-icon-plus" type="primary">添加</el-button>
+	</el-row>
+</div>
+<script th:inline="javascript" th:src="@{/js/page/pagejs_add_model.js}"></script>
+</body>
+</html>

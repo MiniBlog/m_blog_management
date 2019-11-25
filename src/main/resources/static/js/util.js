@@ -1,4 +1,4 @@
-function easymAjax(_vue_that, type, url, param, successCallback, errorCallback) {
+function vueAjax(_vue_that, type, url, param, successCallback, errorCallback) {
 	const loading = _vue_that.$loading({
 		lock: true,
 		text: 'Loading',
@@ -47,20 +47,20 @@ function easymAjax(_vue_that, type, url, param, successCallback, errorCallback) 
 	});
 }
 
-function easymGetAjax(_vue_that, url, data, successCallback, errorCallback) {
-	return easymAjax(_vue_that, "get", url, data, successCallback, errorCallback);
+function vueGetAjax(_vue_that, url, data, successCallback, errorCallback) {
+	return vueAjax(_vue_that, "get", url, data, successCallback, errorCallback);
 }
 
-function easymPostAjax(_vue_that, url, data, successCallback, errorCallback) {
-	return easymAjax(_vue_that, "post", url, data, successCallback, errorCallback);
+function vuePostAjax(_vue_that, url, data, successCallback, errorCallback) {
+	return vueAjax(_vue_that, "post", url, data, successCallback, errorCallback);
 }
 
-function easymPutAjax(_vue_that, url, data, successCallback, errorCallback) {
-	return easymAjax(_vue_that, "put", url, data, successCallback, errorCallback);
+function vuePutAjax(_vue_that, url, data, successCallback, errorCallback) {
+	return vueAjax(_vue_that, "put", url, data, successCallback, errorCallback);
 }
 
-function easymDeleteAjax(_vue_that, url, data, successCallback, errorCallback) {
-	return easymAjax(_vue_that, "delete", url, data, successCallback, errorCallback);
+function vueDeleteAjax(_vue_that, url, data, successCallback, errorCallback) {
+	return vueAjax(_vue_that, "delete", url, data, successCallback, errorCallback);
 }
 
 function ajax(type, url, param, successCallback, errorCallback) {
@@ -110,4 +110,12 @@ function getUrlParam(name) {
 	var r = window.location.search.substr(1).match(reg);  // 匹配目标参数
 	if (r != null) return unescape(r[2]);
 	return null; // 返回参数值
+}
+
+function getMenuTabId() {
+	return getUrlParam("__menuTabId");
+}
+
+function closeThisMenuTab() {
+	parent.closeMenuTab(getMenuTabId());
 }

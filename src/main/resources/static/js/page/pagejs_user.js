@@ -160,7 +160,7 @@ new Vue({
 			paramMap['pageSize'] = pageSize;
 			paramMap['pageNum'] = pageNum;
 			//查询
-			easymGetAjax(that, that.queryUrl, paramMap, (json) => {
+			vueGetAjax(that, that.queryUrl, paramMap, (json) => {
 				that.tableTotal = json.map.count;
 				that.tableData = json.map.list;
 				if (!that.tableData && pageNum > 1) {
@@ -189,7 +189,7 @@ new Vue({
 				if (valid) {
 					if (that.userForm._isEdit) {
 						let param = that.userForm;
-						easymPutAjax(that, webRootAjax + "/sys/user.do", param, (data) => {
+						vuePutAjax(that, webRootAjax + "/sys/user.do", param, (data) => {
 							that.$message({
 								message: '修改用户成功',
 								type: 'success'
@@ -202,7 +202,7 @@ new Vue({
 						param['name'] = that.userForm.name;
 						param['email'] = that.userForm.email;
 						param['pass'] = hex_md5(that.userForm.pass);
-						easymPostAjax(that, webRootAjax + "/sys/user.do", param, (data) => {
+						vuePostAjax(that, webRootAjax + "/sys/user.do", param, (data) => {
 							that.$message({
 								message: '添加用户成功',
 								type: 'success'
@@ -224,7 +224,7 @@ new Vue({
 					param['id'] = that.modifyPassForm.id;
 					param['pass'] = hex_md5(that.modifyPassForm.pass);
 					param['org_pass'] = hex_md5(that.modifyPassForm.org_pass);
-					easymPutAjax(that, webRootAjax + "/sys/user.do", param, (data) => {
+					vuePutAjax(that, webRootAjax + "/sys/user.do", param, (data) => {
 						that.$message({
 							message: '修改密码成功',
 							type: 'success'
@@ -271,7 +271,7 @@ new Vue({
 			}).then(() => {
 				let param = {};
 				param['id'] = row['id'];
-				easymDeleteAjax(that, webRootAjax + "/sys/user.do", param, (data) => {
+				vueDeleteAjax(that, webRootAjax + "/sys/user.do", param, (data) => {
 					that.$message({
 						type: 'success',
 						message: '删除成功!'

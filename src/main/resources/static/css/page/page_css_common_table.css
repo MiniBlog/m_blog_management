@@ -17,3 +17,12 @@ body {
 #tableRow {
     overflow: hidden;
 }
+
+.el-textarea {
+    height: 100% !important;
+}
+
+#m_blog_template {
+    height: 100% !important;
+    font-family: Monospaced, serif;
+}

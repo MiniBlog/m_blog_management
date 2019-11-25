@@ -3,7 +3,7 @@ new Vue({
 	data: function () {
 		let that = this;
 		return {
-			queryUrl: webRootAjax + "/model.do",
+			queryUrl: webRootAjax + "/module.do",
 			tableData: [],
 			tableLoading: true,
 			tableTotal: 0,
@@ -46,7 +46,7 @@ new Vue({
 			paramMap['pageSize'] = pageSize;
 			paramMap['pageNum'] = pageNum;
 			//查询
-			easymGetAjax(that, that.queryUrl, paramMap, (json) => {
+			vueGetAjax(that, that.queryUrl, paramMap, (json) => {
 				that.tableTotal = json.map.count;
 				that.tableData = json.map.list;
 				if (!that.tableData && pageNum > 1) {
@@ -86,7 +86,7 @@ new Vue({
 			}).then(() => {
 				let param = {};
 				param['id'] = row['id'];
-				easymDeleteAjax(that, webRootAjax + "/model.do", param, (data) => {
+				vueDeleteAjax(that, webRootAjax + "/module.do", param, (data) => {
 					that.$message({
 						type: 'success',
 						message: '删除成功!'

@@ -79,7 +79,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 
 	@Override
 	public boolean modifyMenu(MSysMenu menu) {
-		log.info("MenuServiceImpl,addMenu:start");
+		log.info("MenuServiceImpl,modifyMenu:start");
 		try {
 			String loginUser = StrUtil.toString(SessionUtil.getSessionLoginUserName());
 			Date now = new Date();
@@ -93,13 +93,13 @@ public class SysMenuServiceImpl implements SysMenuService {
 			log.error("MenuServiceImpl,modifyMenu", e);
 			return false;
 		}
-		log.info("MenuServiceImpl,addMenu:end");
+		log.info("MenuServiceImpl,modifyMenu:end");
 		return true;
 	}
 
 	@Override
 	public boolean deleteMenu(String id) {
-		log.info("MenuServiceImpl,addMenu:start");
+		log.info("MenuServiceImpl,deleteMenu:start");
 		try {
 			String loginUser = StrUtil.toString(SessionUtil.getSessionLoginUserName());
 			Date now = new Date();
@@ -117,7 +117,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 			log.error("MenuServiceImpl,deleteMenu", e);
 			return false;
 		}
-		log.info("MenuServiceImpl,addMenu:end");
+		log.info("MenuServiceImpl,deleteMenu:end");
 		return true;
 	}
 

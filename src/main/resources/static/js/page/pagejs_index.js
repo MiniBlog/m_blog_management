@@ -20,6 +20,11 @@ new Vue({
 				}
 				//如果没有打开
 				var url = menu["_href"];
+				if (url.indexOf("?") > -1) {
+					url += "&__menuTabId=" + menu["_key"];
+				} else {
+					url += "?__menuTabId=" + menu["_key"];
+				}
 				if (!url) {
 					this.$message.error('该菜单没有配置url属性');
 					return;
@@ -97,3 +102,10 @@ new Vue({
 		}
 	}
 });
+
+//关闭tab页
+function closeMenuTab(tabId) {
+	setTimeout(function () {
+		$("div#tab-" + tabId + ">span").click();
+	});
+}

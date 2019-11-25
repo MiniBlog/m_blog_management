@@ -59,11 +59,11 @@ new Vue({
 		query() {
 			let that = this;
 			//查询
-			easymGetAjax(that, that.queryUrl, {}, (json) => {
+			vueGetAjax(that, that.queryUrl, {}, (json) => {
 				that.tableData = json.list;
 			});
 			//查询平面
-			easymGetAjax(that, that.queryPlantUrl, {}, (json) => {
+			vueGetAjax(that, that.queryPlantUrl, {}, (json) => {
 				that.tablePlantData = json.list;
 			});
 		},
@@ -74,7 +74,7 @@ new Vue({
 				if (valid) {
 					let param = that.menuForm;
 					if (that.menuForm._isEdit) {
-						easymPutAjax(that, webRootAjax + "/sys/menu.do", param, (data) => {
+						vuePutAjax(that, webRootAjax + "/sys/menu.do", param, (data) => {
 							that.$message({
 								message: '修改菜单成功',
 								type: 'success'
@@ -83,7 +83,7 @@ new Vue({
 							that.query();
 						});
 					}else {
-						easymPostAjax(that, webRootAjax + "/sys/menu.do", param, (data) => {
+						vuePostAjax(that, webRootAjax + "/sys/menu.do", param, (data) => {
 							that.$message({
 								message: '添加菜单成功',
 								type: 'success'
@@ -128,7 +128,7 @@ new Vue({
 			}).then(() => {
 				let param = {};
 				param['id'] = row['id'];
-				easymDeleteAjax(that, webRootAjax + "/sys/menu.do", param, (data) => {
+				vueDeleteAjax(that, webRootAjax + "/sys/menu.do", param, (data) => {
 					that.$message({
 						type: 'success',
 						message: '删除成功!'
