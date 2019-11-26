@@ -9,6 +9,7 @@ let vm = new Vue({
 		//打开菜单
 		openMenu(menu) {
 			let that = this;
+			//为了避免再js中调用的时候that为空，取不到tabList变量。
 			let tabList = that.tabList || window.vm.tabList;
 			if (menu) {
 				for (let i = 0; i < tabList.length; i++) {
@@ -120,4 +121,5 @@ function closeMenuTab(tabId) {
 	});
 }
 
+//赋值vue对象给window
 window.vm = vm;
