@@ -10,10 +10,11 @@
     <result column="_query" jdbcType="VARCHAR" property="query" />
     <result column="_params" jdbcType="VARCHAR" property="params" />
     <result column="_ip" jdbcType="VARCHAR" property="ip" />
+    <result column="note" jdbcType="VARCHAR" property="note"/>
     <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, _user_uuid, _user_name, _source, _path, _query, _params, _ip, create_date
+	  id, _user_uuid, _user_name, _source, _path, _query, _params, _ip, note, create_date
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -26,14 +27,13 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.luzhoumin.mblog.management.pojo.TMbLogRequest">
-    insert into t_mb_log_request (id, _user_uuid, _user_name, 
-      _source, _path, _query, 
-      _params, _ip, create_date
-      )
-    values (#{id,jdbcType=INTEGER}, #{userUuid,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
-      #{source,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{query,jdbcType=VARCHAR}, 
-      #{params,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}
-      )
+	  insert into t_mb_log_request (id, _user_uuid, _user_name,
+									_source, _path, _query,
+									_params, _ip, note, create_date)
+	  values (#{id,jdbcType=INTEGER}, #{userUuid,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
+			  #{source,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{query,jdbcType=VARCHAR},
+			  #{params,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR},
+			  #{createDate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.luzhoumin.mblog.management.pojo.TMbLogRequest">
     insert into t_mb_log_request
@@ -51,21 +51,24 @@
         _source,
       </if>
       <if test="path != null">
-        _path,
-      </if>
-      <if test="query != null">
-        _query,
-      </if>
-      <if test="params != null">
-        _params,
-      </if>
-      <if test="ip != null">
-        _ip,
-      </if>
-      <if test="createDate != null">
-        create_date,
-      </if>
-    </trim>
+		  _path,
+	  </if>
+		<if test="query != null">
+			_query,
+		</if>
+		<if test="params != null">
+			_params,
+		</if>
+		<if test="ip != null">
+			_ip,
+		</if>
+		<if test="note != null">
+			note,
+		</if>
+		<if test="createDate != null">
+			create_date,
+		</if>
+	</trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=INTEGER},
@@ -81,20 +84,23 @@
       </if>
       <if test="path != null">
         #{path,jdbcType=VARCHAR},
-      </if>
-      <if test="query != null">
-        #{query,jdbcType=VARCHAR},
-      </if>
-      <if test="params != null">
-        #{params,jdbcType=VARCHAR},
-      </if>
-      <if test="ip != null">
-        #{ip,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null">
-        #{createDate,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
+	  </if>
+		<if test="query != null">
+			#{query,jdbcType=VARCHAR},
+		</if>
+		<if test="params != null">
+			#{params,jdbcType=VARCHAR},
+		</if>
+		<if test="ip != null">
+			#{ip,jdbcType=VARCHAR},
+		</if>
+		<if test="note != null">
+			#{note,jdbcType=VARCHAR},
+		</if>
+		<if test="createDate != null">
+			#{createDate,jdbcType=TIMESTAMP},
+		</if>
+	</trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.luzhoumin.mblog.management.pojo.TMbLogRequest">
     update t_mb_log_request
@@ -110,32 +116,36 @@
       </if>
       <if test="path != null">
         _path = #{path,jdbcType=VARCHAR},
-      </if>
-      <if test="query != null">
-        _query = #{query,jdbcType=VARCHAR},
-      </if>
-      <if test="params != null">
-        _params = #{params,jdbcType=VARCHAR},
-      </if>
-      <if test="ip != null">
-        _ip = #{ip,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null">
-        create_date = #{createDate,jdbcType=TIMESTAMP},
-      </if>
-    </set>
+	  </if>
+		<if test="query != null">
+			_query = #{query,jdbcType=VARCHAR},
+		</if>
+		<if test="params != null">
+			_params = #{params,jdbcType=VARCHAR},
+		</if>
+		<if test="ip != null">
+			_ip = #{ip,jdbcType=VARCHAR},
+		</if>
+		<if test="note != null">
+			note = #{note,jdbcType=VARCHAR},
+		</if>
+		<if test="createDate != null">
+			create_date = #{createDate,jdbcType=TIMESTAMP},
+		</if>
+	</set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.luzhoumin.mblog.management.pojo.TMbLogRequest">
-    update t_mb_log_request
-    set _user_uuid = #{userUuid,jdbcType=VARCHAR},
-      _user_name = #{userName,jdbcType=VARCHAR},
-      _source = #{source,jdbcType=VARCHAR},
-      _path = #{path,jdbcType=VARCHAR},
-      _query = #{query,jdbcType=VARCHAR},
-      _params = #{params,jdbcType=VARCHAR},
-      _ip = #{ip,jdbcType=VARCHAR},
-      create_date = #{createDate,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
+	  update t_mb_log_request
+	  set _user_uuid  = #{userUuid,jdbcType=VARCHAR},
+		  _user_name  = #{userName,jdbcType=VARCHAR},
+		  _source     = #{source,jdbcType=VARCHAR},
+		  _path       = #{path,jdbcType=VARCHAR},
+		  _query      = #{query,jdbcType=VARCHAR},
+		  _params     = #{params,jdbcType=VARCHAR},
+		  _ip         = #{ip,jdbcType=VARCHAR},
+		  note        = #{note,jdbcType=VARCHAR},
+		  create_date = #{createDate,jdbcType=TIMESTAMP}
+	  where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

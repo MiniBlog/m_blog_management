@@ -7,6 +7,7 @@
     <result column="_name" jdbcType="VARCHAR" property="name" />
     <result column="_pass" jdbcType="VARCHAR" property="pass" />
     <result column="_email" jdbcType="VARCHAR" property="email" />
+    <result column="note" jdbcType="VARCHAR" property="note"/>
     <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
     <result column="create_by" jdbcType="VARCHAR" property="createBy" />
     <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
@@ -15,8 +16,8 @@
     <result column="delete_date" jdbcType="TIMESTAMP" property="deleteDate" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, _uid, _name, _pass, _email, create_date, create_by, update_date, update_by, delete_flag, 
-    delete_date
+	  id, _uid, _name, _pass, _email, note, create_date, create_by, update_date, update_by,
+    delete_flag, delete_date
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -29,14 +30,14 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.luzhoumin.mblog.management.pojo.TMbUser">
-    insert into t_mb_user (id, _uid, _name, 
-      _pass, _email, create_date, 
-      create_by, update_date, update_by, 
-      delete_flag, delete_date)
-    values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{pass,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
-      #{createBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, 
-      #{deleteFlag,jdbcType=INTEGER}, #{deleteDate,jdbcType=TIMESTAMP})
+	  insert into t_mb_user (id, _uid, _name,
+							 _pass, _email, note,
+							 create_date, create_by, update_date,
+							 update_by, delete_flag, delete_date)
+	  values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+			  #{pass,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR},
+			  #{createDate,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP},
+			  #{updateBy,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=INTEGER}, #{deleteDate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.luzhoumin.mblog.management.pojo.TMbUser">
     insert into t_mb_user
@@ -45,26 +46,29 @@
         id,
       </if>
       <if test="uid != null">
-        _uid,
-      </if>
-      <if test="name != null">
-        _name,
-      </if>
-      <if test="pass != null">
-        _pass,
-      </if>
-      <if test="email != null">
-        _email,
-      </if>
-      <if test="createDate != null">
-        create_date,
-      </if>
-      <if test="createBy != null">
-        create_by,
-      </if>
-      <if test="updateDate != null">
-        update_date,
-      </if>
+		  _uid,
+	  </if>
+		<if test="name != null">
+			_name,
+		</if>
+		<if test="pass != null">
+			_pass,
+		</if>
+		<if test="email != null">
+			_email,
+		</if>
+		<if test="note != null">
+			note,
+		</if>
+		<if test="createDate != null">
+			create_date,
+		</if>
+		<if test="createBy != null">
+			create_by,
+		</if>
+		<if test="updateDate != null">
+			update_date,
+		</if>
       <if test="updateBy != null">
         update_by,
       </if>
@@ -81,26 +85,29 @@
       </if>
       <if test="uid != null">
         #{uid,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="pass != null">
-        #{pass,jdbcType=VARCHAR},
-      </if>
-      <if test="email != null">
-        #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null">
-        #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createBy != null">
-        #{createBy,jdbcType=VARCHAR},
-      </if>
-      <if test="updateDate != null">
-        #{updateDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateBy != null">
+	  </if>
+		<if test="name != null">
+			#{name,jdbcType=VARCHAR},
+		</if>
+		<if test="pass != null">
+			#{pass,jdbcType=VARCHAR},
+		</if>
+		<if test="email != null">
+			#{email,jdbcType=VARCHAR},
+		</if>
+		<if test="note != null">
+			#{note,jdbcType=VARCHAR},
+		</if>
+		<if test="createDate != null">
+			#{createDate,jdbcType=TIMESTAMP},
+		</if>
+		<if test="createBy != null">
+			#{createBy,jdbcType=VARCHAR},
+		</if>
+		<if test="updateDate != null">
+			#{updateDate,jdbcType=TIMESTAMP},
+		</if>
+		<if test="updateBy != null">
         #{updateBy,jdbcType=VARCHAR},
       </if>
       <if test="deleteFlag != null">
@@ -116,26 +123,29 @@
     <set>
       <if test="uid != null">
         _uid = #{uid,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
-        _name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="pass != null">
-        _pass = #{pass,jdbcType=VARCHAR},
-      </if>
-      <if test="email != null">
-        _email = #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null">
-        create_date = #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createBy != null">
-        create_by = #{createBy,jdbcType=VARCHAR},
-      </if>
-      <if test="updateDate != null">
-        update_date = #{updateDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateBy != null">
+	  </if>
+		<if test="name != null">
+			_name = #{name,jdbcType=VARCHAR},
+		</if>
+		<if test="pass != null">
+			_pass = #{pass,jdbcType=VARCHAR},
+		</if>
+		<if test="email != null">
+			_email = #{email,jdbcType=VARCHAR},
+		</if>
+		<if test="note != null">
+			note = #{note,jdbcType=VARCHAR},
+		</if>
+		<if test="createDate != null">
+			create_date = #{createDate,jdbcType=TIMESTAMP},
+		</if>
+		<if test="createBy != null">
+			create_by = #{createBy,jdbcType=VARCHAR},
+		</if>
+		<if test="updateDate != null">
+			update_date = #{updateDate,jdbcType=TIMESTAMP},
+		</if>
+		<if test="updateBy != null">
         update_by = #{updateBy,jdbcType=VARCHAR},
       </if>
       <if test="deleteFlag != null">
@@ -148,17 +158,18 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.luzhoumin.mblog.management.pojo.TMbUser">
-    update t_mb_user
-    set _uid = #{uid,jdbcType=VARCHAR},
-      _name = #{name,jdbcType=VARCHAR},
-      _pass = #{pass,jdbcType=VARCHAR},
-      _email = #{email,jdbcType=VARCHAR},
-      create_date = #{createDate,jdbcType=TIMESTAMP},
-      create_by = #{createBy,jdbcType=VARCHAR},
-      update_date = #{updateDate,jdbcType=TIMESTAMP},
-      update_by = #{updateBy,jdbcType=VARCHAR},
-      delete_flag = #{deleteFlag,jdbcType=INTEGER},
-      delete_date = #{deleteDate,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
+	  update t_mb_user
+	  set _uid        = #{uid,jdbcType=VARCHAR},
+		  _name       = #{name,jdbcType=VARCHAR},
+		  _pass       = #{pass,jdbcType=VARCHAR},
+		  _email      = #{email,jdbcType=VARCHAR},
+		  note        = #{note,jdbcType=VARCHAR},
+		  create_date = #{createDate,jdbcType=TIMESTAMP},
+		  create_by   = #{createBy,jdbcType=VARCHAR},
+		  update_date = #{updateDate,jdbcType=TIMESTAMP},
+		  update_by   = #{updateBy,jdbcType=VARCHAR},
+		  delete_flag = #{deleteFlag,jdbcType=INTEGER},
+		  delete_date = #{deleteDate,jdbcType=TIMESTAMP}
+	  where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

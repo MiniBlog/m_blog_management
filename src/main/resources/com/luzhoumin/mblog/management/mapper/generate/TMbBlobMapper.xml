@@ -7,6 +7,7 @@
     <result column="_name" jdbcType="VARCHAR" property="name" />
     <result column="_original_name" jdbcType="VARCHAR" property="originalName" />
     <result column="_address" jdbcType="VARCHAR" property="address" />
+    <result column="note" jdbcType="VARCHAR" property="note"/>
     <result column="create_by" jdbcType="VARCHAR" property="createBy" />
     <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
     <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
@@ -15,8 +16,8 @@
     <result column="delete_date" jdbcType="TIMESTAMP" property="deleteDate" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, _blob, _name, _original_name, _address, create_by, create_date, update_by, update_date, 
-    delete_flag, delete_date
+	  id, _blob, _name, _original_name, _address, note, create_by, create_date, update_by,
+    update_date, delete_flag, delete_date
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -29,14 +30,14 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.luzhoumin.mblog.management.pojo.TMbBlob">
-    insert into t_mb_blob (id, _blob, _name, 
-      _original_name, _address, create_by, 
-      create_date, update_by, update_date, 
-      delete_flag, delete_date)
-    values (#{id,jdbcType=INTEGER}, #{blob,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{originalName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
-      #{createDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, 
-      #{deleteFlag,jdbcType=INTEGER}, #{deleteDate,jdbcType=TIMESTAMP})
+	  insert into t_mb_blob (id, _blob, _name,
+							 _original_name, _address, note,
+							 create_by, create_date, update_by,
+							 update_date, delete_flag, delete_date)
+	  values (#{id,jdbcType=INTEGER}, #{blob,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+			  #{originalName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR},
+			  #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR},
+			  #{updateDate,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=INTEGER}, #{deleteDate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.luzhoumin.mblog.management.pojo.TMbBlob">
     insert into t_mb_blob
@@ -45,26 +46,29 @@
         id,
       </if>
       <if test="blob != null">
-        _blob,
-      </if>
-      <if test="name != null">
-        _name,
-      </if>
-      <if test="originalName != null">
-        _original_name,
-      </if>
-      <if test="address != null">
-        _address,
-      </if>
-      <if test="createBy != null">
-        create_by,
-      </if>
-      <if test="createDate != null">
-        create_date,
-      </if>
-      <if test="updateBy != null">
-        update_by,
-      </if>
+		  _blob,
+	  </if>
+		<if test="name != null">
+			_name,
+		</if>
+		<if test="originalName != null">
+			_original_name,
+		</if>
+		<if test="address != null">
+			_address,
+		</if>
+		<if test="note != null">
+			note,
+		</if>
+		<if test="createBy != null">
+			create_by,
+		</if>
+		<if test="createDate != null">
+			create_date,
+		</if>
+		<if test="updateBy != null">
+			update_by,
+		</if>
       <if test="updateDate != null">
         update_date,
       </if>
@@ -81,26 +85,29 @@
       </if>
       <if test="blob != null">
         #{blob,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="originalName != null">
-        #{originalName,jdbcType=VARCHAR},
-      </if>
-      <if test="address != null">
-        #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="createBy != null">
-        #{createBy,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null">
-        #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateBy != null">
-        #{updateBy,jdbcType=VARCHAR},
-      </if>
-      <if test="updateDate != null">
+	  </if>
+		<if test="name != null">
+			#{name,jdbcType=VARCHAR},
+		</if>
+		<if test="originalName != null">
+			#{originalName,jdbcType=VARCHAR},
+		</if>
+		<if test="address != null">
+			#{address,jdbcType=VARCHAR},
+		</if>
+		<if test="note != null">
+			#{note,jdbcType=VARCHAR},
+		</if>
+		<if test="createBy != null">
+			#{createBy,jdbcType=VARCHAR},
+		</if>
+		<if test="createDate != null">
+			#{createDate,jdbcType=TIMESTAMP},
+		</if>
+		<if test="updateBy != null">
+			#{updateBy,jdbcType=VARCHAR},
+		</if>
+		<if test="updateDate != null">
         #{updateDate,jdbcType=TIMESTAMP},
       </if>
       <if test="deleteFlag != null">
@@ -116,26 +123,29 @@
     <set>
       <if test="blob != null">
         _blob = #{blob,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
-        _name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="originalName != null">
-        _original_name = #{originalName,jdbcType=VARCHAR},
-      </if>
-      <if test="address != null">
-        _address = #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="createBy != null">
-        create_by = #{createBy,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null">
-        create_date = #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateBy != null">
-        update_by = #{updateBy,jdbcType=VARCHAR},
-      </if>
-      <if test="updateDate != null">
+	  </if>
+		<if test="name != null">
+			_name = #{name,jdbcType=VARCHAR},
+		</if>
+		<if test="originalName != null">
+			_original_name = #{originalName,jdbcType=VARCHAR},
+		</if>
+		<if test="address != null">
+			_address = #{address,jdbcType=VARCHAR},
+		</if>
+		<if test="note != null">
+			note = #{note,jdbcType=VARCHAR},
+		</if>
+		<if test="createBy != null">
+			create_by = #{createBy,jdbcType=VARCHAR},
+		</if>
+		<if test="createDate != null">
+			create_date = #{createDate,jdbcType=TIMESTAMP},
+		</if>
+		<if test="updateBy != null">
+			update_by = #{updateBy,jdbcType=VARCHAR},
+		</if>
+		<if test="updateDate != null">
         update_date = #{updateDate,jdbcType=TIMESTAMP},
       </if>
       <if test="deleteFlag != null">
@@ -148,17 +158,18 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.luzhoumin.mblog.management.pojo.TMbBlob">
-    update t_mb_blob
-    set _blob = #{blob,jdbcType=VARCHAR},
-      _name = #{name,jdbcType=VARCHAR},
-      _original_name = #{originalName,jdbcType=VARCHAR},
-      _address = #{address,jdbcType=VARCHAR},
-      create_by = #{createBy,jdbcType=VARCHAR},
-      create_date = #{createDate,jdbcType=TIMESTAMP},
-      update_by = #{updateBy,jdbcType=VARCHAR},
-      update_date = #{updateDate,jdbcType=TIMESTAMP},
-      delete_flag = #{deleteFlag,jdbcType=INTEGER},
-      delete_date = #{deleteDate,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
+	  update t_mb_blob
+	  set _blob          = #{blob,jdbcType=VARCHAR},
+		  _name          = #{name,jdbcType=VARCHAR},
+		  _original_name = #{originalName,jdbcType=VARCHAR},
+		  _address       = #{address,jdbcType=VARCHAR},
+		  note           = #{note,jdbcType=VARCHAR},
+		  create_by      = #{createBy,jdbcType=VARCHAR},
+		  create_date    = #{createDate,jdbcType=TIMESTAMP},
+		  update_by      = #{updateBy,jdbcType=VARCHAR},
+		  update_date    = #{updateDate,jdbcType=TIMESTAMP},
+		  delete_flag    = #{deleteFlag,jdbcType=INTEGER},
+		  delete_date    = #{deleteDate,jdbcType=TIMESTAMP}
+	  where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

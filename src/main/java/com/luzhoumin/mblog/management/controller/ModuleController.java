@@ -1,9 +1,16 @@
 package com.luzhoumin.mblog.management.controller;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.codec.Base64;
+import cn.hutool.core.lang.TypeReference;
 import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.extra.template.Template;
+import cn.hutool.extra.template.TemplateEngine;
+import cn.hutool.extra.template.engine.thymeleaf.ThymeleafEngine;
+import cn.hutool.json.JSONUtil;
 import com.luzhoumin.mblog.management.pojo.AjaxJson;
-import com.luzhoumin.mblog.management.pojo.TMbModule;
+import com.luzhoumin.mblog.management.pojo.TMbModuleWithBLOBs;
 import com.luzhoumin.mblog.management.service.ModuleService;
 import com.luzhoumin.mblog.management.service.SequenceService;
 import com.luzhoumin.mblog.management.util.ConvertUtil;
@@ -16,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
@@ -27,18 +35,18 @@ public class ModuleController {
 	@Resource
 	SequenceService sequenceService;
 
-	@RequestMapping("/add-module.html")
+	@RequestMapping("/edit-module.html")
 	public ModelAndView addModulePage(HttpServletRequest request) {
 		log.info("ModuleController,addModulePage:start");
 		log.info("ModuleController,addModulePage:start");
-		return new ModelAndView("module/add_module");
+		return new ModelAndView("module/edit-module");
 	}
 
 	@RequestMapping("/module-list.html")
 	public ModelAndView moduleListPage(HttpServletRequest request) {
 		log.info("ModuleController,moduleListPage:start");
 		log.info("ModuleController,moduleListPage:start");
-		return new ModelAndView("module/module_list");
+		return new ModelAndView("module/module-list");
 	}
 
 	@GetMapping("/module-list.do")
@@ -65,8 +73,9 @@ public class ModuleController {
 		log.info("ModuleController,ajaxGetModule:start");
 		AjaxJson aj = new AjaxJson();
 		try {
-			Map<String, Object> data = moduleService.getModule(moduleId);
-			aj.setMap(data);
+			TMbModuleWithBLOBs tMbModuleWithBLOBs = moduleService.getModule(moduleId);
+			Map<String, Object> moduleBeanMap = BeanUtil.beanToMap(tMbModuleWithBLOBs);
+			aj.setMap(moduleBeanMap);
 			aj.setSuccess(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -85,13 +94,13 @@ public class ModuleController {
 		try {
 			String id = request.getParameter("id");
 			if (StrUtil.isNotEmpty(id)) {
-				TMbModule moduleInfo = moduleService.getModuleInfoById(NumberUtil.parseInt(id));
-				if (moduleInfo == null) {
+				TMbModuleWithBLOBs tMbModuleWithBLOBs = moduleService.getModuleInfoById(NumberUtil.parseInt(id));
+				if (tMbModuleWithBLOBs == null) {
 					//用户不存在
 					aj.setMsg("模块不存在");
 					aj.setSuccess(false);
 				} else {
-					aj.setSuccess(moduleService.deleteModule(moduleInfo));
+					aj.setSuccess(moduleService.deleteModule(tMbModuleWithBLOBs));
 				}
 			} else {
 				//参数不全
@@ -109,13 +118,13 @@ public class ModuleController {
 	}
 
 	@PostMapping("/module.do")
-	public void ajaxAddModule(TMbModule module, HttpServletResponse response) {
+	public void ajaxAddModule(TMbModuleWithBLOBs tMbModuleWithBLOBs, HttpServletResponse response) {
 		log.info("ModuleController,ajaxAddModule:start");
 		AjaxJson aj = new AjaxJson();
 		try {
 			String uid = sequenceService.getSequence("MODULE_ID");
-			module.setUid(uid);
-			boolean b = moduleService.addModule(module);
+			tMbModuleWithBLOBs.setUid(uid);
+			boolean b = moduleService.addModule(tMbModuleWithBLOBs);
 			aj.setSuccess(b);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -128,11 +137,11 @@ public class ModuleController {
 	}
 
 	@PutMapping("/module.do")
-	public void ajaxModifyModule(TMbModule module, HttpServletRequest request, HttpServletResponse response) {
+	public void ajaxModifyModule(TMbModuleWithBLOBs tMbModuleWithBLOBs, HttpServletRequest request, HttpServletResponse response) {
 		log.info("ModuleController,ajaxModifyModule:start");
 		AjaxJson aj = new AjaxJson();
 		try {
-			aj.setSuccess(moduleService.modifyModule(module));
+			aj.setSuccess(moduleService.modifyModule(tMbModuleWithBLOBs));
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.error("ModuleController,ajaxModifyModule", e);
@@ -141,5 +150,26 @@ public class ModuleController {
 		}
 		HttpServletUtil.ajaxResponse(response, aj);
 		log.info("ModuleController,ajaxModifyModule:end");
+	}
+
+	@RequestMapping("/preview-module.html")
+	public ModelAndView preview(@RequestParam("moduleId") int moduleId, @RequestParam("previewParam") String previewParam) {
+		TMbModuleWithBLOBs tMbModuleWithBLOBs = moduleService.getModule(moduleId);
+		String templateStr = tMbModuleWithBLOBs.getTemplate();
+		String cssStr = tMbModuleWithBLOBs.getCss();
+		String jsStr = tMbModuleWithBLOBs.getJs();
+		previewParam = Base64.decodeStr(previewParam);
+		log.error(previewParam);
+		Map<String, Object> paramMap = JSONUtil.toBean(previewParam, new TypeReference<Map<String, Object>>() {
+		}, true);
+		TemplateEngine engine = new ThymeleafEngine();
+		Template template = engine.getTemplate(templateStr);
+		String result = template.render(paramMap);
+
+		Map<String, Object> modelMap = new HashMap<>();
+		modelMap.put("body", result);
+		modelMap.put("js", jsStr);
+		modelMap.put("css", cssStr);
+		return new ModelAndView("module/preview-module", modelMap);
 	}
 }

@@ -4,8 +4,8 @@
 	<meta charset="UTF-8"/>
 	<title>Model List</title>
 	<script th:replace="common :: head"></script>
+	<script th:src="@{/js/jquery.base64.js}"></script>
 	<link rel="stylesheet" th:href="@{/css/page/page_css_common_table.css}"/>
-
 </head>
 <body>
 <div th:replace="common :: page_loading"></div>
@@ -21,10 +21,26 @@
 		</el-form>
 	</div>
 	<el-row id="tableRow">
-		<el-input autosize id="m_blog_template" type="textarea" v-model="module_template"></el-input>
+		<el-col :span="18" style="height: 100%">
+			<el-input autosize id="m_blog_template" type="textarea" v-model="module_template"></el-input>
+		</el-col>
+		<el-col :span="6" style="height: 100%">
+			<el-form>
+				<el-form-item label="Css">
+					<el-input autosize id="m_blog_css" type="textarea" v-model="module_css"></el-input>
+				</el-form-item>
+				<el-form-item label="Js">
+					<el-input autosize id="m_blog_js" type="textarea" v-model="module_js"></el-input>
+				</el-form-item>
+				<el-form-item label="Preview Param">
+					<el-input autosize id="m_blog_param" type="textarea" v-model="preview_param"></el-input>
+				</el-form-item>
+			</el-form>
+		</el-col>
 	</el-row>
 	<el-row justify="end" type="flex">
 		<el-button @click="addClick" icon="el-icon-plus" type="primary">添加</el-button>
+		<el-button @click="previewClick" icon="el-icon-plus">预览</el-button>
 	</el-row>
 </div>
 <script th:inline="javascript" th:src="@{/js/page/pagejs_add_model.js}"></script>

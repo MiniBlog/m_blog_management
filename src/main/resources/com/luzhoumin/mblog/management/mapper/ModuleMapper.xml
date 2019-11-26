@@ -5,7 +5,7 @@
 
 	<select id="getModuleList" resultType="java.util.Map" parameterType="java.util.Map">
 		SELECT
-		id, _uid, _name, create_by, DATE_FORMAT(create_date,'%Y-%m-%d %H:%i:%s') as create_date
+		id, _uid, _name, note, create_by, DATE_FORMAT(create_date,'%Y-%m-%d %H:%i:%s') as create_date
 		FROM t_mb_module
 		<where>
 			<if test="name != null and name !=''">

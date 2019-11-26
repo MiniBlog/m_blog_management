@@ -1,19 +1,19 @@
 package com.luzhoumin.mblog.management.service;
 
-import com.luzhoumin.mblog.management.pojo.TMbModule;
+import com.luzhoumin.mblog.management.pojo.TMbModuleWithBLOBs;
 
 import java.util.Map;
 
 public interface ModuleService {
-	TMbModule getModuleInfoById(int id);
+	TMbModuleWithBLOBs getModuleInfoById(int id);
 
 	Map<String, Object> getModuleList(Map<String, String> paramMap, int pageNum, int pageSize);
 
-	Map<String, Object> getModule(int moduleId);
+	TMbModuleWithBLOBs getModule(int moduleId);
 
-	boolean deleteModule(TMbModule model);
+	boolean deleteModule(TMbModuleWithBLOBs model);
 
-	boolean addModule(TMbModule model);
+	boolean addModule(TMbModuleWithBLOBs model);
 
-	boolean modifyModule(TMbModule model);
+	boolean modifyModule(TMbModuleWithBLOBs model);
 }

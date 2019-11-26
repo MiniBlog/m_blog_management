@@ -5,17 +5,17 @@
 
 	<select id="getTypeDefineList" resultType="java.util.Map" parameterType="java.util.Map" >
 		SELECT
-			td.id,
-			td._type,
-			td._order,
-			td._value,
-			td._value_other,
-			td._desc,
-			td._remark
+		td.id,
+		td._type,
+		td._order,
+		td._value,
+		td._value_other,
+		td._desc,
+		td.note
 		FROM
-			t_mb_type_define td
+		t_mb_type_define td
 		WHERE
-			td._type =  #{typeId:VARCHAR}
+		td._type = #{typeId:VARCHAR}
 		<!-- 指定typeValue -->
 		<if test="typeValueIncludeArray!=null and typeValueIncludeArray.length > 0">
 			AND

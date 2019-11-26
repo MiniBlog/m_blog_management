@@ -1,21 +1,30 @@
 package com.luzhoumin.mblog.management.mapper.generate;
 
+import com.luzhoumin.mblog.management.config.DBWriteConnection;
 import com.luzhoumin.mblog.management.pojo.TMbModule;
+import com.luzhoumin.mblog.management.pojo.TMbModuleWithBLOBs;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface TMbModuleMapper {
-    int deleteByPrimaryKey(Integer id);
+	@DBWriteConnection
+	int deleteByPrimaryKey(Integer id);
 
-    int insert(TMbModule record);
+	@DBWriteConnection
+	int insert(TMbModuleWithBLOBs record);
 
-    int insertSelective(TMbModule record);
+	@DBWriteConnection
+	int insertSelective(TMbModuleWithBLOBs record);
 
-    TMbModule selectByPrimaryKey(Integer id);
+	@DBWriteConnection
+	TMbModuleWithBLOBs selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(TMbModule record);
+	@DBWriteConnection
+	int updateByPrimaryKeySelective(TMbModuleWithBLOBs record);
 
-    int updateByPrimaryKeyWithBLOBs(TMbModule record);
+	@DBWriteConnection
+	int updateByPrimaryKeyWithBLOBs(TMbModuleWithBLOBs record);
 
-    int updateByPrimaryKey(TMbModule record);
+	@DBWriteConnection
+	int updateByPrimaryKey(TMbModule record);
 }

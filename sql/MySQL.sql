@@ -85,23 +85,26 @@ DROP TABLE IF EXISTS `t_mb_menu`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `t_mb_menu` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `_title` varchar(50) NOT NULL COMMENT '菜单名',
-  `_key` varchar(50) DEFAULT NULL COMMENT 'key',
-  `_icon` varchar(50) DEFAULT NULL COMMENT '图标',
-  `_href` varchar(200) DEFAULT NULL COMMENT 'href属性',
-  `_order` int(11) DEFAULT NULL COMMENT '菜单循序',
-  `_group` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否是分组',
-  `_parent` varchar(40) DEFAULT NULL COMMENT '父菜单',
-  `ed_flag` tinyint(1) DEFAULT '1',
-  `create_by` varchar(20) NOT NULL,
-  `create_date` datetime NOT NULL,
-  `update_by` varchar(20) NOT NULL,
-  `update_date` datetime NOT NULL,
-  `delete_flag` int(1) NOT NULL DEFAULT '0',
-  `delete_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+                             `id` int(11) NOT NULL AUTO_INCREMENT,
+                             `_title` varchar(50) NOT NULL COMMENT '菜单名',
+                             `_key` varchar(50) DEFAULT NULL COMMENT 'key',
+                             `_icon` varchar(50) DEFAULT NULL COMMENT '图标',
+                             `_href` varchar(200) DEFAULT NULL COMMENT 'href属性',
+                             `_order` int(11) DEFAULT NULL COMMENT '菜单循序',
+                             `_group` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否是分组',
+                             `_parent` varchar(40) DEFAULT NULL COMMENT '父菜单',
+                             `ed_flag` tinyint(1) DEFAULT '1',
+                             `create_by` varchar(20) NOT NULL,
+                             `create_date` datetime NOT NULL,
+                             `update_by` varchar(20) NOT NULL,
+                             `update_date` datetime NOT NULL,
+                             `delete_flag` int(1) NOT NULL DEFAULT '0',
+                             `delete_date` datetime DEFAULT NULL,
+                             PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 31
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -109,9 +112,71 @@ CREATE TABLE `t_mb_menu` (
 --
 
 LOCK TABLES `t_mb_menu` WRITE;
-/*!40000 ALTER TABLE `t_mb_menu` DISABLE KEYS */;
-INSERT INTO `t_mb_menu` VALUES (1,'首页','0-welcome','el-icon-s-home','/welcome.html',0,0,NULL,1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(2,'内容管理','100-content','el-icon-notebook-2',NULL,100,0,NULL,1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(3,'分类设置','110-category','el-icon-coin','/category.html',110,0,'2',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(4,'标签设置','120-tag','el-icon-price-tag','/tag.html',120,0,'2',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(5,'模块管理','200-modal','el-icon-copy-document',NULL,200,0,NULL,1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(6,'添加模块','210-add-module','el-icon-copy-document','/add-module.html',210,0,'5',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(7,'模块列表','220-module-list','el-icon-copy-document','/module-list.html',220,0,'5',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(8,'文章管理','300-article','el-icon-document',NULL,300,0,NULL,1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(9,'创建文章','310-add-article','el-icon-document-add','/add-article.html',310,0,'8',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(10,'文章列表','320-article-list','el-icon-tickets','/article-list.html',320,0,'8',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(11,'文章评论列表','330-article-comment-list','el-icon-chat-dot-square','/article-comment-list.html',330,0,'8',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(12,'页面管理','400-page','el-icon-document',NULL,400,0,NULL,1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(13,'创建页面','410-add-page','el-icon-document-add','/add-page.html',410,0,'12',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(14,'页面列表','420-page-list','el-icon-document-copy','/page-list.html',420,0,'12',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(15,'页面评论列表','430-page-comment-list','el-icon-chat-dot-square','/page-comment-list.html',430,0,'12',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(16,'附件管理','500-annex','el-icon-paperclip',NULL,500,0,NULL,1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(17,'图片列表','510-pic','el-icon-picture','/pic.html',510,0,'16',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(18,'文件列表','520-file','el-icon-s-order','/file.html',520,0,'16',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(19,'SEO管理','600-seo','el-icon-s-marketing',NULL,600,0,NULL,1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(20,'TKD设置','610-tkd','el-icon-s-operation','/tkd.html',610,0,'19',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(21,'广告位设置','620-advertisement','el-icon-s-operation','/advertisement.html',620,0,'19',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(22,'系统管理','800-sys','el-icon-s-operation',NULL,800,0,NULL,1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(23,'系统设置','810-sys-set','el-icon-s-operation',NULL,810,1,'22',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(24,'菜单设置','811-sys-set-menu','el-icon-s-operation','/sys/menu.html',811,0,'23',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(25,'用户设置','812-sys-set-user','el-icon-s-operation','/sys/user.html',812,0,'23',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(26,'系统信息','820-sys-info','el-icon-s-operation',NULL,820,1,'22',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(27,'请求日志','821-sys-info-log-request','el-icon-s-marketing','/sys/log/request.html',821,0,'26',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(28,'Demo','900-demo','el-icon-menu',NULL,900,0,NULL,1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(29,'demo','901-demo0','el-icon-menu','/demo/demo.html',901,0,'28',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL),(30,'demo图片上传','902-demo-pic-upload','el-icon-menu','/demo/picUpload.html',902,0,'28',1,'jacob','2019-11-21 11:03:52','jacob','2019-11-21 11:03:58',0,NULL);
-/*!40000 ALTER TABLE `t_mb_menu` ENABLE KEYS */;
+/*!40000 ALTER TABLE `t_mb_menu`
+    DISABLE KEYS */;
+INSERT INTO `t_mb_menu`
+VALUES (1, '首页', '0-welcome', 'el-icon-s-home', '/welcome.html', 0, 0, NULL, 1, 'jacob', '2019-11-21 11:03:52', 'jacob',
+        '2019-11-21 11:03:58', 0, NULL),
+       (2, '内容管理', '100-content', 'el-icon-notebook-2', NULL, 100, 0, NULL, 1, 'jacob', '2019-11-21 11:03:52', 'jacob',
+        '2019-11-21 11:03:58', 0, NULL),
+       (3, '分类设置', '110-category', 'el-icon-coin', '/category.html', 110, 0, '2', 1, 'jacob', '2019-11-21 11:03:52',
+        'jacob', '2019-11-21 11:03:58', 0, NULL),
+       (4, '标签设置', '120-tag', 'el-icon-price-tag', '/tag.html', 120, 0, '2', 1, 'jacob', '2019-11-21 11:03:52', 'jacob',
+        '2019-11-21 11:03:58', 0, NULL),
+       (5, '模块管理', '200-modal', 'el-icon-copy-document', NULL, 200, 0, NULL, 1, 'jacob', '2019-11-21 11:03:52', 'jacob',
+        '2019-11-21 11:03:58', 0, NULL),
+       (6, '添加模块', '210-add-module', 'el-icon-copy-document', '/edit-module.html', 210, 0, '5', 1, 'jacob',
+        '2019-11-21 11:03:52', 'jacob', '2019-11-21 11:03:58', 0, NULL),
+       (7, '模块列表', '220-module-list', 'el-icon-copy-document', '/module-list.html', 220, 0, '5', 1, 'jacob',
+        '2019-11-21 11:03:52', 'jacob', '2019-11-21 11:03:58', 0, NULL),
+       (8, '文章管理', '300-article', 'el-icon-document', NULL, 300, 0, NULL, 1, 'jacob', '2019-11-21 11:03:52', 'jacob',
+        '2019-11-21 11:03:58', 0, NULL),
+       (9, '创建文章', '310-add-article', 'el-icon-document-add', '/add-article.html', 310, 0, '8', 1, 'jacob',
+        '2019-11-21 11:03:52', 'jacob', '2019-11-21 11:03:58', 0, NULL),
+       (10, '文章列表', '320-article-list', 'el-icon-tickets', '/article-list.html', 320, 0, '8', 1, 'jacob',
+        '2019-11-21 11:03:52', 'jacob', '2019-11-21 11:03:58', 0, NULL),
+       (11, '文章评论列表', '330-article-comment-list', 'el-icon-chat-dot-square', '/article-comment-list.html', 330, 0, '8',
+        1, 'jacob', '2019-11-21 11:03:52', 'jacob', '2019-11-21 11:03:58', 0, NULL),
+       (12, '页面管理', '400-page', 'el-icon-document', NULL, 400, 0, NULL, 1, 'jacob', '2019-11-21 11:03:52', 'jacob',
+        '2019-11-21 11:03:58', 0, NULL),
+       (13, '创建页面', '410-add-page', 'el-icon-document-add', '/add-page.html', 410, 0, '12', 1, 'jacob',
+        '2019-11-21 11:03:52', 'jacob', '2019-11-21 11:03:58', 0, NULL),
+       (14, '页面列表', '420-page-list', 'el-icon-document-copy', '/page-list.html', 420, 0, '12', 1, 'jacob',
+        '2019-11-21 11:03:52', 'jacob', '2019-11-21 11:03:58', 0, NULL),
+       (15, '页面评论列表', '430-page-comment-list', 'el-icon-chat-dot-square', '/page-comment-list.html', 430, 0, '12', 1,
+        'jacob', '2019-11-21 11:03:52', 'jacob', '2019-11-21 11:03:58', 0, NULL),
+       (16, '附件管理', '500-annex', 'el-icon-paperclip', NULL, 500, 0, NULL, 1, 'jacob', '2019-11-21 11:03:52', 'jacob',
+        '2019-11-21 11:03:58', 0, NULL),
+       (17, '图片列表', '510-pic', 'el-icon-picture', '/pic.html', 510, 0, '16', 1, 'jacob', '2019-11-21 11:03:52', 'jacob',
+        '2019-11-21 11:03:58', 0, NULL),
+       (18, '文件列表', '520-file', 'el-icon-s-order', '/file.html', 520, 0, '16', 1, 'jacob', '2019-11-21 11:03:52',
+        'jacob', '2019-11-21 11:03:58', 0, NULL),
+       (19, 'SEO管理', '600-seo', 'el-icon-s-marketing', NULL, 600, 0, NULL, 1, 'jacob', '2019-11-21 11:03:52', 'jacob',
+        '2019-11-21 11:03:58', 0, NULL),
+       (20, 'TKD设置', '610-tkd', 'el-icon-s-operation', '/tkd.html', 610, 0, '19', 1, 'jacob', '2019-11-21 11:03:52',
+        'jacob', '2019-11-21 11:03:58', 0, NULL),
+       (21, '广告位设置', '620-advertisement', 'el-icon-s-operation', '/advertisement.html', 620, 0, '19', 1, 'jacob',
+        '2019-11-21 11:03:52', 'jacob', '2019-11-21 11:03:58', 0, NULL),
+       (22, '系统管理', '800-sys', 'el-icon-s-operation', NULL, 800, 0, NULL, 1, 'jacob', '2019-11-21 11:03:52', 'jacob',
+        '2019-11-21 11:03:58', 0, NULL),
+       (23, '系统设置', '810-sys-set', 'el-icon-s-operation', NULL, 810, 1, '22', 1, 'jacob', '2019-11-21 11:03:52',
+        'jacob', '2019-11-21 11:03:58', 0, NULL),
+       (24, '菜单设置', '811-sys-set-menu', 'el-icon-s-operation', '/sys/menu.html', 811, 0, '23', 1, 'jacob',
+        '2019-11-21 11:03:52', 'jacob', '2019-11-21 11:03:58', 0, NULL),
+       (25, '用户设置', '812-sys-set-user', 'el-icon-s-operation', '/sys/user.html', 812, 0, '23', 1, 'jacob',
+        '2019-11-21 11:03:52', 'jacob', '2019-11-21 11:03:58', 0, NULL),
+       (26, '系统信息', '820-sys-info', 'el-icon-s-operation', NULL, 820, 1, '22', 1, 'jacob', '2019-11-21 11:03:52',
+        'jacob', '2019-11-21 11:03:58', 0, NULL),
+       (27, '请求日志', '821-sys-info-log-request', 'el-icon-s-marketing', '/sys/log/request.html', 821, 0, '26', 1,
+        'jacob', '2019-11-21 11:03:52', 'jacob', '2019-11-21 11:03:58', 0, NULL),
+       (28, 'Demo', '900-demo', 'el-icon-menu', NULL, 900, 0, NULL, 1, 'jacob', '2019-11-21 11:03:52', 'jacob',
+        '2019-11-21 11:03:58', 0, NULL),
+       (29, 'demo', '901-demo0', 'el-icon-menu', '/demo/demo.html', 901, 0, '28', 1, 'jacob', '2019-11-21 11:03:52',
+        'jacob', '2019-11-21 11:03:58', 0, NULL),
+       (30, 'demo图片上传', '902-demo-pic-upload', 'el-icon-menu', '/demo/picUpload.html', 902, 0, '28', 1, 'jacob',
+        '2019-11-21 11:03:52', 'jacob', '2019-11-21 11:03:58', 0, NULL);
+/*!40000 ALTER TABLE `t_mb_menu`
+    ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -119,7 +184,7 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `t_mb_module`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET @saved_cs_client = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `t_mb_module` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',

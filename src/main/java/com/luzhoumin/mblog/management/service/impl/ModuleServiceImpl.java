@@ -1,11 +1,9 @@
 package com.luzhoumin.mblog.management.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.StrUtil;
 import com.luzhoumin.mblog.management.mapper.ModuleMapper;
 import com.luzhoumin.mblog.management.mapper.generate.TMbModuleMapper;
-import com.luzhoumin.mblog.management.pojo.TMbModule;
+import com.luzhoumin.mblog.management.pojo.TMbModuleWithBLOBs;
 import com.luzhoumin.mblog.management.service.ModuleService;
 import com.luzhoumin.mblog.management.util.PageHelperUtil;
 import com.luzhoumin.mblog.management.util.SessionUtil;
@@ -42,35 +40,32 @@ public class ModuleServiceImpl implements ModuleService {
 
 
 	@Override
-	public TMbModule getModuleInfoById(int id) {
+	public TMbModuleWithBLOBs getModuleInfoById(int id) {
 		log.info("ModelServiceImpl,getModelInfoById:start");
-		TMbModule TMbModule = tMbModuleMapper.selectByPrimaryKey(id);
+		TMbModuleWithBLOBs tMbModuleWithBLOBs = tMbModuleMapper.selectByPrimaryKey(id);
 		log.info("ModelServiceImpl,getModelInfoById:end");
-		return TMbModule;
+		return tMbModuleWithBLOBs;
 	}
 
 	@Override
-	public Map<String, Object> getModule(int moduleId) {
+	public TMbModuleWithBLOBs getModule(int moduleId) {
 		log.info("ModelServiceImpl,getModule:end");
-		TMbModule TMbModule = tMbModuleMapper.selectByPrimaryKey(moduleId);
-		Map<String, Object> moduleBeanMap = BeanUtil.beanToMap(TMbModule);
-		String template = IoUtil.read(IoUtil.toStream(TMbModule.getTemplate()), "utf-8");
-		moduleBeanMap.put("template", template);
+		TMbModuleWithBLOBs tMbModuleWithBLOBs = tMbModuleMapper.selectByPrimaryKey(moduleId);
 		log.info("ModelServiceImpl,getModule:end");
-		return moduleBeanMap;
+		return tMbModuleWithBLOBs;
 	}
 
 	@Override
-	public boolean deleteModule(TMbModule model) {
+	public boolean deleteModule(TMbModuleWithBLOBs tMbModuleWithBLOBs) {
 		log.info("ModelServiceImpl,deleteModel:start");
 		try {
 			String loginUser = StrUtil.toString(SessionUtil.getSessionLoginUserName());
 			Date now = new Date();
-			model.setUpdateBy(loginUser);
-			model.setUpdateDate(now);
-			model.setDeleteFlag(1);
-			model.setDeleteDate(now);
-			tMbModuleMapper.updateByPrimaryKeySelective(model);
+			tMbModuleWithBLOBs.setUpdateBy(loginUser);
+			tMbModuleWithBLOBs.setUpdateDate(now);
+			tMbModuleWithBLOBs.setDeleteFlag(1);
+			tMbModuleWithBLOBs.setDeleteDate(now);
+			tMbModuleMapper.updateByPrimaryKeySelective(tMbModuleWithBLOBs);
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.error("ModelServiceImpl,deleteModel", e);
@@ -81,18 +76,18 @@ public class ModuleServiceImpl implements ModuleService {
 	}
 
 	@Override
-	public boolean addModule(TMbModule module) {
+	public boolean addModule(TMbModuleWithBLOBs tMbModuleWithBLOBs) {
 		log.info("ModelServiceImpl,addMenu:start");
 		try {
 			String loginUser = StrUtil.toString(SessionUtil.getSessionLoginUserName());
 			Date now = new Date();
 
-			module.setCreateBy(loginUser);
-			module.setCreateDate(now);
-			module.setUpdateBy(loginUser);
-			module.setUpdateDate(now);
+			tMbModuleWithBLOBs.setCreateBy(loginUser);
+			tMbModuleWithBLOBs.setCreateDate(now);
+			tMbModuleWithBLOBs.setUpdateBy(loginUser);
+			tMbModuleWithBLOBs.setUpdateDate(now);
 
-			tMbModuleMapper.insertSelective(module);
+			tMbModuleMapper.insertSelective(tMbModuleWithBLOBs);
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.error("ModelServiceImpl,addModule", e);
@@ -103,7 +98,7 @@ public class ModuleServiceImpl implements ModuleService {
 	}
 
 	@Override
-	public boolean modifyModule(TMbModule module) {
+	public boolean modifyModule(TMbModuleWithBLOBs module) {
 		log.info("ModelServiceImpl,modifyModule:start");
 		try {
 			String loginUser = StrUtil.toString(SessionUtil.getSessionLoginUserName());

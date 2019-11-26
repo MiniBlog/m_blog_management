@@ -1,30 +1,33 @@
 package com.luzhoumin.mblog.management.pojo;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
 
 @Data
 public class TMbBlob implements Serializable {
-    private Integer id;
+	private Integer id;
 
-    private String blob;
+	private String blob;
 
-    private String name;
+	private String name;
 
-    private String originalName;
+	private String originalName;
 
-    private String address;
+	private String address;
 
-    private String createBy;
+	private String note;
 
-    private Date createDate;
+	private String createBy;
 
-    private String updateBy;
+	private Date createDate;
 
-    private Date updateDate;
+	private String updateBy;
 
-    private Integer deleteFlag;
+	private Date updateDate;
+
+	private Integer deleteFlag;
 
     private Date deleteDate;
 

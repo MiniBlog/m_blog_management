@@ -1,8 +1,9 @@
 package com.luzhoumin.mblog.management.pojo;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
 
 @Data
 public class TMbTypeDefine implements Serializable {
@@ -18,7 +19,7 @@ public class TMbTypeDefine implements Serializable {
 
     private String desc;
 
-    private String remark;
+	private String note;
 
     private String createBy;
 

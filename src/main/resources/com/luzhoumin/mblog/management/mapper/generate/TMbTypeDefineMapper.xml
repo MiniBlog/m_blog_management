@@ -8,7 +8,7 @@
     <result column="_value" jdbcType="VARCHAR" property="value" />
     <result column="_value_other" jdbcType="VARCHAR" property="valueOther" />
     <result column="_desc" jdbcType="VARCHAR" property="desc" />
-    <result column="_remark" jdbcType="VARCHAR" property="remark" />
+    <result column="note" jdbcType="VARCHAR" property="note"/>
     <result column="create_by" jdbcType="VARCHAR" property="createBy" />
     <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
     <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
@@ -17,8 +17,8 @@
     <result column="delete_date" jdbcType="TIMESTAMP" property="deleteDate" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, _type, _order, _value, _value_other, _desc, _remark, create_by, create_date, 
-    update_by, update_date, delete_flag, delete_date
+	  id, _type, _order, _value, _value_other, _desc, note, create_by, create_date, update_by,
+    update_date, delete_flag, delete_date
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -31,16 +31,16 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.luzhoumin.mblog.management.pojo.TMbTypeDefine">
-    insert into t_mb_type_define (id, _type, _order, 
-      _value, _value_other, _desc, 
-      _remark, create_by, create_date, 
-      update_by, update_date, delete_flag, 
-      delete_date)
-    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{order,jdbcType=INTEGER}, 
-      #{value,jdbcType=VARCHAR}, #{valueOther,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, 
-      #{remark,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
-      #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=INTEGER}, 
-      #{deleteDate,jdbcType=TIMESTAMP})
+	  insert into t_mb_type_define (id, _type, _order,
+									_value, _value_other, _desc,
+									note, create_by, create_date,
+									update_by, update_date, delete_flag,
+									delete_date)
+	  values (#{id,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{order,jdbcType=INTEGER},
+			  #{value,jdbcType=VARCHAR}, #{valueOther,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR},
+			  #{note,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
+			  #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=INTEGER},
+			  #{deleteDate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.luzhoumin.mblog.management.pojo.TMbTypeDefine">
     insert into t_mb_type_define
@@ -53,28 +53,28 @@
       </if>
       <if test="order != null">
         _order,
-      </if>
-      <if test="value != null">
-        _value,
-      </if>
-      <if test="valueOther != null">
-        _value_other,
-      </if>
-      <if test="desc != null">
-        _desc,
-      </if>
-      <if test="remark != null">
-        _remark,
-      </if>
-      <if test="createBy != null">
-        create_by,
-      </if>
-      <if test="createDate != null">
-        create_date,
-      </if>
-      <if test="updateBy != null">
-        update_by,
-      </if>
+	  </if>
+		<if test="value != null">
+			_value,
+		</if>
+		<if test="valueOther != null">
+			_value_other,
+		</if>
+		<if test="desc != null">
+			_desc,
+		</if>
+		<if test="note != null">
+			note,
+		</if>
+		<if test="createBy != null">
+			create_by,
+		</if>
+		<if test="createDate != null">
+			create_date,
+		</if>
+		<if test="updateBy != null">
+			update_by,
+		</if>
       <if test="updateDate != null">
         update_date,
       </if>
@@ -94,28 +94,28 @@
       </if>
       <if test="order != null">
         #{order,jdbcType=INTEGER},
-      </if>
-      <if test="value != null">
-        #{value,jdbcType=VARCHAR},
-      </if>
-      <if test="valueOther != null">
-        #{valueOther,jdbcType=VARCHAR},
-      </if>
-      <if test="desc != null">
-        #{desc,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null">
-        #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="createBy != null">
-        #{createBy,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null">
-        #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateBy != null">
-        #{updateBy,jdbcType=VARCHAR},
-      </if>
+	  </if>
+		<if test="value != null">
+			#{value,jdbcType=VARCHAR},
+		</if>
+		<if test="valueOther != null">
+			#{valueOther,jdbcType=VARCHAR},
+		</if>
+		<if test="desc != null">
+			#{desc,jdbcType=VARCHAR},
+		</if>
+		<if test="note != null">
+			#{note,jdbcType=VARCHAR},
+		</if>
+		<if test="createBy != null">
+			#{createBy,jdbcType=VARCHAR},
+		</if>
+		<if test="createDate != null">
+			#{createDate,jdbcType=TIMESTAMP},
+		</if>
+		<if test="updateBy != null">
+			#{updateBy,jdbcType=VARCHAR},
+		</if>
       <if test="updateDate != null">
         #{updateDate,jdbcType=TIMESTAMP},
       </if>
@@ -135,28 +135,28 @@
       </if>
       <if test="order != null">
         _order = #{order,jdbcType=INTEGER},
-      </if>
-      <if test="value != null">
-        _value = #{value,jdbcType=VARCHAR},
-      </if>
-      <if test="valueOther != null">
-        _value_other = #{valueOther,jdbcType=VARCHAR},
-      </if>
-      <if test="desc != null">
-        _desc = #{desc,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null">
-        _remark = #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="createBy != null">
-        create_by = #{createBy,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null">
-        create_date = #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateBy != null">
-        update_by = #{updateBy,jdbcType=VARCHAR},
-      </if>
+	  </if>
+		<if test="value != null">
+			_value = #{value,jdbcType=VARCHAR},
+		</if>
+		<if test="valueOther != null">
+			_value_other = #{valueOther,jdbcType=VARCHAR},
+		</if>
+		<if test="desc != null">
+			_desc = #{desc,jdbcType=VARCHAR},
+		</if>
+		<if test="note != null">
+			note = #{note,jdbcType=VARCHAR},
+		</if>
+		<if test="createBy != null">
+			create_by = #{createBy,jdbcType=VARCHAR},
+		</if>
+		<if test="createDate != null">
+			create_date = #{createDate,jdbcType=TIMESTAMP},
+		</if>
+		<if test="updateBy != null">
+			update_by = #{updateBy,jdbcType=VARCHAR},
+		</if>
       <if test="updateDate != null">
         update_date = #{updateDate,jdbcType=TIMESTAMP},
       </if>
@@ -170,19 +170,19 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.luzhoumin.mblog.management.pojo.TMbTypeDefine">
-    update t_mb_type_define
-    set _type = #{type,jdbcType=VARCHAR},
-      _order = #{order,jdbcType=INTEGER},
-      _value = #{value,jdbcType=VARCHAR},
-      _value_other = #{valueOther,jdbcType=VARCHAR},
-      _desc = #{desc,jdbcType=VARCHAR},
-      _remark = #{remark,jdbcType=VARCHAR},
-      create_by = #{createBy,jdbcType=VARCHAR},
-      create_date = #{createDate,jdbcType=TIMESTAMP},
-      update_by = #{updateBy,jdbcType=VARCHAR},
-      update_date = #{updateDate,jdbcType=TIMESTAMP},
-      delete_flag = #{deleteFlag,jdbcType=INTEGER},
-      delete_date = #{deleteDate,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
+	  update t_mb_type_define
+	  set _type        = #{type,jdbcType=VARCHAR},
+		  _order       = #{order,jdbcType=INTEGER},
+		  _value       = #{value,jdbcType=VARCHAR},
+		  _value_other = #{valueOther,jdbcType=VARCHAR},
+		  _desc        = #{desc,jdbcType=VARCHAR},
+		  note         = #{note,jdbcType=VARCHAR},
+		  create_by    = #{createBy,jdbcType=VARCHAR},
+		  create_date  = #{createDate,jdbcType=TIMESTAMP},
+		  update_by    = #{updateBy,jdbcType=VARCHAR},
+		  update_date  = #{updateDate,jdbcType=TIMESTAMP},
+		  delete_flag  = #{deleteFlag,jdbcType=INTEGER},
+		  delete_date  = #{deleteDate,jdbcType=TIMESTAMP}
+	  where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

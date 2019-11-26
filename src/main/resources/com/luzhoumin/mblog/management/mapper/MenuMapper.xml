@@ -12,7 +12,8 @@
 			   _order,
 			   _group,
 			   _parent,
-			   ed_flag
+			   ed_flag,
+			   note
 		FROM t_mb_menu
 		WHERE delete_flag &lt;&gt; 1
 		  and (_parent is null || _parent = '')
@@ -28,7 +29,8 @@
 			   _order,
 			   _group,
 			   _parent,
-			   ed_flag
+			   ed_flag,
+			   note
 		FROM t_mb_menu
 		WHERE delete_flag &lt;&gt; 1
 		ORDER BY _order
@@ -43,7 +45,8 @@
 			   _order,
 			   _group,
 			   _parent,
-			   ed_flag
+			   ed_flag,
+			   note
 		FROM t_mb_menu
 		WHERE delete_flag &lt;&gt; 1
 		  and _parent = #{parentId,jdbcType=VARCHAR}

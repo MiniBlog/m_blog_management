@@ -73,7 +73,7 @@ new Vue({
 			let that = this;
 			let moduleId = row['id'];
 			let moduleName = row['_name'];
-			parent.openMenu("edit-module-" + moduleId, "编辑模块:" + moduleName, webRoot + "/add-module.html?moduleId=" + moduleId);
+			parent.openMenu("edit-module-" + moduleId, "编辑模块:" + moduleName, webRoot + "/edit-module.html?moduleId=" + moduleId);
 		},
 		handleDelete(index, row) {
 			let that = this;

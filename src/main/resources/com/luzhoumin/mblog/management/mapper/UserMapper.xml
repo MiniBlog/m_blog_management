@@ -8,9 +8,10 @@
 			   _name,
 			   _pass,
 			   _email,
-			   create_date,
+			   note,
+			   DATE_FORMAT(create_date, '%Y-%m-%d %H:%i:%s') as create_date,
 			   create_by,
-			   update_date,
+			   DATE_FORMAT(update_date, '%Y-%m-%d %H:%i:%s') as update_date,
 			   update_by
 		FROM t_mb_user
 		WHERE _name = #{userName}
@@ -22,6 +23,7 @@
 		id,
 		_name,
 		_email,
+		note,
 		DATE_FORMAT(create_date,'%Y-%m-%d %H:%i:%s') as create_date,
 		create_by
 		FROM t_mb_user

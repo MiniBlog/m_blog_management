@@ -1,8 +1,9 @@
 package com.luzhoumin.mblog.management.pojo;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
 
 @Data
 public class TMbMenu implements Serializable {
@@ -14,25 +15,27 @@ public class TMbMenu implements Serializable {
 
     private String icon;
 
-    private String href;
+	private String href;
 
-    private Integer order;
+	private Integer order;
 
-    private Boolean group;
+	private Boolean group;
 
-    private String parent;
+	private String parent;
 
-    private Boolean edFlag;
+	private Boolean edFlag;
 
-    private String createBy;
+	private String note;
 
-    private Date createDate;
+	private String createBy;
 
-    private String updateBy;
+	private Date createDate;
 
-    private Date updateDate;
+	private String updateBy;
 
-    private Integer deleteFlag;
+	private Date updateDate;
+
+	private Integer deleteFlag;
 
     private Date deleteDate;
 

@@ -8,7 +8,8 @@
 			   _blob,
 			   _name,
 			   _original_name,
-			   _address
+			   _address,
+			   note
 		FROM t_mb_blob
 		WHERE _blob = #{blobId:VARCHAR}
 		  AND delete_flag = 0

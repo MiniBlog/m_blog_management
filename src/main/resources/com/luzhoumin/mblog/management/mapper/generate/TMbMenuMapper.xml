@@ -11,6 +11,7 @@
     <result column="_group" jdbcType="BIT" property="group" />
     <result column="_parent" jdbcType="VARCHAR" property="parent" />
     <result column="ed_flag" jdbcType="BIT" property="edFlag" />
+    <result column="note" jdbcType="VARCHAR" property="note"/>
     <result column="create_by" jdbcType="VARCHAR" property="createBy" />
     <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
     <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
@@ -19,8 +20,8 @@
     <result column="delete_date" jdbcType="TIMESTAMP" property="deleteDate" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, _title, _key, _icon, _href, _order, _group, _parent, ed_flag, create_by, create_date, 
-    update_by, update_date, delete_flag, delete_date
+	  id, _title, _key, _icon, _href, _order, _group, _parent, ed_flag, note, create_by,
+    create_date, update_by, update_date, delete_flag, delete_date
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -33,16 +34,16 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.luzhoumin.mblog.management.pojo.TMbMenu">
-    insert into t_mb_menu (id, _title, _key, 
-      _icon, _href, _order, 
-      _group, _parent, ed_flag, create_by, 
-      create_date, update_by, update_date, 
-      delete_flag, delete_date)
-    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{key,jdbcType=VARCHAR}, 
-      #{icon,jdbcType=VARCHAR}, #{href,jdbcType=VARCHAR}, #{order,jdbcType=INTEGER}, 
-      #{group,jdbcType=BIT}, #{parent,jdbcType=VARCHAR}, #{edFlag,jdbcType=BIT}, #{createBy,jdbcType=VARCHAR}, 
-      #{createDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, 
-      #{deleteFlag,jdbcType=INTEGER}, #{deleteDate,jdbcType=TIMESTAMP})
+	  insert into t_mb_menu (id, _title, _key,
+							 _icon, _href, _order,
+							 _group, _parent, ed_flag, note,
+							 create_by, create_date, update_by,
+							 update_date, delete_flag, delete_date)
+	  values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{key,jdbcType=VARCHAR},
+			  #{icon,jdbcType=VARCHAR}, #{href,jdbcType=VARCHAR}, #{order,jdbcType=INTEGER},
+			  #{group,jdbcType=BIT}, #{parent,jdbcType=VARCHAR}, #{edFlag,jdbcType=BIT}, #{note,jdbcType=VARCHAR},
+			  #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR},
+			  #{updateDate,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=INTEGER}, #{deleteDate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.luzhoumin.mblog.management.pojo.TMbMenu">
     insert into t_mb_menu
@@ -63,26 +64,29 @@
         _href,
       </if>
       <if test="order != null">
-        _order,
-      </if>
-      <if test="group != null">
-        _group,
-      </if>
-      <if test="parent != null">
-        _parent,
-      </if>
-      <if test="edFlag != null">
-        ed_flag,
-      </if>
-      <if test="createBy != null">
-        create_by,
-      </if>
-      <if test="createDate != null">
-        create_date,
-      </if>
-      <if test="updateBy != null">
-        update_by,
-      </if>
+		  _order,
+	  </if>
+		<if test="group != null">
+			_group,
+		</if>
+		<if test="parent != null">
+			_parent,
+		</if>
+		<if test="edFlag != null">
+			ed_flag,
+		</if>
+		<if test="note != null">
+			note,
+		</if>
+		<if test="createBy != null">
+			create_by,
+		</if>
+		<if test="createDate != null">
+			create_date,
+		</if>
+		<if test="updateBy != null">
+			update_by,
+		</if>
       <if test="updateDate != null">
         update_date,
       </if>
@@ -111,26 +115,29 @@
       </if>
       <if test="order != null">
         #{order,jdbcType=INTEGER},
-      </if>
-      <if test="group != null">
-        #{group,jdbcType=BIT},
-      </if>
-      <if test="parent != null">
-        #{parent,jdbcType=VARCHAR},
-      </if>
-      <if test="edFlag != null">
-        #{edFlag,jdbcType=BIT},
-      </if>
-      <if test="createBy != null">
-        #{createBy,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null">
-        #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateBy != null">
-        #{updateBy,jdbcType=VARCHAR},
-      </if>
-      <if test="updateDate != null">
+	  </if>
+		<if test="group != null">
+			#{group,jdbcType=BIT},
+		</if>
+		<if test="parent != null">
+			#{parent,jdbcType=VARCHAR},
+		</if>
+		<if test="edFlag != null">
+			#{edFlag,jdbcType=BIT},
+		</if>
+		<if test="note != null">
+			#{note,jdbcType=VARCHAR},
+		</if>
+		<if test="createBy != null">
+			#{createBy,jdbcType=VARCHAR},
+		</if>
+		<if test="createDate != null">
+			#{createDate,jdbcType=TIMESTAMP},
+		</if>
+		<if test="updateBy != null">
+			#{updateBy,jdbcType=VARCHAR},
+		</if>
+		<if test="updateDate != null">
         #{updateDate,jdbcType=TIMESTAMP},
       </if>
       <if test="deleteFlag != null">
@@ -158,26 +165,29 @@
       </if>
       <if test="order != null">
         _order = #{order,jdbcType=INTEGER},
-      </if>
-      <if test="group != null">
-        _group = #{group,jdbcType=BIT},
-      </if>
-      <if test="parent != null">
-        _parent = #{parent,jdbcType=VARCHAR},
-      </if>
-      <if test="edFlag != null">
-        ed_flag = #{edFlag,jdbcType=BIT},
-      </if>
-      <if test="createBy != null">
-        create_by = #{createBy,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null">
-        create_date = #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateBy != null">
-        update_by = #{updateBy,jdbcType=VARCHAR},
-      </if>
-      <if test="updateDate != null">
+	  </if>
+		<if test="group != null">
+			_group = #{group,jdbcType=BIT},
+		</if>
+		<if test="parent != null">
+			_parent = #{parent,jdbcType=VARCHAR},
+		</if>
+		<if test="edFlag != null">
+			ed_flag = #{edFlag,jdbcType=BIT},
+		</if>
+		<if test="note != null">
+			note = #{note,jdbcType=VARCHAR},
+		</if>
+		<if test="createBy != null">
+			create_by = #{createBy,jdbcType=VARCHAR},
+		</if>
+		<if test="createDate != null">
+			create_date = #{createDate,jdbcType=TIMESTAMP},
+		</if>
+		<if test="updateBy != null">
+			update_by = #{updateBy,jdbcType=VARCHAR},
+		</if>
+		<if test="updateDate != null">
         update_date = #{updateDate,jdbcType=TIMESTAMP},
       </if>
       <if test="deleteFlag != null">
@@ -190,21 +200,22 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.luzhoumin.mblog.management.pojo.TMbMenu">
-    update t_mb_menu
-    set _title = #{title,jdbcType=VARCHAR},
-      _key = #{key,jdbcType=VARCHAR},
-      _icon = #{icon,jdbcType=VARCHAR},
-      _href = #{href,jdbcType=VARCHAR},
-      _order = #{order,jdbcType=INTEGER},
-      _group = #{group,jdbcType=BIT},
-      _parent = #{parent,jdbcType=VARCHAR},
-      ed_flag = #{edFlag,jdbcType=BIT},
-      create_by = #{createBy,jdbcType=VARCHAR},
-      create_date = #{createDate,jdbcType=TIMESTAMP},
-      update_by = #{updateBy,jdbcType=VARCHAR},
-      update_date = #{updateDate,jdbcType=TIMESTAMP},
-      delete_flag = #{deleteFlag,jdbcType=INTEGER},
-      delete_date = #{deleteDate,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
+	  update t_mb_menu
+	  set _title      = #{title,jdbcType=VARCHAR},
+		  _key        = #{key,jdbcType=VARCHAR},
+		  _icon       = #{icon,jdbcType=VARCHAR},
+		  _href       = #{href,jdbcType=VARCHAR},
+		  _order      = #{order,jdbcType=INTEGER},
+		  _group      = #{group,jdbcType=BIT},
+		  _parent     = #{parent,jdbcType=VARCHAR},
+		  ed_flag     = #{edFlag,jdbcType=BIT},
+		  note        = #{note,jdbcType=VARCHAR},
+		  create_by   = #{createBy,jdbcType=VARCHAR},
+		  create_date = #{createDate,jdbcType=TIMESTAMP},
+		  update_by   = #{updateBy,jdbcType=VARCHAR},
+		  update_date = #{updateDate,jdbcType=TIMESTAMP},
+		  delete_flag = #{deleteFlag,jdbcType=INTEGER},
+		  delete_date = #{deleteDate,jdbcType=TIMESTAMP}
+	  where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -1,12 +1,19 @@
+$.base64.utf8encode = true;
+
 new Vue({
 	el: '#app',
 	data: function () {
 		let that = this;
 		return {
 			module_id: '',
+			module_uid: '',
 			module_name: '',
-			module_note: '',
+			module_type: '',
 			module_template: '',
+			module_css: '',
+			module_js: '',
+			preview_param: '',
+			module_note: '',
 		}
 	},
 	methods: {
@@ -22,7 +29,10 @@ new Vue({
 			let that = this;
 			let param = {};
 			param['name'] = that.module_name;
+			param['type'] = that.module_type;
 			param['template'] = that.module_template;
+			param['css'] = that.module_css;
+			param['js'] = that.module_js;
 			param['note'] = that.module_note;
 			if (that.module_id) {
 				//如果有id，说明是修改
@@ -34,7 +44,7 @@ new Vue({
 							confirmButtonText: '确定',
 							showClose: false,
 							callback: () => {
-								closeThisMenuTab();
+								// closeThisMenuTab();
 							}
 						});
 					} else {
@@ -68,6 +78,14 @@ new Vue({
 					}
 				})
 			}
+		},
+		previewClick() {
+			let that = this;
+			let moduleId = that.module_id;
+			let moduleName = that.module_name;
+			let previewParam = $.base64.encode(that.preview_param);
+			parent.openMenu("preview-module-" + moduleId, "预览模块:" + moduleName, webRoot + "/preview-module.html?moduleId=" + moduleId + "&previewParam=" + previewParam);
+
 		}
 	},
 	mounted: function () {
@@ -76,10 +94,14 @@ new Vue({
 		that.moduleId = getUrlParam("moduleId");
 		myGetAjax(webRootAjax + "/module.do", {moduleId: that.moduleId}, data => {
 			if (data.success) {
-				var map = data.map;
+				let map = data.map;
 				that.module_id = map.id;
+				that.module_uid = map.uid;
 				that.module_name = map.name;
+				that.module_type = map.type;
 				that.module_template = map.template;
+				that.module_css = map.css;
+				that.module_js = map.js;
 				that.module_note = map.note;
 			}
 		});
