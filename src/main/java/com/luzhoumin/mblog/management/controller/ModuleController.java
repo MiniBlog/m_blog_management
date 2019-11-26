@@ -159,9 +159,7 @@ public class ModuleController {
 		String cssStr = tMbModuleWithBLOBs.getCss();
 		String jsStr = tMbModuleWithBLOBs.getJs();
 		previewParam = Base64.decodeStr(previewParam);
-		log.error(previewParam);
-		Map<String, Object> paramMap = JSONUtil.toBean(previewParam, new TypeReference<Map<String, Object>>() {
-		}, true);
+		Map<String, Object> paramMap = JSONUtil.toBean(previewParam, new TypeReference<>(){}, true);
 		TemplateEngine engine = new ThymeleafEngine();
 		Template template = engine.getTemplate(templateStr);
 		String result = template.render(paramMap);
