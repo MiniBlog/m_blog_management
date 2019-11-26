@@ -45,7 +45,7 @@ public class UserController {
 		return modelAndView;
 	}
 
-	@GetMapping("/user.do")
+	@GetMapping("/user-list.do")
 	public void ajaxGetUserList(HttpServletRequest request, HttpServletResponse response) {
 		log.info("SysUserController,ajaxGetUserList:start");
 		AjaxJson aj = new AjaxJson();

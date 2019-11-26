@@ -3,7 +3,7 @@ new Vue({
 	data: function () {
 		let that = this;
 		return {
-			queryUrl: webRootAjax + "/module.do",
+			queryUrl: webRootAjax + "/module-list.do",
 			tableData: [],
 			tableLoading: true,
 			tableTotal: 0,
@@ -71,11 +71,9 @@ new Vue({
 		//Business
 		handleEdit(index, row) {
 			let that = this;
-			that.userForm.email = row['_email'];
-			that.userForm.name = row['_name'];
-			that.userForm.id = row['id'];
-			that.userForm._isEdit = true;
-			that.userFormDialog = true;
+			let moduleId = row['id'];
+			let moduleName = row['_name'];
+			parent.openMenu("edit-module-" + moduleId, "编辑模块:" + moduleName, webRoot + "/add-module.html?moduleId=" + moduleId);
 		},
 		handleDelete(index, row) {
 			let that = this;

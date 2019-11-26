@@ -41,9 +41,9 @@ public class ModuleController {
 		return new ModelAndView("module/module_list");
 	}
 
-	@GetMapping("/module.do")
-	public void ajaxGetList(HttpServletRequest request, HttpServletResponse response) {
-		log.info("ModuleController,ajaxGetList:start");
+	@GetMapping("/module-list.do")
+	public void ajaxGetModuleList(HttpServletRequest request, HttpServletResponse response) {
+		log.info("ModuleController,ajaxGetModuleList:start");
 		AjaxJson aj = new AjaxJson();
 		try {
 			Map<String, String> paramMap = ConvertUtil.requestToMap(request);
@@ -52,12 +52,30 @@ public class ModuleController {
 			aj.setSuccess(true);
 		} catch (Exception e) {
 			e.printStackTrace();
-			log.error("ModuleController,ajaxGetList", e);
+			log.error("ModuleController,ajaxGetModuleList", e);
 			aj.setSuccess(false);
 			aj.setMsg(e.getMessage());
 		}
 		HttpServletUtil.ajaxResponse(response, aj);
-		log.info("ModuleController,ajaxGetList:end");
+		log.info("ModuleController,ajaxGetModuleList:end");
+	}
+
+	@GetMapping("/module.do")
+	public void ajaxGetModule(@RequestParam("moduleId") int moduleId, HttpServletResponse response) {
+		log.info("ModuleController,ajaxGetModule:start");
+		AjaxJson aj = new AjaxJson();
+		try {
+			Map<String, Object> data = moduleService.getModule(moduleId);
+			aj.setMap(data);
+			aj.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("ModuleController,ajaxGetModule", e);
+			aj.setSuccess(false);
+			aj.setMsg(e.getMessage());
+		}
+		HttpServletUtil.ajaxResponse(response, aj);
+		log.info("ModuleController,ajaxGetModule:end");
 	}
 
 	@DeleteMapping("/module.do")

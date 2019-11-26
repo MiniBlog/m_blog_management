@@ -5,7 +5,7 @@ new Vue({
 	data: function () {
 		let that = this;
 		return {
-			queryUrl: webRootAjax + "/sys/user.do",
+			queryUrl: webRootAjax + "/sys/user-list.do",
 			tableData: [],
 			tableLoading: true,
 			tableTotal: 0,

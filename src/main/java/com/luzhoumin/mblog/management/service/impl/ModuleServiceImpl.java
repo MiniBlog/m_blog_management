@@ -1,5 +1,7 @@
 package com.luzhoumin.mblog.management.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.StrUtil;
 import com.luzhoumin.mblog.management.mapper.ModuleMapper;
 import com.luzhoumin.mblog.management.mapper.generate.TMbModuleMapper;
@@ -45,6 +47,17 @@ public class ModuleServiceImpl implements ModuleService {
 		TMbModule TMbModule = tMbModuleMapper.selectByPrimaryKey(id);
 		log.info("ModelServiceImpl,getModelInfoById:end");
 		return TMbModule;
+	}
+
+	@Override
+	public Map<String, Object> getModule(int moduleId) {
+		log.info("ModelServiceImpl,getModule:end");
+		TMbModule TMbModule = tMbModuleMapper.selectByPrimaryKey(moduleId);
+		Map<String, Object> moduleBeanMap = BeanUtil.beanToMap(TMbModule);
+		String template = IoUtil.read(IoUtil.toStream(TMbModule.getTemplate()), "utf-8");
+		moduleBeanMap.put("template", template);
+		log.info("ModelServiceImpl,getModule:end");
+		return moduleBeanMap;
 	}
 
 	@Override

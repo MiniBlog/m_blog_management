@@ -1,5 +1,5 @@
 let topHeightExceptTabContent = 135;	//Tab内容距离顶部的距离
-new Vue({
+let vm = new Vue({
 	el: '#app',
 	data: {
 		currentTabName: '',
@@ -9,9 +9,10 @@ new Vue({
 		//打开菜单
 		openMenu(menu) {
 			let that = this;
+			let tabList = that.tabList || window.vm.tabList;
 			if (menu) {
-				for (let i = 0; i < that.tabList.length; i++) {
-					var tab = that.tabList[i];
+				for (let i = 0; i < tabList.length; i++) {
+					let tab = tabList[i];
 					//如果已经打开，切换到该标签页
 					if (tab["name"] === menu["_key"]) {
 						$(".el-tabs__nav").children().eq(i).click();
@@ -36,7 +37,7 @@ new Vue({
 						url = webRoot + "/" + url;
 					}
 				}
-				that.tabList.push({
+				tabList.push({
 					label: menu["_title"],
 					name: menu["_key"],
 					url: url,
@@ -103,9 +104,20 @@ new Vue({
 	}
 });
 
+//js中打开菜单
+function openMenu(key, title, href) {
+	let menu = {};
+	menu['_key'] = key;
+	menu['_title'] = title;
+	menu['_href'] = href;
+	vm.$options.methods.openMenu(menu);
+}
+
 //关闭tab页
 function closeMenuTab(tabId) {
 	setTimeout(function () {
 		$("div#tab-" + tabId + ">span").click();
 	});
 }
+
+window.vm = vm;

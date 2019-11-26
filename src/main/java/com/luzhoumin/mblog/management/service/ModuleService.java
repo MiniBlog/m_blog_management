@@ -9,6 +9,8 @@ public interface ModuleService {
 
 	Map<String, Object> getModuleList(Map<String, String> paramMap, int pageNum, int pageSize);
 
+	Map<String, Object> getModule(int moduleId);
+
 	boolean deleteModule(TMbModule model);
 
 	boolean addModule(TMbModule model);
