@@ -1,5 +1,5 @@
-function vueAjax(_vue_that, type, url, param, successCallback, errorCallback) {
-	const loading = _vue_that.$loading({
+function vueAjax(that, type, url, param, successCallback, errorCallback) {
+	const loading = that.$loading({
 		lock: true,
 		text: 'Loading',
 		spinner: 'el-icon-loading',
@@ -24,7 +24,7 @@ function vueAjax(_vue_that, type, url, param, successCallback, errorCallback) {
 					successCallback(data, textStatus);
 				}
 			} else {
-				_vue_that.$message({
+				that.$message({
 					showClose: true,
 					message: "操作失败. " + data.msg,
 					type: 'error',
@@ -34,7 +34,7 @@ function vueAjax(_vue_that, type, url, param, successCallback, errorCallback) {
 		},
 		error: (XMLHttpRequest, textStatus, errorThrown) => {
 			loading.close();
-			_vue_that.$message({
+			that.$message({
 				showClose: true,
 				message: "操作失败. " + errorThrown,
 				type: 'error',
@@ -47,20 +47,20 @@ function vueAjax(_vue_that, type, url, param, successCallback, errorCallback) {
 	});
 }
 
-function vueGetAjax(_vue_that, url, data, successCallback, errorCallback) {
-	return vueAjax(_vue_that, "get", url, data, successCallback, errorCallback);
+function vueGetAjax(that, url, data, successCallback, errorCallback) {
+	return vueAjax(that, "get", url, data, successCallback, errorCallback);
 }
 
-function vuePostAjax(_vue_that, url, data, successCallback, errorCallback) {
-	return vueAjax(_vue_that, "post", url, data, successCallback, errorCallback);
+function vuePostAjax(that, url, data, successCallback, errorCallback) {
+	return vueAjax(that, "post", url, data, successCallback, errorCallback);
 }
 
-function vuePutAjax(_vue_that, url, data, successCallback, errorCallback) {
-	return vueAjax(_vue_that, "put", url, data, successCallback, errorCallback);
+function vuePutAjax(that, url, data, successCallback, errorCallback) {
+	return vueAjax(that, "put", url, data, successCallback, errorCallback);
 }
 
-function vueDeleteAjax(_vue_that, url, data, successCallback, errorCallback) {
-	return vueAjax(_vue_that, "delete", url, data, successCallback, errorCallback);
+function vueDeleteAjax(that, url, data, successCallback, errorCallback) {
+	return vueAjax(that, "delete", url, data, successCallback, errorCallback);
 }
 
 function ajax(type, url, param, successCallback, errorCallback) {
