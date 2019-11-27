@@ -5,6 +5,7 @@
 	<title>Model List</title>
 	<script th:replace="common :: head"></script>
 	<link rel="stylesheet" th:href="@{/css/page/page_css_common_table.css}"/>
+	<link rel="stylesheet" th:href="@{/css/page/page_css_edit_module.css}"/>
 </head>
 <body>
 <div th:replace="common :: page_loading"></div>
@@ -14,27 +15,30 @@
 			<el-form-item label="模块名">
 				<el-input type="text" v-model="module_name"></el-input>
 			</el-form-item>
+			<el-form-item label="模块类型">
+				<el-select v-model="module_type" style="width:100%">
+					<th:block th:each="type:${moduleTypeOptions}">
+						<el-option
+								th:key="${type['_value']}"
+								th:label="${type['_desc']}"
+								th:value="${type['_value']}">
+						</el-option>
+					</th:block>
+				</el-select>
+			</el-form-item>
 			<el-form-item label="模块备注">
 				<el-input type="text" v-model="module_note"></el-input>
 			</el-form-item>
 		</el-form>
 	</div>
 	<el-row id="tableRow">
-		<el-col :span="18" style="height: 100%">
+		<el-col :span="18" style="height: 100%" id="leftPart">
 			<el-input autosize id="m_blog_template" type="textarea" v-model="module_template"></el-input>
 		</el-col>
-		<el-col :span="6" style="height: 100%">
-			<el-form>
-				<el-form-item label="Css">
-					<el-input autosize id="m_blog_css" type="textarea" v-model="module_css"></el-input>
-				</el-form-item>
-				<el-form-item label="Js">
-					<el-input autosize id="m_blog_js" type="textarea" v-model="module_js"></el-input>
-				</el-form-item>
-				<el-form-item label="Preview Param">
-					<el-input autosize id="m_blog_param" type="textarea" v-model="module_param"></el-input>
-				</el-form-item>
-			</el-form>
+		<el-col :span="6" style="height: 100%" id="rightPart">
+			<el-input autosize id="m_blog_css" type="textarea" v-model="module_css" placeholder="css"></el-input>
+			<el-input autosize id="m_blog_js" type="textarea" v-model="module_js" placeholder="js"></el-input>
+			<el-input autosize id="m_blog_param" type="textarea" v-model="module_param" placeholder="param"></el-input>
 		</el-col>
 	</el-row>
 	<el-row justify="end" type="flex">

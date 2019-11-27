@@ -13,6 +13,7 @@ import com.luzhoumin.mblog.management.pojo.AjaxJson;
 import com.luzhoumin.mblog.management.pojo.TMbModuleWithBLOBs;
 import com.luzhoumin.mblog.management.service.ModuleService;
 import com.luzhoumin.mblog.management.service.SequenceService;
+import com.luzhoumin.mblog.management.service.TypeDefineService;
 import com.luzhoumin.mblog.management.util.ConvertUtil;
 import com.luzhoumin.mblog.management.util.HttpServletUtil;
 import com.luzhoumin.mblog.management.util.PageHelperUtil;
@@ -24,6 +25,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -34,10 +36,19 @@ public class ModuleController {
 	ModuleService moduleService;
 	@Resource
 	SequenceService sequenceService;
+	@Resource
+	TypeDefineService typeDefineService;
 
 	@RequestMapping("/edit-module.html")
 	public ModelAndView addModulePage(HttpServletRequest request) {
 		log.info("ModuleController,addModulePage:start");
+
+		//MODULE_TYPE
+		Map<String, String> mapParams = new HashMap<>();
+		mapParams.put("typeId", "MODULE_TYPE");
+		List<Map<String, Object>> moduleTypeOptions = typeDefineService.getTypeDefineList(mapParams);
+		request.setAttribute("moduleTypeOptions", moduleTypeOptions);
+
 		log.info("ModuleController,addModulePage:start");
 		return new ModelAndView("module/edit-module");
 	}

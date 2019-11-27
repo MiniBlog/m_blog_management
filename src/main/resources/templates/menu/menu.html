@@ -129,9 +129,9 @@
 							<th:block th:each="icon:${iconTypeList}">
 								<el-option
 										th:key="${icon['_value']}"
-										th:label="${icon['_remark']}"
+										th:label="${icon['_desc']}"
 										th:value="${icon['_value']}">
-									<span style="float: left" th:text="${icon['_remark']}"></span>
+									<span style="float: left" th:text="${icon['_desc']}"></span>
 									<span style="float: right">
 										<i th:class="${icon['_value']}"></i>
 									</span>
