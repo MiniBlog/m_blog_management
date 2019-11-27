@@ -12,7 +12,7 @@ new Vue({
 			module_template: '',
 			module_css: '',
 			module_js: '',
-			preview_param: '',
+			module_param: '',
 			module_note: '',
 		}
 	},
@@ -33,6 +33,7 @@ new Vue({
 			param['template'] = that.module_template;
 			param['css'] = that.module_css;
 			param['js'] = that.module_js;
+			param['param'] = that.module_param;
 			param['note'] = that.module_note;
 			if (that.module_id) {
 				//如果有id，说明是修改
@@ -83,7 +84,7 @@ new Vue({
 			let that = this;
 			let moduleId = that.module_id;
 			let moduleName = that.module_name;
-			let previewParam = $.base64.encode(that.preview_param);
+			let previewParam = $.base64.encode(that.module_param);
 			parent.openMenu("preview-module-" + moduleId, "预览模块:" + moduleName, webRoot + "/preview-module.html?moduleId=" + moduleId + "&previewParam=" + previewParam);
 
 		}
@@ -102,6 +103,7 @@ new Vue({
 				that.module_template = map.template;
 				that.module_css = map.css;
 				that.module_js = map.js;
+				that.module_param = map.param;
 				that.module_note = map.note;
 			}
 		});

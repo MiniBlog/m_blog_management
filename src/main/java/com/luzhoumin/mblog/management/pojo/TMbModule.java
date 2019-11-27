@@ -7,27 +7,27 @@ import java.util.Date;
 
 @Data
 public class TMbModule implements Serializable {
-	private Integer id;
+    private Integer id;
 
-	private String uid;
+    private String uid;
 
-	private String name;
+    private String name;
 
-	private String type;
+    private String type;
 
-	private String note;
+    private String note;
 
-	private String createBy;
+    private String createBy;
 
-	private Date createDate;
+    private Date createDate;
 
-	private String updateBy;
+    private String updateBy;
 
-	private Date updateDate;
+    private Date updateDate;
 
     private Date deleteDate;
 
-	private Integer deleteFlag;
+    private Integer deleteFlag;
 
     private static final long serialVersionUID = 1L;
 }
