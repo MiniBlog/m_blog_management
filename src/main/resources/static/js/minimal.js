@@ -3,6 +3,9 @@
 * — jQuery 2.1.3 + Migrate 1.2.1
 * — jQuery.my 1.2.14
 * — jQuery.tags 0.5
+* — Vue.js v2.6.10
+* — jquery.base64.js 0.0.3
+*
 */
 
 
