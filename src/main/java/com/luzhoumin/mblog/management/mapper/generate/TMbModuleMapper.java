@@ -7,24 +7,24 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface TMbModuleMapper {
-	@DBWriteConnection
-	int deleteByPrimaryKey(Integer id);
+    @DBWriteConnection
+    int deleteByPrimaryKey(Integer id);
 
-	@DBWriteConnection
-	int insert(TMbModuleWithBLOBs record);
+    @DBWriteConnection
+    int insert(TMbModuleWithBLOBs record);
 
-	@DBWriteConnection
-	int insertSelective(TMbModuleWithBLOBs record);
+    @DBWriteConnection
+    int insertSelective(TMbModuleWithBLOBs record);
 
-	@DBWriteConnection
-	TMbModuleWithBLOBs selectByPrimaryKey(Integer id);
+    @DBWriteConnection
+    TMbModuleWithBLOBs selectByPrimaryKey(Integer id);
 
-	@DBWriteConnection
-	int updateByPrimaryKeySelective(TMbModuleWithBLOBs record);
+    @DBWriteConnection
+    int updateByPrimaryKeySelective(TMbModuleWithBLOBs record);
 
-	@DBWriteConnection
-	int updateByPrimaryKeyWithBLOBs(TMbModuleWithBLOBs record);
+    @DBWriteConnection
+    int updateByPrimaryKeyWithBLOBs(TMbModuleWithBLOBs record);
 
-	@DBWriteConnection
-	int updateByPrimaryKey(TMbModule record);
+    @DBWriteConnection
+    int updateByPrimaryKey(TMbModule record);
 }

@@ -2,220 +2,232 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.luzhoumin.mblog.management.mapper.generate.TMbModuleMapper">
   <resultMap id="BaseResultMap" type="com.luzhoumin.mblog.management.pojo.TMbModule">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="_uid" jdbcType="VARCHAR" property="uid" />
-	  <result column="_name" jdbcType="VARCHAR" property="name"/>
-	  <result column="_type" jdbcType="VARCHAR" property="type"/>
-	  <result column="note" jdbcType="VARCHAR" property="note"/>
-	  <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
-	  <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
-	  <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
-	  <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
-	  <result column="delete_date" jdbcType="TIMESTAMP" property="deleteDate"/>
-	  <result column="delete_flag" jdbcType="INTEGER" property="deleteFlag"/>
+    <id column="id" jdbcType="INTEGER" property="id"/>
+    <result column="_uid" jdbcType="VARCHAR" property="uid"/>
+    <result column="_name" jdbcType="VARCHAR" property="name"/>
+    <result column="_type" jdbcType="VARCHAR" property="type"/>
+    <result column="note" jdbcType="VARCHAR" property="note"/>
+    <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
+    <result column="delete_date" jdbcType="TIMESTAMP" property="deleteDate"/>
+    <result column="delete_flag" jdbcType="INTEGER" property="deleteFlag"/>
   </resultMap>
-	<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
-			   type="com.luzhoumin.mblog.management.pojo.TMbModuleWithBLOBs">
-		<result column="_template" jdbcType="LONGVARCHAR" property="template"/>
-		<result column="_css" jdbcType="LONGVARCHAR" property="css"/>
-		<result column="_js" jdbcType="LONGVARCHAR" property="js"/>
-	</resultMap>
-	<sql id="Base_Column_List">
-		id, _uid, _name, _type, note, create_by, create_date, update_by, update_date, delete_date,
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+             type="com.luzhoumin.mblog.management.pojo.TMbModuleWithBLOBs">
+    <result column="_template" jdbcType="LONGVARCHAR" property="template"/>
+    <result column="_css" jdbcType="LONGVARCHAR" property="css"/>
+    <result column="_js" jdbcType="LONGVARCHAR" property="js"/>
+    <result column="_param" jdbcType="LONGVARCHAR" property="param"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, _uid, _name, _type, note, create_by, create_date, update_by, update_date, delete_date, 
     delete_flag
-	</sql>
-	<sql id="Blob_Column_List">
-		_template, _css, _js
-	</sql>
-	<select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
-		select
-    <include refid="Base_Column_List" />
+  </sql>
+  <sql id="Blob_Column_List">
+    _template, _css, _js, _param
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List"/>
     ,
-    <include refid="Blob_Column_List" />
+    <include refid="Blob_Column_List"/>
     from t_mb_module
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from t_mb_module
+    delete
+    from t_mb_module
     where id = #{id,jdbcType=INTEGER}
   </delete>
-	<insert id="insert" parameterType="com.luzhoumin.mblog.management.pojo.TMbModuleWithBLOBs">
-		insert into t_mb_module (id, _uid, _name,
-								 _type, note, create_by,
-								 create_date, update_by, update_date,
-								 delete_date, delete_flag, _template,
-								 _css, _js)
-		values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
-				#{type,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR},
-				#{createDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP},
-				#{deleteDate,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=INTEGER}, #{template,jdbcType=LONGVARCHAR},
-				#{css,jdbcType=LONGVARCHAR}, #{js,jdbcType=LONGVARCHAR})
-	</insert>
-	<insert id="insertSelective" parameterType="com.luzhoumin.mblog.management.pojo.TMbModuleWithBLOBs">
-		insert into t_mb_module
-		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="id != null">
-				id,
-			</if>
-			<if test="uid != null">
-				_uid,
-			</if>
-			<if test="name != null">
-				_name,
-			</if>
-			<if test="type != null">
-				_type,
-			</if>
-			<if test="note != null">
-				note,
-			</if>
-			<if test="createBy != null">
-				create_by,
-			</if>
-			<if test="createDate != null">
-				create_date,
-			</if>
-			<if test="updateBy != null">
-				update_by,
-			</if>
-			<if test="updateDate != null">
-				update_date,
-			</if>
-			<if test="deleteDate != null">
-				delete_date,
-			</if>
-			<if test="deleteFlag != null">
-				delete_flag,
-			</if>
-			<if test="template != null">
-				_template,
-			</if>
-			<if test="css != null">
-				_css,
-			</if>
-			<if test="js != null">
-				_js,
-			</if>
-		</trim>
-		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			<if test="id != null">
-				#{id,jdbcType=INTEGER},
-			</if>
-			<if test="uid != null">
-				#{uid,jdbcType=VARCHAR},
-			</if>
-			<if test="name != null">
-				#{name,jdbcType=VARCHAR},
-			</if>
-			<if test="type != null">
-				#{type,jdbcType=VARCHAR},
-			</if>
-			<if test="note != null">
-				#{note,jdbcType=VARCHAR},
-			</if>
-			<if test="createBy != null">
-				#{createBy,jdbcType=VARCHAR},
-			</if>
-			<if test="createDate != null">
-				#{createDate,jdbcType=TIMESTAMP},
-			</if>
-			<if test="updateBy != null">
-				#{updateBy,jdbcType=VARCHAR},
-			</if>
-			<if test="updateDate != null">
-				#{updateDate,jdbcType=TIMESTAMP},
-			</if>
-			<if test="deleteDate != null">
-				#{deleteDate,jdbcType=TIMESTAMP},
-			</if>
-			<if test="deleteFlag != null">
-				#{deleteFlag,jdbcType=INTEGER},
-			</if>
-			<if test="template != null">
-				#{template,jdbcType=LONGVARCHAR},
-			</if>
-			<if test="css != null">
-				#{css,jdbcType=LONGVARCHAR},
-			</if>
-			<if test="js != null">
-				#{js,jdbcType=LONGVARCHAR},
-			</if>
-		</trim>
+  <insert id="insert" parameterType="com.luzhoumin.mblog.management.pojo.TMbModuleWithBLOBs">
+    insert into t_mb_module (id, _uid, _name,
+                             _type, note, create_by,
+                             create_date, update_by, update_date,
+                             delete_date, delete_flag, _template,
+                             _css, _js, _param)
+    values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+            #{type,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR},
+            #{createDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP},
+            #{deleteDate,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=INTEGER}, #{template,jdbcType=LONGVARCHAR},
+            #{css,jdbcType=LONGVARCHAR}, #{js,jdbcType=LONGVARCHAR}, #{param,jdbcType=LONGVARCHAR})
   </insert>
-	<update id="updateByPrimaryKeySelective" parameterType="com.luzhoumin.mblog.management.pojo.TMbModuleWithBLOBs">
-		update t_mb_module
-		<set>
-			<if test="uid != null">
-				_uid = #{uid,jdbcType=VARCHAR},
-			</if>
-			<if test="name != null">
-				_name = #{name,jdbcType=VARCHAR},
-			</if>
-			<if test="type != null">
-				_type = #{type,jdbcType=VARCHAR},
-			</if>
-			<if test="note != null">
-				note = #{note,jdbcType=VARCHAR},
-			</if>
-			<if test="createBy != null">
-				create_by = #{createBy,jdbcType=VARCHAR},
-			</if>
-			<if test="createDate != null">
-				create_date = #{createDate,jdbcType=TIMESTAMP},
-			</if>
-			<if test="updateBy != null">
-				update_by = #{updateBy,jdbcType=VARCHAR},
-			</if>
-			<if test="updateDate != null">
-				update_date = #{updateDate,jdbcType=TIMESTAMP},
-			</if>
-			<if test="deleteDate != null">
-				delete_date = #{deleteDate,jdbcType=TIMESTAMP},
-			</if>
-			<if test="deleteFlag != null">
-				delete_flag = #{deleteFlag,jdbcType=INTEGER},
-			</if>
-			<if test="template != null">
-				_template = #{template,jdbcType=LONGVARCHAR},
-			</if>
-			<if test="css != null">
-				_css = #{css,jdbcType=LONGVARCHAR},
-			</if>
-			<if test="js != null">
-				_js = #{js,jdbcType=LONGVARCHAR},
-			</if>
-		</set>
+  <insert id="insertSelective" parameterType="com.luzhoumin.mblog.management.pojo.TMbModuleWithBLOBs">
+    insert into t_mb_module
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="uid != null">
+        _uid,
+      </if>
+      <if test="name != null">
+        _name,
+      </if>
+      <if test="type != null">
+        _type,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="deleteDate != null">
+        delete_date,
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag,
+      </if>
+      <if test="template != null">
+        _template,
+      </if>
+      <if test="css != null">
+        _css,
+      </if>
+      <if test="js != null">
+        _js,
+      </if>
+      <if test="param != null">
+        _param,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteDate != null">
+        #{deleteDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlag != null">
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="template != null">
+        #{template,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="css != null">
+        #{css,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="js != null">
+        #{js,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="param != null">
+        #{param,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.luzhoumin.mblog.management.pojo.TMbModuleWithBLOBs">
+    update t_mb_module
+    <set>
+      <if test="uid != null">
+        _uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        _name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        _type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteDate != null">
+        delete_date = #{deleteDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="template != null">
+        _template = #{template,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="css != null">
+        _css = #{css,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="js != null">
+        _js = #{js,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="param != null">
+        _param = #{param,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.luzhoumin.mblog.management.pojo.TMbModuleWithBLOBs">
-		update t_mb_module
-		set _uid        = #{uid,jdbcType=VARCHAR},
-			_name       = #{name,jdbcType=VARCHAR},
-			_type       = #{type,jdbcType=VARCHAR},
-			note        = #{note,jdbcType=VARCHAR},
-			create_by   = #{createBy,jdbcType=VARCHAR},
-			create_date = #{createDate,jdbcType=TIMESTAMP},
-			update_by   = #{updateBy,jdbcType=VARCHAR},
-			update_date = #{updateDate,jdbcType=TIMESTAMP},
-			delete_date = #{deleteDate,jdbcType=TIMESTAMP},
-			delete_flag = #{deleteFlag,jdbcType=INTEGER},
-			_template   = #{template,jdbcType=LONGVARCHAR},
-			_css        = #{css,jdbcType=LONGVARCHAR},
-			_js         = #{js,jdbcType=LONGVARCHAR}
-		where id = #{id,jdbcType=INTEGER}
-	</update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.luzhoumin.mblog.management.pojo.TMbModuleWithBLOBs">
+    update t_mb_module
+    set _uid        = #{uid,jdbcType=VARCHAR},
+        _name       = #{name,jdbcType=VARCHAR},
+        _type       = #{type,jdbcType=VARCHAR},
+        note        = #{note,jdbcType=VARCHAR},
+        create_by   = #{createBy,jdbcType=VARCHAR},
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+        update_by   = #{updateBy,jdbcType=VARCHAR},
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+        delete_date = #{deleteDate,jdbcType=TIMESTAMP},
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+        _template   = #{template,jdbcType=LONGVARCHAR},
+        _css        = #{css,jdbcType=LONGVARCHAR},
+        _js         = #{js,jdbcType=LONGVARCHAR},
+        _param      = #{param,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
   <update id="updateByPrimaryKey" parameterType="com.luzhoumin.mblog.management.pojo.TMbModule">
-	  update t_mb_module
-	  set _uid        = #{uid,jdbcType=VARCHAR},
-		  _name       = #{name,jdbcType=VARCHAR},
-		  _type       = #{type,jdbcType=VARCHAR},
-		  note        = #{note,jdbcType=VARCHAR},
-		  create_by   = #{createBy,jdbcType=VARCHAR},
-		  create_date = #{createDate,jdbcType=TIMESTAMP},
-		  update_by   = #{updateBy,jdbcType=VARCHAR},
-		  update_date = #{updateDate,jdbcType=TIMESTAMP},
-		  delete_date = #{deleteDate,jdbcType=TIMESTAMP},
-		  delete_flag = #{deleteFlag,jdbcType=INTEGER}
-	  where id = #{id,jdbcType=INTEGER}
+    update t_mb_module
+    set _uid        = #{uid,jdbcType=VARCHAR},
+        _name       = #{name,jdbcType=VARCHAR},
+        _type       = #{type,jdbcType=VARCHAR},
+        note        = #{note,jdbcType=VARCHAR},
+        create_by   = #{createBy,jdbcType=VARCHAR},
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+        update_by   = #{updateBy,jdbcType=VARCHAR},
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+        delete_date = #{deleteDate,jdbcType=TIMESTAMP},
+        delete_flag = #{deleteFlag,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
