@@ -112,10 +112,11 @@ function getUrlParam(name) {
 	return null; // 返回参数值
 }
 
+//获取当前Tab页id
 function getMenuTabId() {
 	return getUrlParam("__menuTabId");
 }
-
+//关闭当前Tab页
 function closeThisMenuTab() {
 	parent.closeMenuTab(getMenuTabId());
 }
