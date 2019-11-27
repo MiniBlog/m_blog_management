@@ -7,8 +7,14 @@ import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.template.Template;
 import cn.hutool.extra.template.TemplateEngine;
+import cn.hutool.extra.template.engine.beetl.BeetlEngine;
+import cn.hutool.extra.template.engine.enjoy.EnjoyEngine;
+import cn.hutool.extra.template.engine.freemarker.FreemarkerEngine;
+import cn.hutool.extra.template.engine.rythm.RythmEngine;
 import cn.hutool.extra.template.engine.thymeleaf.ThymeleafEngine;
+import cn.hutool.extra.template.engine.velocity.VelocityEngine;
 import cn.hutool.json.JSONUtil;
+import com.luzhoumin.mblog.management.constant.MBlogConstant;
 import com.luzhoumin.mblog.management.pojo.AjaxJson;
 import com.luzhoumin.mblog.management.pojo.TMbModuleWithBLOBs;
 import com.luzhoumin.mblog.management.service.ModuleService;
@@ -166,19 +172,47 @@ public class ModuleController {
 	@RequestMapping("/preview-module.html")
 	public ModelAndView preview(@RequestParam("moduleId") int moduleId, @RequestParam("previewParam") String previewParam) {
 		TMbModuleWithBLOBs tMbModuleWithBLOBs = moduleService.getModule(moduleId);
+		String moduleType = tMbModuleWithBLOBs.getType();
 		String templateStr = tMbModuleWithBLOBs.getTemplate();
 		String cssStr = tMbModuleWithBLOBs.getCss();
 		String jsStr = tMbModuleWithBLOBs.getJs();
 		previewParam = Base64.decodeStr(previewParam);
-		Map<String, Object> paramMap = JSONUtil.toBean(previewParam, new TypeReference<>(){}, true);
-		TemplateEngine engine = new ThymeleafEngine();
-		Template template = engine.getTemplate(templateStr);
-		String result = template.render(paramMap);
+		Map<String, Object> paramMap = JSONUtil.toBean(previewParam, new TypeReference<>() {
+		}, true);
+		TemplateEngine engine;
+		switch (moduleType) {
+			case MBlogConstant.TYPE_DEFINE_MODULE_TYPE_BEETL:
+				engine = new BeetlEngine();
+				break;
+			case MBlogConstant.TYPE_DEFINE_MODULE_TYPE_ENJOY:
+				engine = new EnjoyEngine();
+				break;
+			case MBlogConstant.TYPE_DEFINE_MODULE_TYPE_FREEMARKER:
+				engine = new FreemarkerEngine();
+				break;
+			case MBlogConstant.TYPE_DEFINE_MODULE_TYPE_RYTHM:
+				engine = new RythmEngine();
+				break;
+			case MBlogConstant.TYPE_DEFINE_MODULE_TYPE_VELOCITY:
+				engine = new VelocityEngine();
+				break;
+			case MBlogConstant.TYPE_DEFINE_MODULE_TYPE_THYMELEAF:
+				engine = new ThymeleafEngine();
+				break;
+			default:
+				engine = null;
+		}
+		if (engine != null) {
+			Template template = engine.getTemplate(templateStr);
+			String result = template.render(paramMap);
+			Map<String, Object> modelMap = new HashMap<>();
+			modelMap.put("body", result);
+			modelMap.put("js", jsStr);
+			modelMap.put("css", cssStr);
+			return new ModelAndView("module/preview-module", modelMap);
+		} else {
+			return new ModelAndView("error/404");
+		}
 
-		Map<String, Object> modelMap = new HashMap<>();
-		modelMap.put("body", result);
-		modelMap.put("js", jsStr);
-		modelMap.put("css", cssStr);
-		return new ModelAndView("module/preview-module", modelMap);
 	}
 }
