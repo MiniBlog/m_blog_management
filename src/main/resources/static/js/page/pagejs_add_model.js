@@ -105,6 +105,33 @@ new Vue({
 				that.module_js = map.js;
 				that.module_param = map.param;
 				that.module_note = map.note;
+
+				CodeMirror(document.getElementById("module_template"), {
+					value: map.template,
+					lineNumbers: true,
+					mode: {
+						name: "htmlmixed",
+						scriptTypes: [{matches: /\/x-handlebars-template|\/x-mustache/i,
+							mode: null},
+							{matches: /(text|application)\/(x-)?vb(a|script)/i,
+								mode: "vbscript"}]
+					},
+				});
+				CodeMirror(document.getElementById("module_css"), {
+					value: map.css,
+					lineNumbers: true,
+					mode:  "css"
+				});
+				CodeMirror(document.getElementById("module_js"), {
+					value: map.js,
+					lineNumbers: true,
+					mode:  "javascript"
+				});
+				CodeMirror(document.getElementById("module_param"), {
+					value: map.param,
+					lineNumbers: true,
+					mode:  "application/json"
+				});
 			}
 		});
 		//init style start

@@ -6,6 +6,16 @@
 	<script th:replace="common :: head"></script>
 	<link rel="stylesheet" th:href="@{/css/page/page_css_common_table.css}"/>
 	<link rel="stylesheet" th:href="@{/css/page/page_css_edit_module.css}"/>
+	<!--CodeMirror-->
+	<link rel="stylesheet" th:href="@{/lib/codemirror/lib/codemirror.css}"/>
+	<link rel="stylesheet" th:href="@{/lib/codemirror/theme/darcula.css}"/>
+	<script th:src="@{/lib/codemirror/lib/codemirror.js}"></script>
+	<!--CodeMirror Mode-->
+	<script th:src="@{/lib/codemirror/mode/javascript/javascript.js}"></script>
+	<script th:src="@{/lib/codemirror/mode/htmlembedded/htmlembedded.js}"></script>
+	<script th:src="@{/lib/codemirror/mode/htmlmixed/htmlmixed.js}"></script>
+	<script th:src="@{/lib/codemirror/mode/xml/xml.js}"></script>
+	<script th:src="@{/lib/codemirror/mode/css/css.js}"></script>
 </head>
 <body>
 <div th:replace="common :: page_loading"></div>
@@ -33,12 +43,18 @@
 	</div>
 	<el-row id="tableRow">
 		<el-col :span="18" style="height: 100%" id="leftPart">
-			<el-input autosize id="m_blog_template" type="textarea" v-model="module_template"></el-input>
+			<div class="editor" id="module_template"></div>
 		</el-col>
 		<el-col :span="6" style="height: 100%" id="rightPart">
-			<el-input autosize id="m_blog_css" type="textarea" v-model="module_css" placeholder="css"></el-input>
-			<el-input autosize id="m_blog_js" type="textarea" v-model="module_js" placeholder="js"></el-input>
-			<el-input autosize id="m_blog_param" type="textarea" v-model="module_param" placeholder="param"></el-input>
+			<div class="editorBox">
+				<div class="editor" id="module_css"></div>
+			</div>
+			<div class="editorBox">
+				<div class="editor" id="module_js"></div>
+			</div>
+			<div class="editorBox">
+				<div class="editor" id="module_param"></div>
+			</div>
 		</el-col>
 	</el-row>
 	<el-row justify="end" type="flex">
