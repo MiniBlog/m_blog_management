@@ -42,23 +42,39 @@
 		</el-form>
 	</div>
 	<el-row id="tableRow">
-		<el-col :span="18" style="height: 100%" id="leftPart">
-			<div class="editor" id="module_template"></div>
-		</el-col>
-		<el-col :span="6" style="height: 100%" id="rightPart">
-			<div class="editorBox">
-				<div class="editor" id="module_css"></div>
-			</div>
-			<div class="editorBox">
-				<div class="editor" id="module_js"></div>
-			</div>
-			<div class="editorBox">
-				<div class="editor" id="module_param"></div>
-			</div>
-		</el-col>
+		<ul>
+			<li>
+				<input checked id="tab1" name="tab" type="radio">
+				<label for="tab1">HTML</label>
+				<div class="content">
+					<div class="editor" id="module_template"></div>
+				</div>
+			</li>
+			<li>
+				<input id="tab2" name="tab" type="radio">
+				<label for="tab2">CSS</label>
+				<div class="content">
+					<div class="editor" id="module_css"></div>
+				</div>
+			</li>
+			<li>
+				<input id="tab3" name="tab" type="radio">
+				<label for="tab3">JS</label>
+				<div class="content">
+					<div class="editor" id="module_js"></div>
+				</div>
+			</li>
+			<li>
+				<input id="tab4" name="tab" type="radio">
+				<label for="tab4">PARAM</label>
+				<div class="content">
+					<div class="editor" id="module_param"></div>
+				</div>
+			</li>
+		</ul>
 	</el-row>
 	<el-row justify="end" type="flex">
-		<el-button @click="addClick" icon="el-icon-plus" type="primary">添加</el-button>
+		<el-button @click="addClick" icon="el-icon-plus" type="primary">{{module_id==''?'添加':'保存'}}</el-button>
 		<el-button @click="previewClick" icon="el-icon-plus">预览</el-button>
 	</el-row>
 </div>

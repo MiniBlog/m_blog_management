@@ -9,11 +9,11 @@ new Vue({
 			module_uid: '',
 			module_name: '',
 			module_type: '',
-			module_template: '',
-			module_css: '',
-			module_js: '',
-			module_param: '',
 			module_note: '',
+			cmHTML: null,
+			cmCSS: null,
+			cmJS: null,
+			cmPARAM: null,
 		}
 	},
 	methods: {
@@ -30,10 +30,10 @@ new Vue({
 			let param = {};
 			param['name'] = that.module_name;
 			param['type'] = that.module_type;
-			param['template'] = that.module_template;
-			param['css'] = that.module_css;
-			param['js'] = that.module_js;
-			param['param'] = that.module_param;
+			param['template'] = that.cmHTML.getValue();
+			param['css'] = that.cmCSS.getValue();
+			param['js'] = that.cmJS.getValue();
+			param['param'] = that.cmPARAM.getValue();
 			param['note'] = that.module_note;
 			if (that.module_id) {
 				//如果有id，说明是修改
@@ -100,38 +100,42 @@ new Vue({
 				that.module_uid = map.uid;
 				that.module_name = map.name;
 				that.module_type = map.type;
-				that.module_template = map.template;
-				that.module_css = map.css;
-				that.module_js = map.js;
-				that.module_param = map.param;
 				that.module_note = map.note;
 
-				CodeMirror(document.getElementById("module_template"), {
+				that.cmHTML = CodeMirror(document.getElementById("module_template"), {
 					value: map.template,
 					lineNumbers: true,
 					mode: {
 						name: "htmlmixed",
-						scriptTypes: [{matches: /\/x-handlebars-template|\/x-mustache/i,
-							mode: null},
-							{matches: /(text|application)\/(x-)?vb(a|script)/i,
-								mode: "vbscript"}]
+						scriptTypes: [{
+							matches: /\/x-handlebars-template|\/x-mustache/i,
+							mode: null
+						},
+							{
+								matches: /(text|application)\/(x-)?vb(a|script)/i,
+								mode: "vbscript"
+							}]
 					},
 				});
-				CodeMirror(document.getElementById("module_css"), {
+				that.cmHTML.setSize('auto', '100%');
+				that.cmCSS = CodeMirror(document.getElementById("module_css"), {
 					value: map.css,
 					lineNumbers: true,
-					mode:  "css"
+					mode: "css"
 				});
-				CodeMirror(document.getElementById("module_js"), {
+				that.cmCSS.setSize('auto', '100%');
+				that.cmJS = CodeMirror(document.getElementById("module_js"), {
 					value: map.js,
 					lineNumbers: true,
-					mode:  "javascript"
+					mode: "javascript"
 				});
-				CodeMirror(document.getElementById("module_param"), {
+				that.cmJS.setSize('auto', '100%');
+				that.cmPARAM = CodeMirror(document.getElementById("module_param"), {
 					value: map.param,
 					lineNumbers: true,
-					mode:  "application/json"
+					mode: "application/json"
 				});
+				that.cmPARAM.setSize('auto', '100%');
 			}
 		});
 		//init style start
