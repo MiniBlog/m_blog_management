@@ -1,2 +1,2 @@
-# m_blog_management
-MBlog Management
+# Mini Blog Management
+Mini Blog Management
