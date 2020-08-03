@@ -177,7 +177,7 @@ public class ModuleController {
 		String cssStr = tMbModuleWithBLOBs.getCss();
 		String jsStr = tMbModuleWithBLOBs.getJs();
 		previewParam = Base64.decodeStr(previewParam);
-		Map<String, Object> paramMap = JSONUtil.toBean(previewParam, new TypeReference<>() {
+		Map<String, Object> paramMap = JSONUtil.toBean(previewParam, new TypeReference<Map<String, Object>>() {
 		}, true);
 		TemplateEngine engine;
 		switch (moduleType) {

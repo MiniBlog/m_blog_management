@@ -89,11 +89,10 @@ public class SessionUtil {
 		List<String> exceptList = Arrays.asList(except);
 		if (session != null) {
 			Enumeration<String> attributeNames = session.getAttributeNames();
-			Iterator<String> attributeName = attributeNames.asIterator();
-			while (attributeName.hasNext()) {
-				String attrs = attributeName.next();
+			while (attributeNames.hasMoreElements()) {
+				String attrs = attributeNames.nextElement();
 				if (!exceptList.contains(attrs)) {
-					session.removeAttribute(attributeName.next());
+					session.removeAttribute(attrs);
 				}
 			}
 		}
